@@ -2,7 +2,7 @@
 
 # Project Summary
 
-During this project, we'll be building a web application that walks users through filling out a home loan application. We'll be building out the components that have already been made and make them better with `redux`. To keep track of data and pass it to the correct components we'll make heavy use of `redux` and `react-redux`. We'll be making changes to all files in the components folder except for Finish.js to help them work with Redux, as well as the router.js, store.js, reducer.js, index.js and App.js.
+During this project, we'll be building a web application that walks users through filling out a home loan application. We'll be building out the components that have already been made and make them better with `redux`. To keep track of data and pass it to the correct components via routing we'll make heavy use of `redux` and `react-redux`. We'll be making changes to all files in the components folder except for Finish.js to help them work with Redux, as well as the router.js, store.js, reducer.js, index.js and App.js.
 
 ## Setup
 
@@ -19,8 +19,6 @@ In this step, we will create our `store`.
 When using redux, the store holds the entire state of our application. So it's important we set this up first.
 
 ## Instructions
-
-* `npm install --save redux-promise-middleware`.
 * Create a new file in your src folder called `store.js`
 * Open `src/store.js`.
 * Import `createStore` from `redux`.
@@ -105,6 +103,8 @@ import { Provider } from 'react-redux'
 
 The `Provider` component will "provide" the store to our App. All we need to do is wrap the `App` component in a `Provider` component and give the `Proivder` component a `store` prop that equals `store`. 
 
+
+
 ```js
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -123,4 +123,61 @@ ReactDOM.render(
 registerServiceWorker();
 ```
 
+Lastly, since we're using routing we'll be needing to import `BrowserRouter` from `react-router-dom`.
+
+```js
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
+import registerServiceWorker from './registerServiceWorker';
+import './index.css';
+
+import store from './store'
+import { Provider } from 'react-redux'
+import { BrowserRouter } from 'react-router-dom';
+
+ReactDOM.render(
+<BrowserRouter>
+    <Provider store={store}>
+        <App />
+    </Provider>    
+</BrowserRouter>
+, document.getElementById('root'));
+registerServiceWorker();
+```
+
 </details>
+
+
+### Solution
+
+<details>
+
+<summary> <code> src/index.js </code> </summary>
+
+```js
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
+import registerServiceWorker from './registerServiceWorker';
+import './index.css';
+
+import store from './store'
+import { Provider } from 'react-redux'
+import { BrowserRouter } from 'react-router-dom';
+
+ReactDOM.render(
+<BrowserRouter>
+    <Provider store={store}>
+        <App />
+    </Provider>    
+</BrowserRouter>
+, document.getElementById('root'));
+registerServiceWorker();
+```
+</details>
+
+## Step 3
+
+### Summary
+
