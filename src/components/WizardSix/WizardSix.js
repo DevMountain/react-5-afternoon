@@ -5,20 +5,21 @@ class WizardSix extends Component {
 
     render(){
         return(
-            <div>
-                What is the estimated purchase price? <br />
-                    
-                    
-                    <input type="text" placeholder="amount" onChange={this.props.updateCost}/> <br />
+            <div className="parent-div">
+                    <div className="vert-align">                    <p>What is the estimated purchase price?</p> <br />
+                        
+                        
+                        <input type="text" placeholder="amount" onChange={this.props.updateCost}/> <br />
 
 
-                How much are you putting down as a down payment? <br />
+                    <p>How much are you putting down as a down payment?</p> <br />
+                        
+                        
+                        <input type="text" placeholder="amount" onChange={this.props.updateDownPayment}/>                    
+                        
                     
-                    
-                    <input type="text" placeholder="amount" onChange={this.props.updateDownPayment}/>                    
-                    
-                
-                <Link to="/wSeven"><button > Next </button></Link>
+                    <Link to="/wSeven"><button className="margin-btn"> Next </button></Link>
+                </div>
             </div>
         )
     }
