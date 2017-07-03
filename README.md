@@ -44,7 +44,7 @@ In order to create our store, we'll also need our reducer. So let's import that 
 ```js
 import { createStore } from "redux";
 
-import reducer from "./ducks/reducer";";
+import reducer from "./ducks/reducer";"
 ```
 
 Now that we have everything we need to import, let's export by default the creation of our store. 
@@ -79,3 +79,48 @@ export default createStore( reducer );
 ## Step 2
 
 ### Summary
+
+In this step, we will take our store created from the previous step and hook it up in `src/index.js`. This will allow our App to compile correctly.
+
+### Instructions
+
+* Open `src/index.js`.
+* Import `Provider` from `react-redux`.
+* Import `store` from `src/store.js`.
+* Wrap the `App` component in a `Provider` component:
+  * The `Provider` component should have a `store` prop that equals `store` (remember how we call variables in jsx). 
+
+<details>
+
+<summary> Detailed Instructions </summary>
+
+<br />
+
+Now that our store is created, we can hook it up to our App in `src/index.js`. This will allow our App to have access to the store and the reducers and will also allow our App to compile correctly. Let's open `src/index.js`. We'll need to import `Provider` from `react-redux` and `store` from `src/store.js`. 
+
+```js
+import store from './store'
+import { Provider } from 'react-redux'
+```
+
+The `Provider` component will "provide" the store to our App. All we need to do is wrap the `App` component in a `Provider` component and give the `Proivder` component a `store` prop that equals `store`. 
+
+```js
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
+import registerServiceWorker from './registerServiceWorker';
+import './index.css';
+
+import store from './store'
+import { Provider } from 'react-redux'
+
+ReactDOM.render(
+    <Provider store={store}>
+        <App />
+    </Provider>    
+, document.getElementById('root'));
+registerServiceWorker();
+```
+
+</details>
