@@ -133,7 +133,8 @@ class WizardEleven extends Component {
 }
 
 function mapStateToProps( state ) {
-        return{
+
+        return{ 
             loanType: state.loanType,
             propertyType: state.propertyType,
             city: state.city,
@@ -151,5 +152,6 @@ function mapStateToProps( state ) {
             lastName: state.lastName,
             email: state.email
         };
+        
 }
 export default connect(mapStateToProps)(WizardEleven); 
