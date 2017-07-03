@@ -1,24 +1,28 @@
 import React,  { Component } from 'react';
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
+import { updateLoanType, updatePropertyType } from './../../ducks/reducer'
+import { connect } from 'react-redux'; //ADDED
 
-class WizardOne extends Component {
+class WizardOne extends Component { 
 
     render(){
         return(
-            <div>
-                What type of loan will you be needing? <br />
+            <div className="parent-div">
+                <div className="vert-align">
+
+                <p>What type of loan will you be needing?</p> <br />
             
-                <select onChange={this.props.handleLoanType}>
+                <select onChange={(e) =>this.props.updateLoanType(e.target.value)}>
 
                     <option type="text" value="homePurchase" >Home Purchase</option>
                     <option type="text" value="refinance" >Refinance</option>
                     <option type="text" value="homeEquity" >Home Equity loan/line</option>
 
-                </select> <br/>
+                </select> <br />  
 
-                What type of property are you purchasing? <br />
+                <p>What type of property are you purchasing?</p> <br />
 
-                <select onChange={this.props.handlePropType}>
+                <select onChange={(e)=>this.props.updatePropertyType(e.target.value)}>
 
                     <option value="singleFamHome">Single Family Home</option>
                     <option value="townHome">Townhome</option>
@@ -28,10 +32,19 @@ class WizardOne extends Component {
 
                 </select>
                 
-                <Link to="/wTwo"><button > Next </button></Link>
+                <div>
+                    <Link to="/wTwo"><button className="margin-btn"> Next </button></Link>
+                </div>
 
+                </div>
             </div>
         )
     }
 }
-export default WizardOne; 
+function mapStateToProps( state ) {
+  return { 
+      loanType: state.loanType,
+      propertyType: state.propertyType
+    };
+}
+export default connect(mapStateToProps, {updateLoanType, updatePropertyType})(WizardOne); 

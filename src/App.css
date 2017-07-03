@@ -1,24 +1,82 @@
-.App {
+@import url('https://fonts.googleapis.com/css?family=Roboto|Pacifico');
+p{
+  font-size: 2em;
+  margin: 0;
+}
+select{
+    width: 50%;
+    margin-left: 25%;
+    padding: 6px;
+    border-radius: 5px;
+}
+input{
+    width: 50%;
+    margin-left: 25%;
+    padding: 6px;
+    border-radius: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.parent-div{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   text-align: center;
+  height: 100vh;
+  width: 100%;
+  font-family: Roboto, sans-serif;
 }
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.home-text{
+  font-family: Pacifico, cursive;
+  font-size: 4em;
 }
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+button{
+    width: 100px;
+    background-color: #bff8ff;
+    border: none;
+    height: 50px;
+    border-radius: 30px;
+    margin-right: 5px;
+    margin-left: 5px;
 }
-
-.App-intro {
-  font-size: large;
+.home-btn{
+    width: 175px;
+    height: 75px;
+    border-radius: 40px;
+    font-size: 1.2em;
 }
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.margin-btn{
+    margin-top: 4%;
+}
+.vert-align{
+    height: 400px;
+    width: 85%;
+    margin-left: 7.5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.wTwo-btn{
+  margin-top: 3%;
+}
+.wSix-btn{
+  margin-top: 4%;
+}
+.row{
+    flex-direction: row;
+    display: flex;
+    justify-content: center;
+}
+.form{
+  font-size: 1em;
+  text-align: left;
+  padding-left: 10px;
+}
+.p2{
+  font-size: 1em;
+  float: right;
+  padding-right: 10px;
+}
+.overarching-div:nth-child(2n){
+  background-color: lightgrey;
 }

@@ -1,0 +1,21 @@
+import React,  { Component } from 'react';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux'; //ADDED
+
+class Finish extends Component {
+
+    render(){
+        return(
+            <div className="parent-div">
+                <div className="vert-align">
+                    <p>Thank you for choosing Wizard Home Loan, a representative will be in touch with you shortly to talk about further steps.</p> <br />
+               
+                
+                    <Link to="/"><button className="margin-btn"> Home </button></Link>
+                </div>
+            </div>
+        )
+    }
+}
+
+export default Finish

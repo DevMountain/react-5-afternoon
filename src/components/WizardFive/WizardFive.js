@@ -1,20 +1,29 @@
 import React,  { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { updateRealEstateAgent } from './../../ducks/reducer'
+import { connect } from 'react-redux'; //ADDED
 
 class WizardFive extends Component {
 
     render(){
         return(
-            <div>
+            <div className="parent-div">
+                <div className="vert-align">
 
-                Are you currently working with a real estate agent? <br />
-
-                <Link to="/wSix"><button onClick={this.props.realEstateAgentTrue}>Yes</button></Link>
-                <Link to="/wSix"><button onClick={this.props.realEstateAgentFalse}>No </button></Link>
-                
+                    <p>Are you currently working with a real estate agent?</p> <br />
+                    <div className="row">
+                        <Link to="/wSix"><button onClick={ (e)=>this.props.updateRealEstateAgent("true") }>Yes</button></Link>
+                        <Link to="/wSix"><button onClick={ (e)=>this.props.updateRealEstateAgent("false") }>No </button></Link>
+                    </div>
+                </div>
             </div>
         )
     }
 }
 
-export default WizardFive;
+function mapStateToProps( state ) {
+  return { 
+      found: state.found
+    };
+}
+export default connect(mapStateToProps, { updateRealEstateAgent })(WizardFive); 

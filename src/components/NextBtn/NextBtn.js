@@ -4,11 +4,15 @@ import { Link } from 'react-router-dom'
 class NextBtn extends Component {
     render(){
         return(
-            <div>
-                Home Loan Wizard <br />
+            <div className="parent-div">
+                <div className="vert-align">
+
+                <h1 className="home-text">Home Loan Wizard</h1> <br />
                 <Link to="/wOne" name={this.props.user}>
-                    <button>Get Started</button>
+                    <button className="home-btn">Get Started</button>
                 </Link>
+
+                </div>
             </div>
         )
     }

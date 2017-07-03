@@ -1,19 +1,32 @@
 import React,  { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { updateFirstName, updateLastName, updateEmail } from './../../ducks/reducer'
+import { connect } from 'react-redux'; //ADDED
 
 class WizardTen extends Component {
     render(){
         return(
-            <div>
-                What's your name? <br />
+            <div className="parent-div">
+                <div className="vert-align">
+                    <p>What's your name?</p> <br />
 
-                <input type="text" placeholder="First Name" onChange={this.props.updateFirst}/>
-                <input type="text" placeholder="Last Name" onChange= {this.props.updateLast}/>
-                <input type="text" placeholder="email" onChange={this.props.updateEmail}/>
-                
-                <Link to="/wEleven"><button > Next </button></Link>
+                    <input type="text" placeholder="First Name" onChange={ (e)=>this.props.updateFirstName(e.target.value) }/>
+                    <input type="text" placeholder="Last Name" onChange= { (e)=>this.props.updateLastName(e.target.value) }/>
+                    <input type="text" placeholder="email" onChange={ (e)=>this.props.updateEmail(e.target.value) }/>
+                    
+                    <Link to="/wEleven"><button className="margin-btn"> Next </button></Link>
+                </div>
             </div>
         )
     }
 }
-export default WizardTen;
+
+
+function mapStateToProps( state ) {
+  return { 
+     firstName: state.firstName,
+     lastName: state.lastName,
+     email: state.email
+  };
+}
+export default connect(mapStateToProps, { updateFirstName, updateLastName, updateEmail })(WizardTen); 

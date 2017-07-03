@@ -10,32 +10,33 @@ import WizardEight from './components/WizardEight/WizardEight';
 import WizardNine from './components/WizardNine/WizardNine';
 import WizardTen from './components/WizardTen/WizardTen';
 import WizardEleven from './components/WizardEleven/WizardEleven';
+import Finish from './components/Finish/Finish';
 
 import NextBtn from './components/NextBtn/NextBtn';
-import { Switch, Route } from 'react-router-dom';
+import {  Route, HashRouter } from 'react-router-dom';
 
+export default (
 
-export default function(loanType, propType, changeLoanType, changePropertyType, changePropertyToBeUsedOn, propToBeUsedOn, city, updateCity, foundFalse, foundTrue, found, realEstateAgentTrue, realEstateAgentFalse, realEstateAgent, updateDownPayment, downPayment, updateCost, cost, credit, updateCreditE,updateCreditG, updateCreditF,updateCreditP, history, updateHistory, addressOne, addressTwo, addressThree, updateAddLineOne, updateAddLineTwo, updateAddLineThree, updateFirst, updateLast, updateEmail, firstName, lastName, email){
+        <HashRouter>
+            <div>  
+                 
+                <Route component={NextBtn} exact path= '/'/>
+                <Route component={WizardOne}  path='/wOne'/>
+                <Route component={WizardTwo}  path="/wTwo"/>
+                <Route component={WizardThree} path="/wThree"/>
+                <Route component={WizardFour} path="/wFour"/>
+                <Route component={WizardFive} path="/wFive"/>
+                <Route component={WizardSix} path="/wSix"/>
+                <Route component={WizardSeven} path="/wSeven"/>
+                <Route component={WizardEight} path="/wEight"/>
+                <Route component={WizardNine} path="/wNine"/>
+                <Route component={WizardTen} path="/wTen"/>
+                <Route component={WizardEleven} path="/wEleven"/>
+                <Route component={Finish} path='/finish'/>
 
-        return (
-            <Switch>
-                <Route exact path= '/' render={()=> <NextBtn />} />
-
-                <Route path='/wOne' render={()=> <WizardOne loanType={loanType} propType={propType} handleLoanType={changeLoanType} handlePropType={changePropertyType}/>} />
-                
-                <Route render={()=> <WizardTwo city={city} updateCity={updateCity}/>} path="/wTwo"/>
-                <Route render={()=> <WizardThree loanType={loanType} propType={propType} propToBeUsedOn={changePropertyToBeUsedOn} propUsedOn={propToBeUsedOn}/> } path="/wThree"/>
-                <Route render={()=> <WizardFour foundFalse={foundFalse} foundTrue={foundTrue} found={found}/>} path='/wFour' />
-                <Route render={()=> <WizardFive realEstateAgentTrue={realEstateAgentTrue} realEstateAgentFalse={realEstateAgentFalse} realEstateAgent={realEstateAgent}/>} path="/wFive" />
-                <Route render={()=> <WizardSix downPayment={downPayment} updateDownPayment={updateDownPayment} cost={cost} updateCost={updateCost}/>} path="/wSix"/>
-                <Route render={()=> <WizardSeven credit={credit} updateCreditE={updateCreditE} updateCreditF={updateCreditF} updateCreditG={updateCreditG} updateCreditP={updateCreditP}/>} path="/wSeven"/>
-                <Route render={()=> <WizardEight history={history} updateHistory ={updateHistory} />} path="/wEight"/>
-                <Route render={()=> <WizardNine addressOne={addressOne} addressTwo={addressTwo} addressThree={addressThree} updateAddLineOne={updateAddLineOne} updateAddLineTwo={updateAddLineTwo} updateAddLineThree={updateAddLineThree} />} path="/wNine"/>
-                <Route render={()=> <WizardTen firstName={firstName} lastName={lastName} email={email} updateFirst={updateFirst} updateLast={updateLast} updateEmail={updateEmail} />} path="/wTen"/>
-                <Route render={()=> <WizardEleven firstName={firstName} lastName={lastName} email={email} loanType={loanType} propType={propType} propToBeUsedOn={propToBeUsedOn} city={city} found={found} realEstateAgent={realEstateAgent} downPayment={downPayment} cost={cost} credit={credit} history={history} addressOne={addressOne}addressTwo={addressTwo} addressThree={addressThree} />} path="/wEleven"/>
-            </Switch>
-        )
-}
+            </div>
+        </HashRouter>
+)
  
 
  
