@@ -29,7 +29,7 @@ class WizardOne extends Component {
 
                     </select>
                     
-                    <Link to="/wTwo"><button > Next </button></Link>
+                    <Link to="/wTwo"><button className="margin-btn"> Next </button></Link>
                 </div>
             </div>
         )

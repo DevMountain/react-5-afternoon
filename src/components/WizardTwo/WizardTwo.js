@@ -4,13 +4,15 @@ import { Link } from 'react-router-dom';
 class WizardTwo extends Component {
     render(){
         return(
-            <div>
+            <div className="parent-div">
+                <div className="vert-align">
             
-               In what city will the property be located?<br />
+                <p>In what city will the property be located?</p><br />
+                    
+                        <input placeholder="city name" type="text" onChange={this.props.updateCity}/>
                 
-                    <input placeholder="city name" type="text" onChange={this.props.updateCity}/>
-               
-                <Link to="/wThree"><button > Next </button></Link>
+                    <Link to="/wThree"><button className="wTwo-btn"> Next </button></Link>
+                </div>
             </div>
         )
     }
