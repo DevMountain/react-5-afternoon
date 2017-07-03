@@ -12,8 +12,8 @@ class WizardFive extends Component {
 
                     <p>Are you currently working with a real estate agent?</p> <br />
                     <div className="row">
-                        <Link to="/wSix"><button onClick={ (e)=>this.props.updateRealEstateAgent("true") }>Yes</button></Link>
-                        <Link to="/wSix"><button onClick={ (e)=>this.props.updateRealEstateAgent("false") }>No </button></Link>
+                        <Link to="/wSix"><button onClick={ (e)=>this.props.updateRealEstateAgent("True") }>Yes</button></Link>
+                        <Link to="/wSix"><button onClick={ (e)=>this.props.updateRealEstateAgent("False") }>No </button></Link>
                     </div>
                 </div>
             </div>

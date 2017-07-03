@@ -113,8 +113,8 @@ class WizardEleven extends Component {
                         <div className="overarching-div">
                             <div className="form" >Current Address: 
                                 <p className="p2">
-                                    {this.props.addressOne}
-                                    {this.props.addressTwo}
+                                    {this.props.addressOne} <br />
+                                    {this.props.addressTwo} <br />
                                     {this.props.addressThree}
                                 </p>
                             </div>
