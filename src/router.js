@@ -10,6 +10,7 @@ import WizardEight from './components/WizardEight/WizardEight';
 import WizardNine from './components/WizardNine/WizardNine';
 import WizardTen from './components/WizardTen/WizardTen';
 import WizardEleven from './components/WizardEleven/WizardEleven';
+import Finish from './components/Finish/Finish';
 
 import NextBtn from './components/NextBtn/NextBtn';
 import { Switch, Route } from 'react-router-dom';
@@ -33,6 +34,7 @@ export default function(loanType, propType, changeLoanType, changePropertyType, 
                 <Route render={()=> <WizardNine addressOne={addressOne} addressTwo={addressTwo} addressThree={addressThree} updateAddLineOne={updateAddLineOne} updateAddLineTwo={updateAddLineTwo} updateAddLineThree={updateAddLineThree} />} path="/wNine"/>
                 <Route render={()=> <WizardTen firstName={firstName} lastName={lastName} email={email} updateFirst={updateFirst} updateLast={updateLast} updateEmail={updateEmail} />} path="/wTen"/>
                 <Route render={()=> <WizardEleven firstName={firstName} lastName={lastName} email={email} loanType={loanType} propType={propType} propToBeUsedOn={propToBeUsedOn} city={city} found={found} realEstateAgent={realEstateAgent} downPayment={downPayment} cost={cost} credit={credit} history={history} addressOne={addressOne}addressTwo={addressTwo} addressThree={addressThree} />} path="/wEleven"/>
+                <Route component={Finish} path='/finish'/>
             </Switch>
         )
 }

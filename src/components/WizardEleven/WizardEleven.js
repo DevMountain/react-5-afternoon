@@ -1,40 +1,126 @@
 import React,  { Component } from 'react';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 class WizardEleven extends Component {
 
     render(){
         return(
-            <div>
-                      
-                Here's an over view of your form: <br />
+            <div className="parent-div">
+                <div className="vert-align">                      
+                    <p>Here's an over view of your form:</p> 
 
-                Name: {this.props.firstName} {this.props.lastName} <br />
+                    <div>
+                        <div className="overarching-div">
+                            <div className="form">Name: 
+                                <p className="p2">
+                                    {this.props.firstName} {this.props.lastName}
+                                </p>
+                            </div>
+                        </div>
 
-                Email: {this.props.email} <br />
+                        <div className="overarching-div">
+                            <div className="form">Email: 
+                                <p className="p2">
+                                    {this.props.email} 
+                                </p>
+                            </div>
+                        </div>
 
-                What type of loan will you be needing?: {this.props.loanType} <br />
+                        <div className="overarching-div">
+                            <div className="form">What type of loan will you be needing?: 
+                                <p className="p2">
+                                    {this.props.loanType} 
+                                </p>
+                            </div>
+                        </div>
 
-                What type of property are you purchasing?: {this.props.propType} <br />
+                        <div className="overarching-div">
+                            <div className="form">What type of property are you purchasing?: 
+                                <p className="p2">
+                                    {this.props.propType} 
+                                </p>
+                            </div>
+                        </div>
 
-                In what city will the property be located?: {this.props.city} <br />
+                        <div className="overarching-div">
+                            <div className="form">In what city will the property be located?:
+                                <p className="p2">
+                                    {this.props.city}  
+                                </p>
+                            </div>
+                        </div>
 
-                Type of property the loan is applied to: {this.props.propToBeUsedOn} <br />
+                        <div className="overarching-div">
+                            <div className="form">Type of property the loan is applied to:
+                                <p className="p2">
+                                    {this.props.propToBeUsedOn}  
+                                </p>
+                            </div>
+                        </div>
 
-                Have you already found your new home?: {this.props.found} <br />
+                        <div className="overarching-div">
+                            <div className="form">Have you already found your new home?:
+                                <p className="p2">
+                                    {this.props.found}   
+                                </p>
+                            </div>
+                        </div>
 
-                Currently working with a real estate agent?: {this.props.realEstateAgent} <br />
+                        <div className="overarching-div">
+                            <div className="form">Currently working with a real estate agent?:
+                                <p className="p2">
+                                    {this.props.realEstateAgent}   
+                                </p>
+                            </div>
+                        </div>
 
-                Estimated purchase price of the home: {this.props.cost} <br />
+                        <div className="overarching-div">
+                            <div className="form">Estimated purchase price of the home:
+                                <p className="p2">
+                                    {this.props.cost} 
+                                </p>
+                            </div>
+                        </div>
 
-                Down payment: {this.props.downPayment} <br />
+                        <div className="overarching-div">
+                            <div className="form">Down payment:
+                                <p className="p2">
+                                    {this.props.downPayment} 
+                                </p>
+                            </div>
+                        </div>
 
-                Credit score: {this.props.credit} <br />
+                        <div className="overarching-div">
+                            <div className="form">Credit score:
+                                <p className="p2">
+                                    {this.props.credit}  
+                                </p>
+                            </div>
+                        </div>
 
-                Bankruptcy history: {this.props.history} <br />
+                        <div className="overarching-div">
+                            <div className="form">Bankruptcy history:
+                                <p className="p2">
+                                    {this.props.history}  
+                                </p>
+                            </div>
+                        </div>
 
-                Current Address: {this.props.addressOne} {this.props.addressTwo} {this.props.addressThree} <br />   
-                
+                        <div className="overarching-div">
+                            <div className="form">Current Address:
+                                <p className="p2">
+                                    {this.props.addressOne} {this.props.addressTwo} {this.props.addressThree}    
+                                </p>
+                            </div>
+                        </div>
+
+                        <div className="row">
+                            <Link to="/finish"><button>Submit</button></Link>
+                            <Link to="/"><button>Start Over</button></Link>
+
+                        </div>
+                    </div>                    
+                </div>
             </div>
         )
     }
