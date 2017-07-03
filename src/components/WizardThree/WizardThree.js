@@ -19,3 +19,8 @@ class WizardThree extends Component {
 }
 
 export default WizardThree; 
+                    // <div className="row">
+                    //     <Link to="/wFour"><button value="primaryHome" onClick={(e) =>this.props.updatePropToBeUsedOn(e.target.value)}>Primary Home</button></Link>
+                    //     <Link to="/wFour"><button value="rentalProperty" onClick={(e) =>this.props.updatePropToBeUsedOn(e.target.value)}>Rental Property</button></Link>
+                    //     <Link to="/wFour"><button value="secondaryHome" onClick={(e) =>this.props.updatePropToBeUsedOn(e.target.value)}>Secondary Home</button></Link>
+                    // </div>
