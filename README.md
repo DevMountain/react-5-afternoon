@@ -459,3 +459,25 @@ class App extends Component {
 export default App;
 ```
 </details>
+
+## Step 4
+
+### Summary
+
+## Instructions
+
+
+
+<details>
+
+<summary> Detailed Instructions </summary>
+
+</details>
+
+### Solution
+
+<details>
+
+<summary> <code> src/.js </code> </summary>
+
+</details>
