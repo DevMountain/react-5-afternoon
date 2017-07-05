@@ -190,3 +190,122 @@ Instead of just taking everything out of our App.js and router files all at once
 Because we needed to pass state down to our routes, we had to make our routing a function. Currently, we're exporting a function by default in our `router.js`, by making this a function, we were able to import it into our `App.js` and then pass it props through its arguments. 
 
 In addition to our route component being a function, the way we're connecting our `Route` to the correct component is using a `render={()=> <Component prop={prop}/> path='/'}` instead of a `component={Component} path='/'`. The reason we needed to use render this way was so we could pass props down through the Components element. However, this results in messy looking code, so let's clean it up.
+
+## Instructions
+
+* Export default our router without making it a function.
+* Import `HashRouter` from `react-router-dom`.
+    * Instead of using `Switch`, we're going to use `HashRouter` from `react-router-dom` to wrap our routes. (HashRouter uses the hash portion of our URL to keep our UI in sync with the URL when we change views).
+* Wrap routes in a div, HashRouter can only have one first level element, so we will nest our routes inside of the div. 
+* For each individual route, instead of using render, we will be using component. A route should look like the following: `<Route component={WizardOne}  path='/wOne'/>`
+
+
+<details>
+
+<summary> Detailed Instructions </summary>
+
+<br />
+
+* Export default our router without making it a function.
+```js
+export default (
+
+)
+```
+
+* Import `HashRouter` from `react-router-dom`.
+    * Instead of using `Switch`, we're going to use `HashRouter` from `react-router-dom` to wrap our routes. (HashRouter uses the hash portion of our URL to keep our UI in sync with the URL when we change views).
+```js
+import {  Route, HashRouter } from 'react-router-dom';
+```
+* Wrap routes in a div, HashRouter can only have one first level element, so we will nest our routes inside of the div. Example:
+```js
+export default (
+
+        <HashRouter>
+            <div>  
+                 
+                <Route component={NextBtn} exact path= '/'/>
+                <Route component={WizardOne}  path='/wOne'/>
+                
+            </div>
+        </HashRouter>
+)
+```
+* For each individual route, instead of using render, we will be using component. A route should look like the following: `<Route component={WizardOne}  path='/wOne'/>`
+
+```js
+export default (
+
+        <HashRouter>
+            <div>  
+                 
+                <Route component={NextBtn} exact path= '/'/>
+                <Route component={WizardOne}  path='/wOne'/>
+                <Route component={WizardTwo}  path="/wTwo"/>
+                <Route component={WizardThree} path="/wThree"/>
+                <Route component={WizardFour} path="/wFour"/>
+                <Route component={WizardFive} path="/wFive"/>
+                <Route component={WizardSix} path="/wSix"/>
+                <Route component={WizardSeven} path="/wSeven"/>
+                <Route component={WizardEight} path="/wEight"/>
+                <Route component={WizardNine} path="/wNine"/>
+                <Route component={WizardTen} path="/wTen"/>
+                <Route component={WizardEleven} path="/wEleven"/>
+                <Route component={Finish} path='/finish'/>
+
+            </div>
+        </HashRouter>
+)
+```
+</details>
+
+
+### Solution
+
+<details>
+
+<summary> <code> src/index.js </code> </summary>
+
+```js
+import React from 'react';
+import WizardOne from './components/WizardOne/WizardOne';
+import WizardTwo from './components/WizardTwo/WizardTwo';
+import WizardThree from './components/WizardThree/WizardThree';
+import WizardFour from './components/WizardFour/WizardFour';
+import WizardFive from './components/WizardFive/WizardFive';
+import WizardSix from './components/WizardSix/WizardSix';
+import WizardSeven from './components/WizardSeven/WizardSeven';
+import WizardEight from './components/WizardEight/WizardEight';
+import WizardNine from './components/WizardNine/WizardNine';
+import WizardTen from './components/WizardTen/WizardTen';
+import WizardEleven from './components/WizardEleven/WizardEleven';
+import Finish from './components/Finish/Finish';
+
+import NextBtn from './components/NextBtn/NextBtn';
+import {  Route, HashRouter } from 'react-router-dom';
+
+export default (
+
+        <HashRouter>
+            <div>  
+                 
+                <Route component={NextBtn} exact path= '/'/>
+                <Route component={WizardOne}  path='/wOne'/>
+                <Route component={WizardTwo}  path="/wTwo"/>
+                <Route component={WizardThree} path="/wThree"/>
+                <Route component={WizardFour} path="/wFour"/>
+                <Route component={WizardFive} path="/wFive"/>
+                <Route component={WizardSix} path="/wSix"/>
+                <Route component={WizardSeven} path="/wSeven"/>
+                <Route component={WizardEight} path="/wEight"/>
+                <Route component={WizardNine} path="/wNine"/>
+                <Route component={WizardTen} path="/wTen"/>
+                <Route component={WizardEleven} path="/wEleven"/>
+                <Route component={Finish} path='/finish'/>
+
+            </div>
+        </HashRouter>
+)
+```
+</details>
