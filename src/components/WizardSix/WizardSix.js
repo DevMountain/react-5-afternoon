@@ -1,7 +1,7 @@
 import React,  { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { updateCost, updateDownPayment } from './../../ducks/reducer'
-import { connect } from 'react-redux'; //ADDED
+import { connect } from 'react-redux'; 
 
 class WizardSix extends Component {
     render(){

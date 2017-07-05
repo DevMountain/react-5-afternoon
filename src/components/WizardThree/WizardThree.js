@@ -1,7 +1,7 @@
 import React,  { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { updatePropToBeUsedOn } from './../../ducks/reducer'
-import { connect } from 'react-redux'; //ADDED
+import { connect } from 'react-redux'; 
 
 class WizardThree extends Component {
     

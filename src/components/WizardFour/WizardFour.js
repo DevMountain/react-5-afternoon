@@ -1,7 +1,7 @@
 import React,  { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { updateFound } from './../../ducks/reducer'
-import { connect } from 'react-redux'; //ADDED
+import { connect } from 'react-redux'; 
 
 
 class WizardFour extends Component {

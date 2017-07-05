@@ -34,7 +34,7 @@ const UPDATE_FIRST_NAME = "UPDATE_FIRST_NAME";
 const UPDATE_LAST_NAME = "UPDATE_LAST_NAME";
 const UPDATE_EMAIL = "UPDATE_EMAIL"; 
 
-function reducer(state=initialState, action){ //current state then action you want to perform
+function reducer(state=initialState, action){ 
 
     switch(action.type){
         case UPDATE_LOAN_PROP_TYPE:
@@ -77,7 +77,7 @@ function reducer(state=initialState, action){ //current state then action you wa
     }
 
 } 
-//Action Creator
+
 export function updateLoanType(loanPropType){
     return{
         type: UPDATE_LOAN_PROP_TYPE,
@@ -185,4 +185,4 @@ export function updateEmail(email){
         payload: email
     }    
 }
-export default reducer; //export reducer so store can see it
+export default reducer; 
