@@ -463,8 +463,10 @@ export default App;
 ## Step 4
 
 ### Summary
+In this next step, we'll be looking at our `App.js`, understanding what's happening with state. Then transition into how we'll be handling state with redux.
 
 ## Instructions
+Now that we have our `router.js` cleaned up, let's head over to our App.js and take a look at what we have.
 
 
 
