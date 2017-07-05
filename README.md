@@ -185,11 +185,13 @@ registerServiceWorker();
 
 ### Summary
 
-Instead of just taking everything out of our App.js and router files all at once, let's go one view at a time. Let's go check out our router.js first. This view is almost as messy as our `App.js`. 
+We need to clean up our `App.js` and `router.js` and get them ready to be used with `redux`. Let's go check out our router.js first. This view is almost as messy as our `App.js`. 
 
 Because we needed to pass state down to our routes, we had to make our routing a function. Currently, we're exporting a function by default in our `router.js`, by making this a function, we were able to import it into our `App.js` and then pass it props through its arguments. 
 
 In addition to our route component being a function, the way we're connecting our `Route` to the correct component is using a `render={()=> <Component prop={prop}/> path='/'}` instead of a `component={Component} path='/'`. The reason we needed to use render this way was so we could pass props down through the Components element. However, this results in messy looking code, so let's clean it up.
+
+
 
 ## Instructions
 
@@ -198,6 +200,8 @@ In addition to our route component being a function, the way we're connecting ou
     * Instead of using `Switch`, we're going to use `HashRouter` from `react-router-dom` to wrap our routes. (HashRouter uses the hash portion of our URL to keep our UI in sync with the URL when we change views).
 * Wrap routes in a div, HashRouter can only have one first level element, so we will nest our routes inside of the div. 
 * For each individual route, instead of using render, we will be using component. A route should look like the following: `<Route component={WizardOne}  path='/wOne'/>`
+* Now that we've changed our `router.js`, no data is going to be passed to our other components, you will also get an error that says `TypeError: __webpack_require__.i(...) is not a function`. This is because in our `App.js` router is still being treated as a function.
+* Go to your `App.js` and remove the invoking parenthesis from your `{router}` as well as the content inside of them.
 
 
 <details>
@@ -258,6 +262,19 @@ export default (
         </HashRouter>
 )
 ```
+* Now that we've changed our `router.js`, no data is going to be passed to our other components, you will also get an error that says `TypeError: __webpack_require__.i(...) is not a function`. This is because in our `App.js` router is still being treated as a function.
+* Go to your `App.js` and remove the invoking parenthesis from your `{router}` as well as the content inside of them.
+```js
+  render() {
+    return (
+      <div>
+    
+        {router}
+
+      </div>
+    );
+  }
+```
 </details>
 
 
@@ -265,7 +282,7 @@ export default (
 
 <details>
 
-<summary> <code> src/index.js </code> </summary>
+<summary> <code> src/router.js </code> </summary>
 
 ```js
 import React from 'react';
@@ -307,5 +324,138 @@ export default (
             </div>
         </HashRouter>
 )
+```
+</details>
+
+<details>
+<summary><code> src/App.js</code></summary>
+
+```js
+import React, { Component } from 'react';
+import './App.css';
+import router from './router'
+
+
+class App extends Component {
+  constructor(){
+    super()
+    this.state = {
+      loanType: 'Home Purchase',
+      propertyType: 'Single Family Home',
+      propToBeUsedOn: '',
+      city: '',
+      found: "false",
+      realEstateAgent: "false",
+      downPayment: 0,
+      cost: 0,
+      credit: '',
+      history: '',
+      addressOne: '',
+      addressTwo: '',
+      addressThree: '',
+      firstName: '',
+      lastName: '',
+      email: ''
+    }
+     
+    this.handleChangeLoanType = this.handleChangeLoanType.bind(this);
+    this.handleChangePropertyType = this.handleChangePropertyType.bind(this);
+    this.handleChangePropertyToBeUsedOn = this.handleChangePropertyToBeUsedOn.bind(this);
+    this.handleChangeCity = this.handleChangeCity.bind(this);
+    this.handleChangeFoundFalse = this.handleChangeFoundFalse.bind(this);
+    this.handleChangeFoundTrue = this.handleChangeFoundTrue.bind(this);
+    this.handleChangeRealEstateAgentTrue = this.handleChangeRealEstateAgentTrue.bind(this);
+    this.handleChangeRealEstateAgentFalse = this.handleChangeRealEstateAgentFalse.bind(this);
+    this.handleChangeUpdateDownPayment = this.handleChangeUpdateDownPayment.bind(this);
+    this.handleChangeUpdateCost = this.handleChangeUpdateCost.bind(this);
+    this.handleChangeCreditE = this.handleChangeCreditE.bind(this);
+    this.handleChangeCreditG = this.handleChangeCreditG.bind(this);
+    this.handleChangeCreditF = this.handleChangeCreditF.bind(this);
+    this.handleChangeCreditP = this.handleChangeCreditP.bind(this);
+    this.handleChangeUpdateHistory = this.handleChangeUpdateHistory.bind(this);
+    this.handleChangeAddressOne = this.handleChangeAddressOne.bind(this);
+    this.handleChangeAddressTwo = this.handleChangeAddressTwo.bind(this);
+    this.handleChangeAddressThree = this.handleChangeAddressThree.bind(this);
+    this.handleChangeFirstName = this.handleChangeFirstName.bind(this);
+    this.handleChangeLastName = this.handleChangeLastName.bind(this);
+    this.handleChangeEmail = this.handleChangeEmail.bind(this);
+  }
+    
+    handleChangeLoanType(event) {
+        this.setState({loanType : event.target.value});
+    }
+    handleChangePropertyType(event) {
+        this.setState({propertyType : event.target.value});
+    }
+    handleChangePropertyToBeUsedOn(event){
+        this.setState({propToBeUsedOn : event.target.value})
+    }
+    handleChangeCity(event){
+        this.setState({city : event.target.value});
+    }
+    handleChangeFoundTrue(event){
+        this.setState({found : "true"});
+    }
+    handleChangeFoundFalse(event){
+        this.setState({found : "false"});
+    }
+    handleChangeRealEstateAgentTrue(){
+        this.setState({realEstateAgent : "true"});
+    }
+    handleChangeRealEstateAgentFalse(){
+        this.setState({realEstateAgent : "false"});
+    }
+    handleChangeUpdateDownPayment(event){
+        this.setState({downPayment : event.target.value})
+    }
+    handleChangeUpdateCost(event){
+      this.setState({cost: event.target.value});
+    }
+    handleChangeCreditE(){
+      this.setState({credit: 'Excellent'})
+    }
+    handleChangeCreditG(){
+      this.setState({credit: 'Good'})
+    }
+    handleChangeCreditF(){
+      this.setState({credit: 'Fair'})
+    }
+    handleChangeCreditP(){
+      this.setState({credit: 'Poor'})
+    }
+    handleChangeUpdateHistory(event){
+      this.setState({history: event.target.value})
+    }
+    handleChangeAddressOne(event){
+      this.setState({addressOne: event.target.value})
+    }
+    handleChangeAddressTwo(event){
+      this.setState({addressTwo: event.target.value})
+    }
+    handleChangeAddressThree(event){
+      this.setState({addressThree: event.target.value})
+    }
+    handleChangeFirstName(event){
+      this.setState({firstName : event.target.value})
+    }
+    handleChangeLastName(event){
+      this.setState({lastName: event.target.value})
+    }
+    handleChangeEmail(event){
+      this.setState({email: event.target.value})
+    }
+
+  render() {
+    return (
+      <div>
+    
+        {router}
+
+      </div>
+    );
+  }
+}
+
+export default App;
 ```
 </details>
