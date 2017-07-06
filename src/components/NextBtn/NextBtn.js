@@ -7,7 +7,7 @@ class NextBtn extends Component {
             <div className="parent-div">
                 <div className="vert-align">
                     <p className="home-text">Home Loan Wizard</p> <br />
-                    <Link to="/wOne" name={this.props.user}>
+                    <Link to="/wOne">
                         <button>Get Started</button>
                     </Link>
                 </div>
