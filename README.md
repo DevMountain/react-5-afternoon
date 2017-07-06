@@ -478,7 +478,12 @@ Now our App is connected with redux, let's think about what needs to have access
 
 * Create a function called reducer and pass it state equal to initial state and an action
 * At the bottom of the file `export default reducer`. This reducer will take place in actually manipulating state once we put some cases in it. 
-* Above the reducer we're going to make two const's, one called `UPDATE_LOAN_PROP_TYPE` set equal to a string `"UPDATE_LOAN_PROP_TYPE"`.
+* Above the reducer we're going to make two const's, one called `UPDATE_LOAN_TYPE ` set equal to a string `"UPDATE_LOAN_TYPE "`, the other called `UPDATE_PROPERTY_TYPE ` set equal to a string `"UPDATE_PROPERTY_TYPE "`. 
+    * We do this because react will throw an error if a variable is misspelled, but not if a string is misspelled.
+* Now let's set up the `action` that will connect to the `reducer`:
+    * `Actions` will be exported functions, below the reducer function, export a function called `updateLoanType`, pass it `loanPropType`. 
+    * All of our `actions` will return an object with a `type` and `payload`.
+    * return and object with `type: UPDATE_LOAN TYPE` and `payload: loanType`
 
 
 <details>
