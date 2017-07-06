@@ -78,10 +78,10 @@ function reducer(state=initialState, action){
 
 } 
 
-export function updateLoanType(loanPropType){
+export function updateLoanType(loanType){
     return{
         type: UPDATE_LOAN_TYPE,
-        payload: loanPropType
+        payload: loanType
     }
 }
 export function updatePropertyType(property) {
