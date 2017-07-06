@@ -9,7 +9,7 @@ class WizardNine extends Component {
         return(
             <div className="parent-div">
                 <div className="vert-align">
-                    <p>What's your address?</p> <br />
+                    <p>What is your address?</p> <br />
 
                     <input type="text" placeholder="Line One" onChange={ (e)=>this.props.updateAddOne(e.target.value) }/>
                     <input type="text" placeholder="Line Two" onChange={ (e)=>this.props.updateAddTwo(e.target.value) }/>

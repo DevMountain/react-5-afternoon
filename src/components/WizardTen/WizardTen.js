@@ -8,7 +8,7 @@ class WizardTen extends Component {
         return(
             <div className="parent-div">
                 <div className="vert-align">
-                    <p>What's your name?</p> <br />
+                    <p>What is your name?</p> <br />
 
                     <input type="text" placeholder="First Name" onChange={ (e)=>this.props.updateFirstName(e.target.value) }/>
                     <input type="text" placeholder="Last Name" onChange= { (e)=>this.props.updateLastName(e.target.value) }/>
