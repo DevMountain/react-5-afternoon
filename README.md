@@ -941,14 +941,184 @@ export function updateCity(city) {
 ```
 </details>
 
+### Solution
+
+<details>
+
+<summary> <code> src/ducks/reducer.js </code> </summary>
+
+```js
+const initialState = {
+   loanType: 'Home Purchase',
+   propertyType: 'Single Family Home',
+   city: '',
+   propToBeUsedOn: '',
+   found: false,
+   realEstateAgent: "false",
+   cost: 0,
+   downPayment: 0,
+   credit: '',
+   history: '',
+   addressOne: '',
+   addressTwo: '',
+   addressThree: '',
+   firstName: 'aa',
+   lastName: '',
+   email: ''
+}
+
+const UPDATE_LOAN_TYPE = "UPDATE_LOAN_TYPE";
+const UPDATE_PROPERTY_TYPE = 'UPDATE_PROPERTY_TYPE';
+const UPDATE_CITY = 'UPDATE_CITY';
+
+function reducer(state=initialState, action){ 
+
+    switch(action.type){
+        case UPDATE_LOAN_TYPE:
+            return Object.assign({}, state, {loanType: action.payload})
+        case UPDATE_PROPERTY_TYPE:
+            return Object.assign({}, state, {propertyType: action.payload})
+        case UPDATE_CITY:
+            return Object.assign({}, state, {city: action.payload})
+
+        default:
+            return state
+    }
+
+} 
+
+export function updateLoanType(loanType){
+    return{
+        type: UPDATE_LOAN_TYPE,
+        payload: loanType
+    }
+}
+export function updatePropertyType(property) {
+    return {
+        type: UPDATE_PROPERTY_TYPE,
+        payload: property
+    }
+}
+
+export function updateCity(city) {
+    return {
+        type: UPDATE_CITY,
+        payload: city
+    }
+}
+
+export default reducer; 
+```
+
+</details>
+
 ## Instructions 
 
 In the `src/component/WizardTwo/WizardTwo.js`
 
+* Import `connect` from `react-redux`.
+* Import the update function you just made from your reducer: `updateCity` from `'./../../ducks/reducer'` (remember to destructure them). 
+* Connect the WizardTwo component to `redux`, similarly to how we connected our `App.js` to `redux`.
+    * Create a `mapStateToProps` function, passing it `state`.
+    * Return an object that contains the piece of state you'll be updating/wanting access to.
+    * In the export default we'll need to access the destructured functions from our reducer like so: `export default connect(mapStateToProps, { updateCity })(WizardTwo); `
+* Now our component is connected to the `redux store`, let's access the function we need to change state on the input element.
+    * Set the input element's `onChange` function equal to `{(e)=>this.props.updateCity(e.target.value)}`.
+* Our WizardTwo Component should now be hooked up properly and be working with redux! 
+<details>
+
+<summary> Detailed Instructions </summary>
+
+* Import `connect` from `react-redux`.
+
+```js
+import { connect } from 'react-redux'; 
+
+```
+
+* Import the update function you just made from your reducer: `updateCity` from `'./../../ducks/reducer'` (remember to destructure them). 
+
+```js
+import { updateCity } from './../../ducks/reducer'
+
+```
+
+* Connect the WizardTwo component to `redux`, similarly to how we connected our `App.js` to `redux`.
+    * Create a `mapStateToProps` function, passing it `state`.
+    * Return an object that contains the piece of state you'll be updating/wanting access to.
+    * In the export default we'll need to access the destructured functions from our reducer like so: `export default connect(mapStateToProps, { updateCity })(WizardTwo); `
+    
+```js
+function mapStateToProps( state ) {
+  return { 
+      city: state.city
+    };
+}
+export default connect(mapStateToProps, { updateCity })(WizardTwo); 
+```
+
+* Now our component is connected to the `redux store`, let's access the function we need to change state on the input element.
+    * Set the input element's `onChange` function equal to `{(e)=>this.props.updateCity(e.target.value)}`.
+    * Because we've connected to `redux`, the updateLoanType function is now on props for this component.
+* Our WizardTwo Component should now be hooked up properly and be working with redux! 
+    
+```js
+<input placeholder="city name" type="text" onChange={(e)=>this.props.updateCity(e.target.value)}/>
+
+```
+</details>
+
+### Solution
+
+<details>
+
+<summary> <code> src/components/WizardTwo/WizardTwo.js </code> </summary>
+
+
+```js
+import React,  { Component } from 'react';
+import { Link } from 'react-router-dom';
+import { updateCity } from './../../ducks/reducer'
+import { connect } from 'react-redux'; 
+
+class WizardTwo extends Component {
+    render(){
+        return(
+            <div className="parent-div">
+                <div className="vert-align">
+            
+                    <p>In what city will the property be located?</p><br />
+                
+                    <input placeholder="city name" type="text" onChange={(e)=>this.props.updateCity(e.target.value)}/>
+               
+                <Link to="/wThree"><button className="wTwo-btn"> Next </button></Link>
+                </div>
+            </div>
+        )
+    }
+}
+
+function mapStateToProps( state ) {
+  return { 
+      city: state.city
+    };
+}
+export default connect(mapStateToProps, { updateCity })(WizardTwo); 
+```
+
+</details>
 
 
 
+## Step 8
+### Summary
+## Instructions
 
+<details>
+
+<summary> Detailed Instructions </summary>
+
+</details>
 
 ### Solution
 
