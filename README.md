@@ -45,7 +45,7 @@ In order to create our store, we'll also need our reducer. So let's import that 
 ```js
 import { createStore } from "redux";
 
-import reducer from "./ducks/reducer";"
+import reducer from "./ducks/reducer";
 ```
 
 Now that we have everything we need to import, let's export by default the creation of our store. 
@@ -92,6 +92,7 @@ In this step, we will take our store created from the previous step and hook it 
   * The `Provider` component should have a `store` prop that equals `store` (remember how we call variables in jsx). 
 * Import `BrowserRouter` from `react-router-dom`.
 * Wrap the `Provider` in `<BrowserRouter>` tags.
+
 <details>
 
 <summary> Detailed Instructions </summary>
