@@ -10,9 +10,9 @@ class WizardOne extends Component {
                 
                     <select onChange={this.props.handleLoanType}>
 
-                        <option type="text" value="homePurchase" >Home Purchase</option>
-                        <option type="text" value="refinance" >Refinance</option>
-                        <option type="text" value="homeEquity" >Home Equity loan/line</option>
+                        <option type="text" value="Home Purchase" >Home Purchase</option>
+                        <option type="text" value="Refinance" >Refinance</option>
+                        <option type="text" value="Home Equity" >Home Equity loan/line</option>
 
                     </select> <br/>
 
@@ -20,11 +20,11 @@ class WizardOne extends Component {
 
                     <select onChange={this.props.handlePropType}>
 
-                        <option value="singleFamHome">Single Family Home</option>
-                        <option value="townHome">Townhome</option>
-                        <option value="condo">Condo</option>
-                        <option value="multiFam">Multi Family Dwelling</option>
-                        <option value="mobileHome">Mobile Home</option>
+                        <option value="Single Family Home">Single Family Home</option>
+                        <option value="Town Home">Townhome</option>
+                        <option value="Condo">Condo</option>
+                        <option value="Multi Family Home">Multi Family Dwelling</option>
+                        <option value="Mobile Home">Mobile Home</option>
 
                     </select>
                     
