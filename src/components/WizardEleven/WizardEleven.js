@@ -7,7 +7,7 @@ class WizardEleven extends Component {
         return(
             <div className="parent-div">
                 <div className="vert-align">                      
-                    <p>Here's an over view of your form:</p> 
+                    <p>Here is an over view of your form:</p> 
 
                     <div>
                         <div className="overarching-div">

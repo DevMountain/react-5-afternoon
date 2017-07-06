@@ -543,7 +543,7 @@ export default connect(mapStateToProps)(App);
 
 ### Summary
 
-Now that our reducer is set up, let's connect our Eleventh view to the store, so that moving forward, as we start hooking our views up with `redux`, we'll be able to see the data getting to where it needs to end up.
+Now that our App is set up, let's connect our Eleventh view to the store, so that moving forward, as we start hooking our views up with `redux`, we'll be able to see the data getting to where it needs to end up.
 
 ## Instructions 
 

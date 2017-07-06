@@ -5,7 +5,9 @@ class WizardTen extends Component {
     render(){
         return(
             <div className="parent-div">
-                <div className="vert-align">                    <p>What's your name?</p> <br />
+                <div className="vert-align">                    
+                    
+                    <p>What is your name?</p> <br />
 
                     <input type="text" placeholder="First Name" onChange={this.props.updateFirst}/>
                     <input type="text" placeholder="Last Name" onChange= {this.props.updateLast}/>
