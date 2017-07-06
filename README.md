@@ -1588,3 +1588,437 @@ export default connect(mapStateToProps, { updateFound })(WizardFour);
 ```
 
 </details>
+
+## Step 10
+
+### Summary
+
+Now that we have our fourth view hooked up, I think we're getting the hang of the flow between the reducer and our component. So in this step we're going to finish out our reducer.js.
+
+## Instructions 
+
+In the `src/ducks/reducer.js`
+
+* Create the following new const's: 
+
+```js
+const UPDATE_REALESTATE_AGENT = "UPDATE_REALESTATE_AGENT";
+const UPDATE_COST = "UPDATE_COST";
+const UPDATE_DOWNPAYMENT = "UPDATE_DOWNPAYMENT";
+const UPDATE_CREDIT = "UPDATE_CREDIT";
+const UPDATE_HIST = "UPDATE_HIST";
+const UPDATE_ADD_ONE = "UPDATE_ADD_ONE";
+const UPDATE_ADD_TWO = "UPDATE_ADD_TWO";
+const UPDATE_ADD_THREE = "UPDATE_ADD_THREE";
+const UPDATE_FIRST_NAME = "UPDATE_FIRST_NAME";
+const UPDATE_LAST_NAME = "UPDATE_LAST_NAME";
+const UPDATE_EMAIL = "UPDATE_EMAIL"; 
+```
+
+* Create actions for updating the following properties:
+    * realEstateAgentalse
+    * cost
+    * downPayment
+    * credit
+    * history
+    * addressOne
+    * addressTwo
+    * addressThree
+    * firstNamea'
+    * lastName
+    * email
+* Remember to export each function, and that each function returns an object with two properties: `type` and `payload`.
+* Each function will have a parameter being passed into it that contains the value for `payload`, it's what we'll be updating the property on state to. 
+* `type` will equal the case you want your action to match
+
+<details>
+
+<summary> Detailed Instructions </summary>
+
+* Create actions for updating the following properties:
+    * realEstateAgentalse
+    * cost
+    * downPayment
+    * credit
+    * history
+    * addressOne
+    * addressTwo
+    * addressThree
+    * firstNamea'
+    * lastName
+    * email
+* Remember to export each function, and that each function returns an object with two properties: `type` and `payload`.
+* Each function will have a parameter being passed into it that contains the value for `payload`, it's what we'll be updating the property on state to. 
+* `type` will equal the case you want your action to match
+
+```js
+export function updateLoanType(loanType){
+    return{
+        type: UPDATE_LOAN_TYPE,
+        payload: loanType
+    }
+}
+export function updatePropertyType(property) {
+    return {
+        type: UPDATE_PROPERTY_TYPE,
+        payload: property
+    }
+}
+
+export function updateCity(city) {
+    return {
+        type: UPDATE_CITY,
+        payload: city
+    }
+}
+
+export function updatePropToBeUsedOn(prop){
+    return {
+        type: UPDATE_PROP,
+        payload: prop
+    }
+}
+export function updateFound(found){
+    return {
+        type: UPDATE_FOUND,
+        payload: found
+    }
+}
+
+export function updateRealEstateAgent(bool){
+    return {
+        type: UPDATE_REALESTATE_AGENT,
+        payload: bool
+    }    
+}
+
+export function updateCost(num){
+    return {
+        type: UPDATE_COST,
+        payload: num
+    }    
+}
+
+export function updateDownPayment(num){
+    return {
+        type: UPDATE_DOWNPAYMENT,
+        payload: num
+    }    
+}
+
+export function updateCredit(num){
+    return {
+        type: UPDATE_CREDIT,
+        payload: num
+    }    
+}
+
+export function updateHist(hist){
+    return {
+        type: UPDATE_HIST,
+        payload: hist
+    }    
+}
+
+export function updateAddOne(add){
+    return {
+        type: UPDATE_ADD_ONE,
+        payload: add
+    }    
+}
+export function updateAddTwo(add){
+    return {
+        type: UPDATE_ADD_TWO,
+        payload: add
+    }    
+}
+export function updateAddThree(add){
+    return {
+        type: UPDATE_ADD_THREE,
+        payload: add
+    }    
+}
+
+export function updateFirstName(first){
+    return {
+        type: UPDATE_FIRST_NAME,
+        payload: first
+    }    
+}
+
+export function updateLastName(last){
+    return {
+        type: UPDATE_LAST_NAME,
+        payload: last
+    }    
+}
+
+export function updateEmail(email){
+    return {
+        type: UPDATE_EMAIL,
+        payload: email
+    }    
+}
+```
+
+</details>
+
+* Moving onto our reducers, you'll need to make cases that will activate depending on which action.type is passed through the switch function.  
+* Create a cases for each action type
+    * In each case, return a new object that will become state, pass it empty curly braces, state, and the property with the value that you want to change.
+    * Remember, Object.assign is used to copy values from an original source, the first parameter is curly brackets, showing that we want to make a `new` object, the second parameter is state, which is the object we want to copy all the values of, and the third parameter targets the specific property and it's value that we want to change on this new version of state.
+
+<details>
+
+<summary> Detailed Instructions </summary>
+
+* Moving onto our reducers, you'll need to make cases that will activate depending on which action.type is passed through the switch function.  
+* Create a cases for each action type
+    * In each case, return a new object that will become state, pass it empty curly braces, state, and the property with the value that you want to change.
+    * Remember, Object.assign is used to copy values from an original source, the first parameter is curly brackets, showing that we want to make a `new` object, the second parameter is state, which is the object we want to copy all the values of, and the third parameter targets the specific property and it's value that we want to change on this new version of state.
+
+```js
+function reducer(state=initialState, action){ 
+
+    switch(action.type){
+        case UPDATE_LOAN_TYPE:
+            return Object.assign({}, state, {loanType: action.payload})
+        case UPDATE_PROPERTY_TYPE:
+            return Object.assign({}, state, {propertyType: action.payload})
+        case UPDATE_CITY:
+            return Object.assign({}, state, {city: action.payload})
+        case UPDATE_PROP:
+            return Object.assign({}, state, {propToBeUsedOn: action.payload})
+        case UPDATE_FOUND:
+            return Object.assign({}, state, {found: action.payload})
+        case UPDATE_REALESTATE_AGENT:
+            return Object.assign({}, state, {realEstateAgent: action.payload})
+        case UPDATE_COST:
+            return Object.assign({}, state, {cost: action.payload})
+        case UPDATE_DOWNPAYMENT:
+            return Object.assign({}, state, {downPayment: action.payload})
+        case UPDATE_CREDIT:
+            return Object.assign({}, state, {credit: action.payload})
+        case UPDATE_HIST:
+            return Object.assign({}, state, {history: action.payload})
+        case UPDATE_ADD_ONE:
+            return Object.assign({}, state, {addressOne: action.payload})
+        case UPDATE_ADD_TWO:
+            return Object.assign({}, state, {addressTwo: action.payload})
+        case UPDATE_ADD_THREE:
+            return Object.assign({}, state, {addressThree: action.payload})
+        case UPDATE_FIRST_NAME:
+            return Object.assign({}, state, {firstName: action.payload})
+        case UPDATE_LAST_NAME:
+            return Object.assign({}, state, {lastName: action.payload})
+        case UPDATE_EMAIL:
+            return Object.assign({}, state, {email: action.payload})
+
+        default:
+            return state
+    }
+} 
+```
+
+</details>
+
+
+### Solution
+
+<details>
+
+<summary> <code> src/ducks/reducer.js </code> </summary>
+
+```js
+const initialState = {
+   loanType: 'Home Purchase',
+   propertyType: 'Single Family Home',
+   city: '',
+   propToBeUsedOn: '',
+   found: false,
+   realEstateAgent: "false",
+   cost: 0,
+   downPayment: 0,
+   credit: '',
+   history: '',
+   addressOne: '',
+   addressTwo: '',
+   addressThree: '',
+   firstName: 'aa',
+   lastName: '',
+   email: ''
+}
+
+const UPDATE_LOAN_TYPE = "UPDATE_LOAN_TYPE";
+const UPDATE_PROPERTY_TYPE = 'UPDATE_PROPERTY_TYPE';
+const UPDATE_CITY = 'UPDATE_CITY';
+const UPDATE_PROP = 'UPDATE_PROP';
+const UPDATE_FOUND = 'UPDATE_FOUND';
+const UPDATE_REALESTATE_AGENT = "UPDATE_REALESTATE_AGENT";
+const UPDATE_COST = "UPDATE_COST";
+const UPDATE_DOWNPAYMENT = "UPDATE_DOWNPAYMENT";
+const UPDATE_CREDIT = "UPDATE_CREDIT";
+const UPDATE_HIST = "UPDATE_HIST";
+const UPDATE_ADD_ONE = "UPDATE_ADD_ONE";
+const UPDATE_ADD_TWO = "UPDATE_ADD_TWO";
+const UPDATE_ADD_THREE = "UPDATE_ADD_THREE";
+const UPDATE_FIRST_NAME = "UPDATE_FIRST_NAME";
+const UPDATE_LAST_NAME = "UPDATE_LAST_NAME";
+const UPDATE_EMAIL = "UPDATE_EMAIL"; 
+
+function reducer(state=initialState, action){ 
+
+    switch(action.type){
+        case UPDATE_LOAN_TYPE:
+            return Object.assign({}, state, {loanType: action.payload})
+        case UPDATE_PROPERTY_TYPE:
+            return Object.assign({}, state, {propertyType: action.payload})
+        case UPDATE_CITY:
+            return Object.assign({}, state, {city: action.payload})
+        case UPDATE_PROP:
+            return Object.assign({}, state, {propToBeUsedOn: action.payload})
+        case UPDATE_FOUND:
+            return Object.assign({}, state, {found: action.payload})
+        case UPDATE_REALESTATE_AGENT:
+            return Object.assign({}, state, {realEstateAgent: action.payload})
+        case UPDATE_COST:
+            return Object.assign({}, state, {cost: action.payload})
+        case UPDATE_DOWNPAYMENT:
+            return Object.assign({}, state, {downPayment: action.payload})
+        case UPDATE_CREDIT:
+            return Object.assign({}, state, {credit: action.payload})
+        case UPDATE_HIST:
+            return Object.assign({}, state, {history: action.payload})
+        case UPDATE_ADD_ONE:
+            return Object.assign({}, state, {addressOne: action.payload})
+        case UPDATE_ADD_TWO:
+            return Object.assign({}, state, {addressTwo: action.payload})
+        case UPDATE_ADD_THREE:
+            return Object.assign({}, state, {addressThree: action.payload})
+        case UPDATE_FIRST_NAME:
+            return Object.assign({}, state, {firstName: action.payload})
+        case UPDATE_LAST_NAME:
+            return Object.assign({}, state, {lastName: action.payload})
+        case UPDATE_EMAIL:
+            return Object.assign({}, state, {email: action.payload})
+
+
+
+        default:
+            return state
+    }
+
+} 
+
+export function updateLoanType(loanType){
+    return{
+        type: UPDATE_LOAN_TYPE,
+        payload: loanType
+    }
+}
+export function updatePropertyType(property) {
+    return {
+        type: UPDATE_PROPERTY_TYPE,
+        payload: property
+    }
+}
+
+export function updateCity(city) {
+    return {
+        type: UPDATE_CITY,
+        payload: city
+    }
+}
+
+export function updatePropToBeUsedOn(prop){
+    return {
+        type: UPDATE_PROP,
+        payload: prop
+    }
+}
+export function updateFound(found){
+    return {
+        type: UPDATE_FOUND,
+        payload: found
+    }
+}
+
+export function updateRealEstateAgent(bool){
+    return {
+        type: UPDATE_REALESTATE_AGENT,
+        payload: bool
+    }    
+}
+
+export function updateCost(num){
+    return {
+        type: UPDATE_COST,
+        payload: num
+    }    
+}
+
+export function updateDownPayment(num){
+    return {
+        type: UPDATE_DOWNPAYMENT,
+        payload: num
+    }    
+}
+
+export function updateCredit(num){
+    return {
+        type: UPDATE_CREDIT,
+        payload: num
+    }    
+}
+
+export function updateHist(hist){
+    return {
+        type: UPDATE_HIST,
+        payload: hist
+    }    
+}
+
+export function updateAddOne(add){
+    return {
+        type: UPDATE_ADD_ONE,
+        payload: add
+    }    
+}
+export function updateAddTwo(add){
+    return {
+        type: UPDATE_ADD_TWO,
+        payload: add
+    }    
+}
+export function updateAddThree(add){
+    return {
+        type: UPDATE_ADD_THREE,
+        payload: add
+    }    
+}
+
+export function updateFirstName(first){
+    return {
+        type: UPDATE_FIRST_NAME,
+        payload: first
+    }    
+}
+
+export function updateLastName(last){
+    return {
+        type: UPDATE_LAST_NAME,
+        payload: last
+    }    
+}
+
+export function updateEmail(email){
+    return {
+        type: UPDATE_EMAIL,
+        payload: email
+    }    
+}
+export default reducer; 
+```
+
+</details>
+
