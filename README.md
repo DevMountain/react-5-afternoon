@@ -538,7 +538,214 @@ export default connect(mapStateToProps)(App);
 ```
 </details>
 
+
 ## Step 5
+
+### Summary
+
+Now that our reducer is set up, let's connect our Eleventh view to the store, so that moving forward, as we start hooking our views up with `redux`, we'll be able to see the data getting to where it needs to end up.
+
+## Instructions 
+
+* Import `connect` from `react-redux`
+* Connect the component to the `redux store`
+    * Create a function `mapStateToProps`, pass it state.
+    * Return an object with the properties that you want from state.
+    *Export your component similarly to how it was done in the `App.js`: `export default connect(mapStateToProps)(WizardEleven);`
+
+<details>
+
+<summary> Detailed Instructions </summary>
+
+* Import `connect` from `react-redux`
+
+```js
+import { connect } from 'react-redux'; 
+
+```
+
+* Connect the component to the `redux store`
+    * Create a function `mapStateToProps`, pass it state.
+    * Return an object with the properties that you want from state.
+    *Export your component similarly 
+
+```js
+function mapStateToProps( state ) {
+        return{ 
+            loanType: state.loanType,
+            propertyType: state.propertyType,
+            city: state.city,
+            propToBeUsedOn: state.propToBeUsedOn,
+            found: state.found,
+            realEstateAgent: state.realEstateAgent,
+            cost: state.cost,
+            downPayment: state.downPayment,
+            credit: state.credit,
+            history: state.history,
+            addressOne: state.addressOne,
+            addressTwo: state.addressTwo,
+            addressThree: state.addressThree,
+            firstName: state.firstName,
+            lastName: state.lastName,
+            email: state.email
+        };
+        
+}
+export default connect(mapStateToProps)(WizardEleven); 
+```
+</details>
+
+### Solution
+
+<details>
+
+<summary> <code> src/components/WizardEleven/WizardEleven.js </code> </summary>
+
+```js
+import React,  { Component } from 'react';
+import { connect } from 'react-redux'; 
+import { Link } from 'react-router-dom';
+
+class WizardEleven extends Component {
+
+    render(){
+        return(
+            <div className="parent-div">
+                <div className="vert-align">
+                
+                      
+                    <p>Here is an overview of your form:</p> 
+                    <div >
+                        <div className="overarching-div">
+                            <div className="form" >Name: 
+                                <p className="p2">
+                                    {this.props.firstName} {this.props.lastName}
+                                </p>
+                            </div> 
+                        </div>
+                        <div className="overarching-div">
+                            <div className="form" >Email: 
+                                <p className="p2">
+                                  {this.props.email}
+                                </p>
+                            </div> 
+                        </div>
+                        <div className="overarching-div">
+                            <div className="form" >What type of loan will you be needing?: 
+                                <p className="p2">
+                                    {this.props.loanType}
+                                </p> 
+                            </div>
+                        </div>
+                        <div className="overarching-div">
+                            <div className="form" >What type of property are you purchasing?: 
+                                <p className="p2">
+                                    {this.props.propertyType}
+                                </p>
+                            </div>
+                        </div>
+                        <div className="overarching-div">
+                            <div className="form" >In what city will the property be located?: 
+                                <p className="p2"> 
+                                    {this.props.city}
+                                </p>
+                            </div>
+                        </div>
+                        <div className="overarching-div">
+                            <div className="form" >Type of property the loan is applied to:
+                                <p className="p2">
+                                    {this.props.propToBeUsedOn}
+                                </p> 
+                            </div>
+                        </div>
+                        <div className="overarching-div">
+                            <div className="form" >Have you already found your new home?: 
+                                <p className="p2">
+                                    {this.props.found}
+                                </p>
+                            </div> 
+                        </div>
+                        <div className="overarching-div">
+                            <div className="form" >Currently working with a real estate agent?: 
+                                <p className="p2">
+                                    {this.props.realEstateAgent}
+                                </p>
+                            </div>
+                        </div>
+                        <div className="overarching-div">
+                            <div className="form" >Estimated purchase price of the home: 
+                                <p className="p2">
+                                    {this.props.cost}
+                                </p>
+                            </div> 
+                        </div>
+                        <div className="overarching-div">
+                            <div className="form" >Down payment: 
+                                <p className="p2">
+                                    {this.props.downPayment}
+                                </p>
+                            </div> 
+                        </div>
+                        <div className="overarching-div">
+                            <div className="form" >Credit score: 
+                                <p className="p2"> 
+                                    {this.props.credit}
+                                </p>
+                            </div>
+                        </div>
+                        <div className="overarching-div">
+                            <div className="form" >Bankruptcy history: 
+                                <p className="p2">
+                                    {this.props.history}
+                                </p>
+                            </div>
+                        </div>
+                        <div className="overarching-div">
+                            <div className="form" >Current Address: 
+                                <p className="p2">
+                                    {this.props.addressOne} <br />
+                                    {this.props.addressTwo} <br />
+                                    {this.props.addressThree}
+                                </p>
+                            </div>
+                        </div>
+                    </div>   
+                </div>
+               <div className="row">
+                    <Link to="/finish"> <button>Send</button></Link>
+                    <Link to="/"> <button>Start Again</button></Link>
+               </div>
+            </div>
+            )
+       }
+}
+function mapStateToProps( state ) {
+        return{ 
+            loanType: state.loanType,
+            propertyType: state.propertyType,
+            city: state.city,
+            propToBeUsedOn: state.propToBeUsedOn,
+            found: state.found,
+            realEstateAgent: state.realEstateAgent,
+            cost: state.cost,
+            downPayment: state.downPayment,
+            credit: state.credit,
+            history: state.history,
+            addressOne: state.addressOne,
+            addressTwo: state.addressTwo,
+            addressThree: state.addressThree,
+            firstName: state.firstName,
+            lastName: state.lastName,
+            email: state.email
+        };
+        
+}
+export default connect(mapStateToProps)(WizardEleven); 
+```
+</details>
+
+
+## Step 6
 
 ### Summary
 
@@ -749,7 +956,7 @@ export default reducer;
 
 </details>
 
-## Step 6
+## Step 7
 
 ### Summary
 
@@ -886,7 +1093,7 @@ export default connect(mapStateToProps, {updateLoanType, updatePropertyType})(Wi
 </details>
 
 
-## Step 7
+## Step 8
 
 ### Summary
 
@@ -1110,7 +1317,7 @@ export default connect(mapStateToProps, { updateCity })(WizardTwo);
 
 
 
-## Step 8
+## Step 9
 ### Summary
 
 Now that we have our second view hooked up. Let's move onto the third View.
@@ -1346,7 +1553,7 @@ export default connect(mapStateToProps, { updatePropToBeUsedOn })(WizardThree);
 
 </details>
 
-## Step 9
+## Step 10
 
 ### Summary
 
@@ -1589,7 +1796,7 @@ export default connect(mapStateToProps, { updateFound })(WizardFour);
 
 </details>
 
-## Step 10
+## Step 11
 
 ### Summary
 
@@ -2022,7 +2229,7 @@ export default reducer;
 
 </details>
 
-## Step 11
+## Step 12
 
 ### Summary
 
@@ -2128,7 +2335,7 @@ export default connect(mapStateToProps, { updateRealEstateAgent })(WizardFive);
 </details>
 
 
-## Step 12
+## Step 13
 
 ### Summary
 
@@ -2238,6 +2445,185 @@ function mapStateToProps( state ) {
     };
 }
 export default connect(mapStateToProps, { updateCost, updateDownPayment })(WizardSix); 
+```
+
+</details>
+
+## Step 14
+
+### Summary
+
+Hooking up the rest of our views to the reducer.
+
+## Instructions 
+
+Continue to go through the rest of the views and hook them up to the reducer like we've done in previous steps. When you're done, you should be able to see all of the data you've passed in the eleventh view.
+
+### Solution For Seventh View
+
+<details>
+
+<summary> <code> src/components/WizardSix/WizardSix.js </code> </summary>
+
+
+```js
+import React,  { Component } from 'react';
+import { Link } from 'react-router-dom';
+import { updateCredit } from './../../ducks/reducer'
+import { connect } from 'react-redux'; 
+
+class WizardSeven extends Component {
+
+    render(){
+        return(
+            <div className="parent-div">
+                <div className="vert-align">
+                    <p>Estimate your credit score</p> <br />
+                    <div className="row">
+                        <Link to="/wEight"><button onClick={ (e)=>this.props.updateCredit('Excellent') }>Excellent</button></Link>
+                        <Link to="/wEight"><button onClick={ (e)=>this.props.updateCredit('Good') }>Good</button></Link>
+                        <Link to="/wEight"><button onClick={ (e)=>this.props.updateCredit('Fair') }>Fair</button></Link>
+                        <Link to="/wEight"><button onClick={ (e)=>this.props.updateCredit('Poor') }>Poor</button></Link>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+}
+
+function mapStateToProps( state ) {
+  return { 
+      credit: state.credit,
+    };
+}
+export default connect(mapStateToProps, { updateCredit })(WizardSeven); 
+```
+
+</details>
+
+
+### Solution For Eigth View
+   
+<details>
+
+<summary> <code> src/components/WizardSix/WizardSix.js </code> </summary>
+
+
+```js
+import React,  { Component } from 'react';
+import { Link } from 'react-router-dom';
+import { updateHist } from './../../ducks/reducer'
+import { connect } from 'react-redux'; 
+
+class WizardEight extends Component {
+
+    render(){
+        return(
+            <div className="parent-div">
+                <div className="vert-align">
+                    <p>Have you had a bankruptcy or foreclosure in the past seven years?</p> <br />
+                <div className="row">
+                    <Link to="/wNine"><button value="Has never been in bankruptcy" onClick={ (e)=> this.props.updateHist(e.target.value) }>No</button></Link>
+                    <Link to="/wNine"><button value="Has had bankruptcy before" onClick={ (e)=> this.props.updateHist(e.target.value) }>Bankruptcy</button></Link>
+                    <Link to="/wNine"><button value="Has had a foreclosure before" onClick={ (e)=> this.props.updateHist(e.target.value) }>Foreclosure</button></Link>
+                    <Link to="/wNine"><button value="Has had both a foreclosure and a bankruptcy" onClick={ (e)=> this.props.updateHist(e.target.value) }>Both</button></Link>
+                </div>    
+                </div>
+            </div>
+        )
+    }
+}
+
+function mapStateToProps( state ) {
+  return { 
+      history: state.history,
+    };
+}
+export default connect(mapStateToProps, { updateHist })(WizardEight); 
+```
+
+</details>
+
+### Solution For Ninth View
+
+<details>
+
+<summary> <code> src/components/WizardSix/WizardSix.js </code> </summary>
+
+
+```js
+import React,  { Component } from 'react';
+import { Link } from 'react-router-dom';
+import { updateAddOne, updateAddTwo, updateAddThree } from './../../ducks/reducer'
+import { connect } from 'react-redux'; 
+
+class WizardNine extends Component {
+
+    render(){
+        return(
+            <div className="parent-div">
+                <div className="vert-align">
+                    <p>What is your address?</p> <br />
+                    <input type="text" placeholder="Line One" onChange={ (e)=>this.props.updateAddOne(e.target.value) }/>
+                    <input type="text" placeholder="Line Two" onChange={ (e)=>this.props.updateAddTwo(e.target.value) }/>
+                    <input type="text" placeholder="Line Three" onChange={ (e)=>this.props.updateAddThree(e.target.value) }/>
+               
+                
+                    <Link to="/wTen"><button className="margin-btn"> Next </button></Link>
+                </div>
+            </div>
+        )
+    }
+}
+function mapStateToProps( state ) {
+  return { 
+     addressOne: state.addressOne,
+     addressTwo: state.addressTwo,
+     addressThree: state.addressThree
+  };
+}
+export default connect(mapStateToProps, { updateAddOne, updateAddTwo, updateAddThree })(WizardNine); 
+```
+
+</details>
+
+### Solution For Tenth View
+
+<details>
+
+<summary> <code> src/components/WizardSix/WizardSix.js </code> </summary>
+
+
+```js
+import React,  { Component } from 'react';
+import { Link } from 'react-router-dom';
+import { updateFirstName, updateLastName, updateEmail } from './../../ducks/reducer'
+import { connect } from 'react-redux'; 
+
+class WizardTen extends Component {
+    render(){
+        return(
+            <div className="parent-div">
+                <div className="vert-align">
+                    <p>What is your name and Email?</p> <br />
+                    <input type="text" placeholder="First Name" onChange={ (e)=>this.props.updateFirstName(e.target.value) }/>
+                    <input type="text" placeholder="Last Name" onChange= { (e)=>this.props.updateLastName(e.target.value) }/>
+                    <input type="text" placeholder="email" onChange={ (e)=>this.props.updateEmail(e.target.value) }/>
+                    
+                    <Link to="/wEleven"><button className="margin-btn"> Next </button></Link>
+                </div>
+            </div>
+        )
+    }
+}
+function mapStateToProps( state ) {
+  return { 
+     firstName: state.firstName,
+     lastName: state.lastName,
+     email: state.email
+  };
+}
+export default connect(mapStateToProps, { updateFirstName, updateLastName, updateEmail })(WizardTen); 
 ```
 
 </details>
