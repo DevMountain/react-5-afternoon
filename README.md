@@ -468,6 +468,17 @@ In this next step, we'll be looking at our `App.js`, understanding what's happen
 ## Instructions
 Now that we have our `router.js` cleaned up, let's head over to our App.js and take a look at what we have.
 
+You'll notice that throughout this file there are comments, these comments are there to more easily show which pieces of state have to do with which views/routes. In this step, we're just going to connect our App.js and first view to redux.
+
+* Import `connect` from `react-redux`
+* At the bottom of the page make a function called `mapStateToProps`, pass it `state`, then return `state`
+* Instead of having `export default App`, we're going to be using `connect` to connect the `App.js` to the `redux` store. `export default connect(mapStateToProps)(App);`
+
+Now our App is connected with redux, let's think about what needs to have access to our state in our first view: `WizardOne.js`. It looks like we need to be able to update the loanType and propertyType items on state. In redux, in order to update something, we need to have an action and a reducer, so let's go to our `src/reducer.js`.
+
+* Create a function called reducer and pass it state equal to initial state and an action
+* At the bottom of the file `export default reducer`. This reducer will take place in actually manipulating state once we put some cases in it. 
+* Above the reducer we're going to make two const's, one called `UPDATE_LOAN_PROP_TYPE` set equal to a string `"UPDATE_LOAN_PROP_TYPE"`.
 
 
 <details>
