@@ -45,7 +45,7 @@ In order to create our store, we'll also need our reducer. So let's import that 
 ```js
 import { createStore } from "redux";
 
-import reducer from "./ducks/reducer";"
+import reducer from "./ducks/reducer";
 ```
 
 Now that we have everything we need to import, let's export by default the creation of our store. 
@@ -92,6 +92,7 @@ In this step, we will take our store created from the previous step and hook it 
   * The `Provider` component should have a `store` prop that equals `store` (remember how we call variables in jsx). 
 * Import `BrowserRouter` from `react-router-dom`.
 * Wrap the `Provider` in `<BrowserRouter>` tags.
+
 <details>
 
 <summary> Detailed Instructions </summary>
@@ -196,6 +197,8 @@ In addition to our route component being a function, the way we're connecting ou
 ## Instructions
 
 * Export default our router without making it a function.
+    * Now that our routes aren't exported in a function, we don't need to `return` anything.
+    * You will start getting errors coming from the props on the routes rendered elements once our routing is no longer a function, this is because they're no longer receiving information via parameters from the function and are now undefined.
 * Import `HashRouter` from `react-router-dom`.
     * Instead of using `Switch`, we're going to use `HashRouter` from `react-router-dom` to wrap our routes. (HashRouter uses the hash portion of our URL to keep our UI in sync with the URL when we change views).
 * Wrap routes in a div, HashRouter can only have one first level element, so we will nest our routes inside of the div. 
@@ -547,11 +550,15 @@ Now that our App is set up, let's connect our Eleventh view to the store, so tha
 
 ## Instructions 
 
+In `src/components/WizardEleven/WizardEleven.js`
+
 * Import `connect` from `react-redux`
 * Connect the component to the `redux store`
     * Create a function `mapStateToProps`, pass it state.
     * Return an object with the properties that you want from state.
-    *Export your component similarly to how it was done in the `App.js`: `export default connect(mapStateToProps)(WizardEleven);`
+    * You will need to look at the detailed instructions or solution to get all of the properties you'll want on this Component for the return object.
+    * Export your component similarly to how it was done in the `App.js`: `export default connect(mapStateToProps)(WizardEleven);`
+
 
 <details>
 
@@ -567,7 +574,8 @@ import { connect } from 'react-redux';
 * Connect the component to the `redux store`
     * Create a function `mapStateToProps`, pass it state.
     * Return an object with the properties that you want from state.
-    *Export your component similarly 
+    * Export your component similarly to how it was done in the `App.js`: `export default connect(mapStateToProps)(WizardEleven);`
+
 
 ```js
 function mapStateToProps( state ) {
@@ -749,12 +757,12 @@ export default connect(mapStateToProps)(WizardEleven);
 
 ### Summary
 
-Now our App is connected with redux, let's think about what needs to have access to our state in our first view: `WizardOne.js`. It looks like we need to be able to update the loanType and propertyType items on state. In redux, in order to update something, we need to have an action and a reducer, so let's go to our `src/reducer.js`.
+Now our App is connected with redux, let's think about what needs to have access to our state in our first view: `WizardOne.js`. It looks like we need to be able to update the loanType and propertyType items on state. In redux, in order to update something, we need to have an action and a reducer, so let's go to our `src/ducks/reducer.js`.
 
 ## Instructions
 
 * First, let's create our `initialState`. Initial state serves as a placeholder for what we want to change on state, `redux` needs the state to always be defined so having a placeholder prevents it from being undefined.
-    * Create a const called `initialState`, set it equal to an object with these values:
+    * Create a const called `initialState`, set it equal to an object with these values and place them above your reducer function, not inside:
 
 ```js
 const initialState = {
@@ -779,13 +787,19 @@ const initialState = {
 * Create a function called reducer and pass it `state` equal to `initialState` and an `action`.
 * At the bottom of the file `export default reducer`. This reducer will take place in actually manipulating state once we put some cases in it. 
 * Above the reducer we're going to make two const's, one called `UPDATE_LOAN_TYPE ` set equal to a string `"UPDATE_LOAN_TYPE "`, the other called `UPDATE_PROPERTY_TYPE ` set equal to a string `"UPDATE_PROPERTY_TYPE "`. 
-    * We do this because react will throw an error if a variable is misspelled, but not if a string is misspelled.
+    * When we make a case, it takes a type of string. So we save those strings into consts. We do this because react will throw an error if a variable is misspelled, but not if a string is misspelled. It helps us to be more efficient.
 * Now let's set up the `action` that will connect to the `reducer`:
-    * `Actions` will be exported functions, below the reducer function, export a function called `updateLoanType`, pass it `loanType`. 
+    * `Actions` will be exported functions, below the reducer function.
     * All of our `actions` will return an object with a `type` and `payload`.
-    * Return and object with `type: UPDATE_LOAN_TYPE` and `payload: loanType`. `UPDATE_LOAN_TYPE` is equal to the string in that const we set before, `loanType` is a parameter in the function that serves as what we want to actually change on state.
-* The action needs a reducer now that will change the state. Inside of the reducer function, create a switch statement, passing it action.type as a parameter. 
-    * The action parameter in our reducer function is equal to the object our actions return, which is why we pass the switch statement action.type.
+* Export a function called `updateLoanType`, pass it `loanType`. 
+    * Inside of `updateLoanType`, return an object with `type: UPDATE_LOAN_TYPE` and `payload: loanType`. `UPDATE_LOAN_TYPE` is equal to the string in that const we set before, `loanType` is a parameter in the function that serves as what we want to actually change on state.
+* Export another function called `updatePropertyType`. 
+    * Return an object with `type: UPDATE_PROPERTY_TYPE` and `payload: property`. `UPDATE_PROPERTY_TYPE` is equal to the string in that const we set before, `property` is a parameter in the function that serves as what we want to actually change on state.
+
+The action needs a reducer now that will change the state. Inside of the reducer function, create a switch statement, passing it action.type as a parameter. 
+
+* The action parameter in our reducer function is equal to the object our actions return, which is why we pass the switch statement action.type.
+
 * Create a `case` with `UPDATE_LOAN_TYPE`, enter down and tab in once, return `Object.assign({}, state, {loanType: action.payload})`
 * Create another `case` with `UPDATE_PROPERTY_TYPE`, enter down and tab in once, return `Object.assign({}, state, {propertyType: action.payload})`
     * Object.assign is used to copy values from an original source, the first parameter is curly brackets, showing that we want to make a `new` object, the second parameter is state, which is the object we want to copy all the values of, and the third parameter targets the specific property and it's value that we want to change on this new version of state.
@@ -973,7 +987,7 @@ Now that the `action` and `reducer` are set up for our first view, let's head ov
     * The export default will be a little different, this time we'll need to access the destructured functions from our reducer like so: `export default connect(mapStateToProps, {updateLoanType, updatePropertyType})(WizardOne);`
 * Now our component is connected to the `redux store`, let's access the function we need to change state. On the first select element on the `onChange` event, set it equal to `{(e) =>this.props.updateLoanType(e.target.value)}`.
     * Because we've connected to `redux`, the updateLoanType function is now on props for this component.
-* Go to the second select element's `onChange` even and set it equal to `(e)=>this.props.updatePropertyType(e.target.value)}`
+* Go to the second select element's `onChange` even and set it equal to `{(e)=>this.props.updatePropertyType(e.target.value)}`
 * Our WizardOne Component should now be hooked up properly and be working with redux! 
 * If you'd like to, you can console log what's currently on state by writing `console.log(this.props)` inside of the `render()` function.
 
@@ -1097,7 +1111,7 @@ export default connect(mapStateToProps, {updateLoanType, updatePropertyType})(Wi
 
 ### Summary
 
-Now that we have our first view hooked up. Let's move onto the second View.
+Now that we have our first view hooked up. Let's move on to the second View.
 
 ## Instructions 
 
@@ -1268,6 +1282,7 @@ export default connect(mapStateToProps, { updateCity })(WizardTwo);
     * Set the input element's `onChange` function equal to `{(e)=>this.props.updateCity(e.target.value)}`.
     * Because we've connected to `redux`, the updateLoanType function is now on props for this component.
 * Our WizardTwo Component should now be hooked up properly and be working with redux! 
+* You can see what's on state by writing `console.log(this.props)` inside of the `render()` function.
     
 ```js
 <input placeholder="city name" type="text" onChange={(e)=>this.props.updateCity(e.target.value)}/>
@@ -1320,13 +1335,13 @@ export default connect(mapStateToProps, { updateCity })(WizardTwo);
 ## Step 9
 ### Summary
 
-Now that we have our second view hooked up. Let's move onto the third View.
+Now that we have our second view hooked up. Let's move on to the third View.
 
 ## Instructions
 In the `src/ducks/reducer.js`
 
 * Create a new const: `const UPDATE_PROP  = 'UPDATE_PROP ';`
-* Create an action for updating the city:
+* Create an action for updating the prop:
     * Beneath the reducer function, export a function called `updatePropToBeUsedOn` and pass it `prop` as a parameter.
     * Return an object with a `type` equal to `UPDATE_PROP ` and a `payload` equal to `prop`.
 * Create a reducer to update state for that action. Inside the reducer function:
@@ -1345,7 +1360,7 @@ const UPDATE_PROP = 'UPDATE_PROP';
 
 ```
 
-* Create an action for updating the city:
+* Create an action for updating the prop:
     * All `actions` will return an object with a `type` and `payload`.
     * Beneath the reducer function, export a function called `updatePropToBeUsedOn` and pass it `prop` as a parameter.
     * Return an object with a `type` equal to `UPDATE_PROP` and a `payload` equal to `prop`.
@@ -1468,6 +1483,7 @@ In the `src/component/WizardThree/WizardThree.js`
 * Now our component is connected to the `redux store`, let's access the function we need to change state on the input element.
     * Set all of the button element's `onChange` functions equal to `{(e) =>this.props.updatePropToBeUsedOn(e.target.value)}`.
 * Our WizardThree Component should now be hooked up properly and be working with redux! 
+* You can see what's on state by writing `console.log(this.props)` inside of the `render()` function.
 <details>
 
 <summary> Detailed Instructions </summary>
@@ -1557,7 +1573,7 @@ export default connect(mapStateToProps, { updatePropToBeUsedOn })(WizardThree);
 
 ### Summary
 
-Now that we have our third view hooked up. Let's move onto the fourth View.
+Now that we have our third view hooked up. Let's move on to the fourth View.
 
 ## Instructions 
 
@@ -1713,6 +1729,7 @@ In the `src/component/WizardFour/WizardFour.js`
 * Now our component is connected to the `redux store`, let's access the function we need to change state on the input element.
     * Set the input element's `onChange` function equal to `{(e)=>this.props.updateFound(e.target.value)}`.
 * Our WizardFour Component should now be hooked up properly and be working with redux! 
+* You can see what's on state by writing `console.log(this.props)` inside of the `render()` function.
 <details>
 
 <summary> Detailed Instructions </summary>
@@ -1823,7 +1840,7 @@ const UPDATE_EMAIL = "UPDATE_EMAIL";
 ```
 
 * Create actions for updating the following properties:
-    * realEstateAgentalse
+    * realEstateAgent
     * cost
     * downPayment
     * credit
@@ -1831,7 +1848,7 @@ const UPDATE_EMAIL = "UPDATE_EMAIL";
     * addressOne
     * addressTwo
     * addressThree
-    * firstNamea'
+    * firstName
     * lastName
     * email
 * Remember to export each function, and that each function returns an object with two properties: `type` and `payload`.
@@ -1970,8 +1987,8 @@ export function updateEmail(email){
 
 </details>
 
-* Moving onto our reducers, you'll need to make cases that will activate depending on which action.type is passed through the switch function.  
-* Create a cases for each action type
+* Moving on to our reducers, you'll need to make cases that will activate depending on which action.type is passed through the switch function.  
+* Create a case for each action type
     * In each case, return a new object that will become state, pass it empty curly braces, state, and the property with the value that you want to change.
     * Remember, Object.assign is used to copy values from an original source, the first parameter is curly brackets, showing that we want to make a `new` object, the second parameter is state, which is the object we want to copy all the values of, and the third parameter targets the specific property and it's value that we want to change on this new version of state.
 
@@ -1979,8 +1996,8 @@ export function updateEmail(email){
 
 <summary> Detailed Instructions </summary>
 
-* Moving onto our reducers, you'll need to make cases that will activate depending on which action.type is passed through the switch function.  
-* Create a cases for each action type
+* Moving on to our reducers, you'll need to make cases that will activate depending on which action.type is passed through the switch function.  
+* Create a case for each action type
     * In each case, return a new object that will become state, pass it empty curly braces, state, and the property with the value that you want to change.
     * Remember, Object.assign is used to copy values from an original source, the first parameter is curly brackets, showing that we want to make a `new` object, the second parameter is state, which is the object we want to copy all the values of, and the third parameter targets the specific property and it's value that we want to change on this new version of state.
 
@@ -2249,6 +2266,7 @@ In the `src/component/WizardFive/WizardFive.js`
     * Set the first button element's `onChange` function equal to `{(e)=>this.props.updateRealEstateAgent("True")}`.
     * Set the second button element's `onChange` function equal to `{(e)=>this.props.updateRealEstateAgent("False")}`.
 * Our WizardFive Component should now be hooked up properly and be working with redux! 
+* You can see what's on state by writing `console.log(this.props)` inside of the `render()` function.
 <details>
 
 <summary> Detailed Instructions </summary>
@@ -2355,6 +2373,7 @@ In the `src/component/WizardSix/WizardSix.js`
     * Set the first input element's `onChange` function equal to `{ (e)=> this.props.updateCost(e.target.value) }`.
     * Set the second input element's `onChange` function equal to `{ (e)=> this.props.updateDownPayment(e.target.value) }`.
 * Our WizardSix Component should now be hooked up properly and be working with redux! 
+* You can see what's on state by writing `console.log(this.props)` inside of the `render()` function.
 <details>
 
 <summary> Detailed Instructions </summary>
@@ -2366,7 +2385,7 @@ import { connect } from 'react-redux';
 
 ```
 
-* Import the update function you just made from your reducer: `updateRealEstateAgent ` from `'./../../ducks/reducer'` (remember to destructure them). 
+* Import the update functions you just made from your reducer: `updateCost, updateDownPayment ` from `'./../../ducks/reducer'` (remember to destructure them)
 
 ```js
 import { updateCost, updateDownPayment } from './../../ducks/reducer';
@@ -2463,7 +2482,7 @@ Continue to go through the rest of the views and hook them up to the reducer lik
 
 <details>
 
-<summary> <code> src/components/WizardSix/WizardSix.js </code> </summary>
+<summary> <code> src/components/WizardSeven/WizardSeven.js </code> </summary>
 
 
 ```js
@@ -2506,7 +2525,7 @@ export default connect(mapStateToProps, { updateCredit })(WizardSeven);
    
 <details>
 
-<summary> <code> src/components/WizardSix/WizardSix.js </code> </summary>
+<summary> <code> src/components/WizardEight/WizardEight.js </code> </summary>
 
 
 ```js
@@ -2548,7 +2567,7 @@ export default connect(mapStateToProps, { updateHist })(WizardEight);
 
 <details>
 
-<summary> <code> src/components/WizardSix/WizardSix.js </code> </summary>
+<summary> <code> src/components/WizardNine/WizardNine.js </code> </summary>
 
 
 ```js
@@ -2591,7 +2610,7 @@ export default connect(mapStateToProps, { updateAddOne, updateAddTwo, updateAddT
 
 <details>
 
-<summary> <code> src/components/WizardSix/WizardSix.js </code> </summary>
+<summary> <code> src/components/WizardTen/WizardTen.js </code> </summary>
 
 
 ```js
@@ -2627,3 +2646,13 @@ export default connect(mapStateToProps, { updateFirstName, updateLastName, updat
 ```
 
 </details>
+
+## Contributions
+
+If you see a problem or a typo, please fork, make the necessary changes, and create a pull request so we can review your changes and merge them into the master repo and branch.
+
+## Copyright
+
+© DevMountain LLC, 2017. Unauthorized use and/or duplication of this material without express and written permission from DevMountain, LLC is strictly prohibited. Excerpts and links may be used, provided that full and clear credit is given to DevMountain with appropriate and specific direction to the original content. 
+<br />
+<img src="https://devmounta.in/img/logowhiteblue.png" width="250" align="right">
