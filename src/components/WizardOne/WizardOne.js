@@ -2,7 +2,6 @@ import React,  { Component } from 'react';
 import {Link} from 'react-router-dom'
 
 class WizardOne extends Component {
-
     render(){
         return(
             <div className="parent-div">

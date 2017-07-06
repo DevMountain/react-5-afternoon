@@ -468,34 +468,492 @@ In this next step, we'll be looking at our `App.js`, understanding what's happen
 ## Instructions
 Now that we have our `router.js` cleaned up, let's head over to our App.js and take a look at what we have.
 
-You'll notice that throughout this file there are comments, these comments are there to more easily show which pieces of state have to do with which views/routes. In this step, we're just going to connect our App.js and first view to redux.
+You'll notice that throughout this file there are comments, these comments are there to more easily show which pieces of state have to do with which views/routes. In this step, we're just going to connect our App.js and first view to redux. 
+
+Sidenote: You can either leave the constructor function, super, state, all of the bound functions and regular functions that originally dealt with state in there if you'd like. Or it may help to take out the specific ones that deal with state one at a time as you connect things to redux. In this project I'll be removing them all at once. 
 
 * Import `connect` from `react-redux`
 * At the bottom of the page make a function called `mapStateToProps`, pass it `state`, then return `state`
 * Instead of having `export default App`, we're going to be using `connect` to connect the `App.js` to the `redux` store. `export default connect(mapStateToProps)(App);`
 
-Now our App is connected with redux, let's think about what needs to have access to our state in our first view: `WizardOne.js`. It looks like we need to be able to update the loanType and propertyType items on state. In redux, in order to update something, we need to have an action and a reducer, so let's go to our `src/reducer.js`.
-
-* Create a function called reducer and pass it state equal to initial state and an action
-* At the bottom of the file `export default reducer`. This reducer will take place in actually manipulating state once we put some cases in it. 
-* Above the reducer we're going to make two const's, one called `UPDATE_LOAN_TYPE ` set equal to a string `"UPDATE_LOAN_TYPE "`, the other called `UPDATE_PROPERTY_TYPE ` set equal to a string `"UPDATE_PROPERTY_TYPE "`. 
-    * We do this because react will throw an error if a variable is misspelled, but not if a string is misspelled.
-* Now let's set up the `action` that will connect to the `reducer`:
-    * `Actions` will be exported functions, below the reducer function, export a function called `updateLoanType`, pass it `loanPropType`. 
-    * All of our `actions` will return an object with a `type` and `payload`.
-    * return and object with `type: UPDATE_LOAN TYPE` and `payload: loanType`
-
-
 <details>
 
 <summary> Detailed Instructions </summary>
 
+* Import `connect` from `react-redux`;
+```js
+import { connect } from 'react-redux'
+```
+* At the bottom of the page make a function called `mapStateToProps`, pass it `state`, then return `state`
+```js
+function mapStateToProps(state){
+  return{
+
+      state
+
+  }
+}
+
+```
+* Instead of having `export default App`, we're going to be using `connect` to connect the `App.js` to the `redux` store. `export default connect(mapStateToProps)(App);`
+```js
+export default connect(mapStateToProps)(App);
+```
 </details>
 
 ### Solution
 
 <details>
 
-<summary> <code> src/.js </code> </summary>
+<summary> <code> src/App.js </code> </summary>
+
+```js
+import React, { Component } from 'react';
+import './App.css';
+import router from './router'
+import { connect } from "react-redux";
+
+
+class App extends Component {
+  render() {
+    return (
+      <div>
+    
+      {router}
+
+      </div>
+    );
+  }
+}
+
+function mapStateToProps(state){
+  return{
+
+      state
+
+  }
+}
+
+export default connect(mapStateToProps)(App);
+```
+</details>
+
+## Step 5
+
+### Summary
+
+Now our App is connected with redux, let's think about what needs to have access to our state in our first view: `WizardOne.js`. It looks like we need to be able to update the loanType and propertyType items on state. In redux, in order to update something, we need to have an action and a reducer, so let's go to our `src/reducer.js`.
+
+## Instructions
+
+* First, let's create our `initialState`. Initial state serves as a placeholder for what we want to change on state, `redux` needs the state to always be defined so having a placeholder prevents it from being undefined.
+    * Create a const called `initialState`, set it equal to an object with these values:
+
+```js
+const initialState = {
+   loanType: 'Home Purchase',
+   propertyType: 'Single Family Home',
+   city: '',
+   propToBeUsedOn: '',
+   found: false,
+   realEstateAgent: "false",
+   cost: 0,
+   downPayment: 0,
+   credit: '',
+   history: '',
+   addressOne: '',
+   addressTwo: '',
+   addressThree: '',
+   firstName: 'aa',
+   lastName: '',
+   email: ''
+}
+```
+* Create a function called reducer and pass it `state` equal to `initialState` and an `action`.
+* At the bottom of the file `export default reducer`. This reducer will take place in actually manipulating state once we put some cases in it. 
+* Above the reducer we're going to make two const's, one called `UPDATE_LOAN_TYPE ` set equal to a string `"UPDATE_LOAN_TYPE "`, the other called `UPDATE_PROPERTY_TYPE ` set equal to a string `"UPDATE_PROPERTY_TYPE "`. 
+    * We do this because react will throw an error if a variable is misspelled, but not if a string is misspelled.
+* Now let's set up the `action` that will connect to the `reducer`:
+    * `Actions` will be exported functions, below the reducer function, export a function called `updateLoanType`, pass it `loanType`. 
+    * All of our `actions` will return an object with a `type` and `payload`.
+    * Return and object with `type: UPDATE_LOAN_TYPE` and `payload: loanType`. `UPDATE_LOAN_TYPE` is equal to the string in that const we set before, `loanType` is a parameter in the function that serves as what we want to actually change on state.
+* The action needs a reducer now that will change the state. Inside of the reducer function, create a switch statement, passing it action.type as a parameter. 
+    * The action parameter in our reducer function is equal to the object our actions return, which is why we pass the switch statement action.type.
+* Create a `case` with `UPDATE_LOAN_TYPE`, enter down and tab in once, return `Object.assign({}, state, {loanType: action.payload})`
+* Create another `case` with `UPDATE_PROPERTY_TYPE`, enter down and tab in once, return `Object.assign({}, state, {propertyType: action.payload})`
+    * Object.assign is used to copy values from an original source, the first parameter is curly brackets, showing that we want to make a `new` object, the second parameter is state, which is the object we want to copy all the values of, and the third parameter targets the specific property and it's value that we want to change on this new version of state.
+* At the end of all our cases we need a default to return if nothing matches action.type. We need to return state by default.
+
+<details>
+
+<summary> Detailed Instructions </summary>
+
+* First, let's create our `initialState`. Initial state serves as a placeholder for what we want to change on state, `redux` needs the state to always be defined so having a placeholder prevents it from being undefined.
+    * Create a const called `initialState`, set it equal to an object with these values:
+
+```js
+const initialState = {
+   loanType: 'Home Purchase',
+   propertyType: 'Single Family Home',
+   city: '',
+   propToBeUsedOn: '',
+   found: false,
+   realEstateAgent: "false",
+   cost: 0,
+   downPayment: 0,
+   credit: '',
+   history: '',
+   addressOne: '',
+   addressTwo: '',
+   addressThree: '',
+   firstName: 'aa',
+   lastName: '',
+   email: ''
+}
+```
+* Create a function called reducer and pass it `state` equal to `initialState` and an `action`.
+
+```js
+function reducer(state=initialState, action){ 
+
+}
+```
+
+* At the bottom of the file `export default reducer`. This reducer will take place in actually manipulating state once we put some cases in it. 
+
+```js
+function reducer(state=initialState, action){ 
+
+}
+export default reducer; 
+```
+* Above the reducer we're going to make two const's, one called `UPDATE_LOAN_TYPE ` set equal to a string `"UPDATE_LOAN_TYPE "`, the other called `UPDATE_PROPERTY_TYPE ` set equal to a string `"UPDATE_PROPERTY_TYPE "`. 
+    * We do this because react will throw an error if a variable is misspelled, but not if a string is misspelled.
+
+```js
+const UPDATE_LOAN_TYPE = "UPDATE_LOAN_TYPE";
+const UPDATE_PROPERTY_TYPE = 'UPDATE_PROPERTY_TYPE';
+```
+
+* Now let's set up the `action` that will connect to the `reducer`:
+    * `Actions` will be exported functions, below the reducer function, export a function called `updateLoanType`, pass it `loanType`. 
+    * All of our `actions` will return an object with a `type` and `payload`.
+    * Return an object with `type: UPDATE_LOAN_TYPE` and `payload: loanType`. 
+        * `UPDATE_LOAN_TYPE` is equal to the string in that const we set before, `loanType` is a parameter in the function that serves as what we want to actually change on state.
+    * Return an object with `type: UPDATE_PROPERTY_TYPE` and `payload: property`. 
+        * `UPDATE_PROPERTY_TYPE` is equal to the string in that const we set before, `property` is a parameter in the function that serves as what we want to actually change on state.
+
+    
+```js
+export function updateLoanType(loanType){
+    return{
+        type: UPDATE_LOAN_TYPE,
+        payload: loanType
+    }
+}
+export function updatePropertyType(property) {
+    return {
+        type: UPDATE_PROPERTY_TYPE,
+        payload: property
+    }
+}
+```
+* The action needs a reducer now that will change the state. Inside of the reducer function, create a switch statement, passing it action.type as a parameter. 
+    * The action parameter in our reducer function is equal to the object our actions return, which is why we pass the switch statement action.type.
+
+```js
+function reducer(state=initialState, action){ 
+    switch(action.type){
+
+    }
+}
+```
+
+* Create a `case` with `UPDATE_LOAN_TYPE`, enter down and tab in once, return `Object.assign({}, state, {loanType: action.payload})`
+* Create another `case` with `UPDATE_PROPERTY_TYPE`, enter down and tab in once, return `Object.assign({}, state, {propertyType: action.payload})`
+    * Object.assign is used to copy values from an original source, the first parameter is curly brackets, showing that we want to make a `new` object, the second parameter is state, which is the object we want to copy all the values of, and the third parameter targets the specific property and it's value that we want to change on this new version of state.
+* At the end of all our cases we need a default to return if nothing matches action.type. We need to return state by default.
+```js
+function reducer(state=initialState, action){ 
+    switch(action.type){
+        case UPDATE_LOAN_TYPE:
+            return Object.assign({}, state, {loanType: action.payload})
+        case UPDATE_PROPERTY_TYPE:
+            return Object.assign({}, state, {propertyType: action.payload})
+
+        default:
+            return state;
+    }
+}
+```
+</details>
+
+### Solution
+
+<details>
+
+<summary> <code> src/ducks/reducer.js </code> </summary>
+
+```js
+const initialState = {
+   loanType: 'Home Purchase',
+   propertyType: 'Single Family Home',
+   city: '',
+   propToBeUsedOn: '',
+   found: false,
+   realEstateAgent: "false",
+   cost: 0,
+   downPayment: 0,
+   credit: '',
+   history: '',
+   addressOne: '',
+   addressTwo: '',
+   addressThree: '',
+   firstName: 'aa',
+   lastName: '',
+   email: ''
+}
+
+const UPDATE_LOAN_TYPE = "UPDATE_LOAN_TYPE";
+const UPDATE_PROPERTY_TYPE = 'UPDATE_PROPERTY_TYPE'; 
+
+function reducer(state=initialState, action){ 
+
+    switch(action.type){
+        case UPDATE_LOAN_TYPE:
+            return Object.assign({}, state, {loanType: action.payload})
+        case UPDATE_PROPERTY_TYPE:
+            return Object.assign({}, state, {propertyType: action.payload})
+
+        default:
+            return state
+    }
+
+} 
+
+export function updateLoanType(loanType){
+    return{
+        type: UPDATE_LOAN_TYPE,
+        payload: loanType
+    }
+}
+export function updatePropertyType(property) {
+    return {
+        type: UPDATE_PROPERTY_TYPE,
+        payload: property
+    }
+}
+
+export default reducer; 
+```
+
+</details>
+
+## Step 6
+
+### Summary
+
+Now that the `action` and `reducer` are set up for our first view, let's head over to `src/WizardOne.js`.
+
+### Instructions
+
+* Import `connect` from `react-redux`.
+* Import the update functions you just made from your reducer: `updateLoanType` and `updatePropertyType` from `'./../../ducks/reducer'` (remember to destructure them).
+* Currently, in the first select elements `onChange` function, we have `{this.props.handleLoanType}`. This is because we were previously being passed the handle function on props coming from our `App.js`, to the `router.js`, then to our WizardOne component. Now that we're using `redux`, we'll be handling it a little differently.
+* Connect the WizardOne component to `redux`, similarly to how we connected our `App.js` to `redux`.
+    * Create a `mapStateToProps` function, passing it `state`.
+    * Return an object that contains the two pieces of state you'll be updating/wanting access to.
+    * The export default will be a little different, this time we'll need to access the destructured functions from our reducer like so: `export default connect(mapStateToProps, {updateLoanType, updatePropertyType})(WizardOne);`
+* Now our component is connected to the `redux store`, let's access the function we need to change state. On the first select element on the `onChange` event, set it equal to `{(e) =>this.props.updateLoanType(e.target.value)}`.
+    * Because we've connected to `redux`, the updateLoanType function is now on props for this component.
+* Go to the second select element's `onChange` even and set it equal to `(e)=>this.props.updatePropertyType(e.target.value)}`
+* Our WizardOne Component should now be hooked up properly and be working with redux! 
+* If you'd like to, you can console log what's currently on state by writing `console.log(this.props)` inside of the `render()` function.
+
+<details>
+
+<summary> Detailed Instructions </summary>
+
+* Import `connect` from `react-redux`.
+
+```js
+import { connect } from 'react-redux'; 
+```
+
+* Import the update functions you just made from your reducer: `updateLoanType` and `updatePropertyType` from `'./../../ducks/reducer'` (remember to destructure them).
+
+```js
+import { updateLoanType, updatePropertyType } from './../../ducks/reducer'
+```
+* Currently, in the first select elements `onChange` function, we have `{this.props.handleLoanType}`. This is because we were previously being passed the handle function on props coming from our `App.js`, to the `router.js`, then to our WizardOne component. Now that we're using `redux`, we'll be handling it a little differently.
+* Connect the WizardOne component to `redux`, similarly to how we connected our `App.js` to `redux`.
+    * Create a `mapStateToProps` function, passing it `state`.
+
+```js
+function mapStateToProps( state ) {
+
+}
+```
+* Return an object that contains the two pieces of state you'll be updating/wanting access to.
+
+```js
+function mapStateToProps( state ) {
+  return { 
+      loanType: state.loanType,
+      propertyType: state.propertyType
+    };
+}
+```
+* The export default will be a little different, this time we'll need to access the destructured functions from our reducer like so: `export default connect(mapStateToProps, {updateLoanType, updatePropertyType})(WizardOne);`
+
+```js
+export default connect(mapStateToProps, {updateLoanType, updatePropertyType})(WizardOne); 
+
+```
+* Now our component is connected to the `redux store`, let's access the function we need to change state. On the first select element on the `onChange` event, set it equal to `{(e) =>this.props.updateLoanType(e.target.value)}`.
+    * Because we've connected to `redux`, the updateLoanType function is now on props for this component.
+
+```js
+<select onChange={(e) =>this.props.updateLoanType(e.target.value)}>
+
+```
+* Go to the second select element's `onChange` even and set it equal to `(e)=>this.props.updatePropertyType(e.target.value)}`
+
+```js
+<select onChange={(e)=>this.props.updatePropertyType(e.target.value)}>
+
+```
+</details>
+
+### Solution
+
+<details>
+
+<summary> <code> src/components/WizardOne/WizardOne.js </code> </summary>
+
+
+```js
+import React,  { Component } from 'react';
+import {Link} from 'react-router-dom';
+import { updateLoanType, updatePropertyType } from './../../ducks/reducer'
+import { connect } from 'react-redux'; 
+
+class WizardOne extends Component { 
+
+    render(){
+        return(
+            <div className="parent-div">
+                <div className="vert-align">
+
+                <p>What type of loan will you be needing?</p> <br />
+            
+                <select onChange={(e) =>this.props.updateLoanType(e.target.value)}>
+
+                    <option type="text" value="Home Purchase" >Home Purchase</option>
+                    <option type="text" value="Refinance" >Refinance</option>
+                    <option type="text" value="Home Equity" >Home Equity loan/line</option>
+
+                </select> <br />  
+
+                <p>What type of property are you purchasing?</p> <br />
+
+                <select onChange={(e)=>this.props.updatePropertyType(e.target.value)}>
+
+
+                        <option value="Single Family Home">Single Family Home</option>
+                        <option value="Town Home">Townhome</option>
+                        <option value="Condo">Condo</option>
+                        <option value="Multi Family Dwelling">Multi Family Dwelling</option>
+                        <option value="Mobile Home">Mobile Home</option>
+
+                </select>
+                    
+                    <Link to="/wTwo"><button className="margin-btn"> Next </button></Link>
+                </div>
+            </div>
+        )
+    }
+}
+function mapStateToProps( state ) {
+  return { 
+      loanType: state.loanType,
+      propertyType: state.propertyType
+    };
+}
+export default connect(mapStateToProps, {updateLoanType, updatePropertyType})(WizardOne); 
+```
+
+</details>
+
+
+## Step 7
+
+### Summary
+
+Now that we have our first view hooked up. Let's move onto the second View.
+
+## Instructions 
+
+In the `src/ducks/reducer.js`
+
+* Create a new const: `const UPDATE_CITY = 'UPDATE_CITY';`
+* Create an action for updating the city:
+    * Beneath the reducer function, export a function called `updateCity` and pass it `city` as a parameter.
+    * Return an object with a `type` equal to `UPDATE_CITY` and a `payload` equal to `city`.
+* Create a reducer to update state for that action. Inside the reducer function:
+    * Create a case for `UPDATE_CITY`
+    * Return a new object that will become state, pass it empty curly braces, state, and the property with the value that you want to change.
+
+
+<details>
+
+<summary> Detailed Instructions </summary>
+
+* Create a new const: `const UPDATE_CITY = 'UPDATE_CITY';`
+    * We do this because react will throw an error if a variable is misspelled, but not if a string is misspelled.
+```js
+const UPDATE_CITY = 'UPDATE_CITY';
+
+```
+
+* Create an action for updating the city:
+    * All `actions` will return an object with a `type` and `payload`.
+    * Beneath the reducer function, export a function called `updateCity` and pass it `city` as a parameter.
+    * Return an object with a `type` equal to `UPDATE_CITY` and a `payload` equal to `city`.
+
+```js
+export function updateCity(city) {
+    return {
+        type: UPDATE_CITY,
+        payload: city
+    }
+}
+```
+
+* Create a reducer to update state for that action. Inside the reducer function:
+    * Create a case for `UPDATE_CITY`
+    * Return a new object that will become state, pass it empty curly braces, state, and the property with the value that you want to change.
+    * Remember, Object.assign is used to copy values from an original source, the first parameter is curly brackets, showing that we want to make a `new` object, the second parameter is state, which is the object we want to copy all the values of, and the third parameter targets the specific property and it's value that we want to change on this new version of state.
+
+```js
+    case UPDATE_CITY:
+        return Object.assign({}, state, {city: action.payload})
+```
+</details>
+
+## Instructions 
+
+In the `src/component/WizardTwo/WizardTwo.js`
+
+
+
+
+
+
+### Solution
+
+<details>
+
+<summary> <code> src/components/WizardOne/WizardOne.js </code> </summary>
 
 </details>
