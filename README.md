@@ -2482,7 +2482,7 @@ Continue to go through the rest of the views and hook them up to the reducer lik
 
 <details>
 
-<summary> <code> src/components/WizardSix/WizardSix.js </code> </summary>
+<summary> <code> src/components/WizardSeven/WizardSeven.js </code> </summary>
 
 
 ```js
@@ -2525,7 +2525,7 @@ export default connect(mapStateToProps, { updateCredit })(WizardSeven);
    
 <details>
 
-<summary> <code> src/components/WizardSix/WizardSix.js </code> </summary>
+<summary> <code> src/components/WizardEight/WizardEight.js </code> </summary>
 
 
 ```js
@@ -2567,7 +2567,7 @@ export default connect(mapStateToProps, { updateHist })(WizardEight);
 
 <details>
 
-<summary> <code> src/components/WizardSix/WizardSix.js </code> </summary>
+<summary> <code> src/components/WizardNine/WizardNine.js </code> </summary>
 
 
 ```js
@@ -2610,7 +2610,7 @@ export default connect(mapStateToProps, { updateAddOne, updateAddTwo, updateAddT
 
 <details>
 
-<summary> <code> src/components/WizardSix/WizardSix.js </code> </summary>
+<summary> <code> src/components/WizardTen/WizardTen.js </code> </summary>
 
 
 ```js
