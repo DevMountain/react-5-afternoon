@@ -2,7 +2,7 @@
 
 # Project Summary
 
-This is a working project that currently only utilizes state and props to pass its data. Before getting started, try to get familiar with the code and see how props are being passed through to different components. In particular, take a look at the App.js. You'll notice the App.js is 127 lines of code, during this project and using `redux`, we'll be able to turn those 127 lines of code into 27.
+This is a working project that currently only utilizes state and props to pass its data. Before getting started, try to get familiar with the code and see how props is being passed through to different components. In particular, take a look at the App.js. You'll notice the App.js is 127 lines of code, during this project and using `redux`, we'll be able to turn those 127 lines of code into 27.
 
 During this project, we'll be improving on a web application that walks users through filling out a home loan application. We'll be building out the components that have already been made and make them better with `redux`. To keep track of data and pass it to the correct components via routing we'll make heavy use of `redux` and `react-redux`. We'll be making changes to all files in the components folder except for Finish.js to help them work with Redux, as well as the router.js, store.js, reducer.js, index.js and App.js.
 
