@@ -14,6 +14,8 @@ During this project, we'll be improving on a web application that walks users th
 * Run `npm i react-redux redux react-router-dom`
 * Run `npm start`.
 
+<img src="https://github.com/DevMountain/home-loan-wizard/blob/solution/readme-assets/1.png" />
+
 ## Step 1
 
 ### Summary
