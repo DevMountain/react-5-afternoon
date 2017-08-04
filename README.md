@@ -218,73 +218,77 @@ Now that we've changed our `router.js`, no data is going to be passed to our oth
 
 <br />
 
-* Export default our router without making it a function.
+Let's begin by opening `src/router.js` and importing `HashRouter` from `react-router-dom`. We can replace `Switch` with `HashRouter` since we will no longer be using `Switch`.
+
+```js
+import { HashRouter, Route } from 'react-router-dom';
+```
+
+We can then use this `HashRouter` to reconfigure our router. Let's add an `export default ()` statement above the current export default statement. 
+
 ```js
 export default (
 
 )
 ```
 
-* Import `HashRouter` from `react-router-dom`.
-    * Instead of using `Switch`, we're going to use `HashRouter` from `react-router-dom` to wrap our routes. (HashRouter uses the hash portion of our URL to keep our UI in sync with the URL when we change views).
-```js
-import {  Route, HashRouter } from 'react-router-dom';
-```
-* Wrap routes in a div, HashRouter can only have one first level element, so we will nest our routes inside of the div. Example:
-```js
-export default (
-
-        <HashRouter>
-            <div>  
-                 
-                <Route component={NextBtn} exact path= '/'/>
-                <Route component={WizardOne}  path='/wOne'/>
-                
-            </div>
-        </HashRouter>
-)
-```
-* For each individual route, instead of using render, we will be using component. A route should look like the following: `<Route component={WizardOne}  path='/wOne'/>`
+In the new export default statement, add a `HashRouter` component that has a `<div>` inside of it. We use this single `<div>` to export all of our routes.
 
 ```js
 export default (
+  <HashRouter>
+    <div>
 
-        <HashRouter>
-            <div>  
-                 
-                <Route component={NextBtn} exact path= '/'/>
-                <Route component={WizardOne}  path='/wOne'/>
-                <Route component={WizardTwo}  path="/wTwo"/>
-                <Route component={WizardThree} path="/wThree"/>
-                <Route component={WizardFour} path="/wFour"/>
-                <Route component={WizardFive} path="/wFive"/>
-                <Route component={WizardSix} path="/wSix"/>
-                <Route component={WizardSeven} path="/wSeven"/>
-                <Route component={WizardEight} path="/wEight"/>
-                <Route component={WizardNine} path="/wNine"/>
-                <Route component={WizardTen} path="/wTen"/>
-                <Route component={WizardEleven} path="/wEleven"/>
-                <Route component={Finish} path='/finish'/>
-
-            </div>
-        </HashRouter>
+    </div>
+  </HashRouter>
 )
 ```
-* Now that we've changed our `router.js`, no data is going to be passed to our other components, you will also get an error that says `TypeError: __webpack_require__.i(...) is not a function`. This is because in our `App.js` router is still being treated as a function.
-* Go to your `App.js` and remove the invoking parenthesis from your `{router}` as well as the content inside of them.
+
+We can then copy and paste all the routes from the old export default statement into your new one. We'll also need to make modifications to each one so that it looks like: `<Route component={ theComponent } path="/thePath" />`. When finished you'll end up with:
+
+```js
+export default (
+  <HashRouter>
+    <div>
+
+      <Route component={NextBtn} exact path= '/'/>
+      <Route component={WizardOne}  path='/wOne'/>
+      <Route component={WizardTwo}  path="/wTwo"/>
+      <Route component={WizardThree} path="/wThree"/>
+      <Route component={WizardFour} path="/wFour"/>
+      <Route component={WizardFive} path="/wFive"/>
+      <Route component={WizardSix} path="/wSix"/>
+      <Route component={WizardSeven} path="/wSeven"/>
+      <Route component={WizardEight} path="/wEight"/>
+      <Route component={WizardNine} path="/wNine"/>
+      <Route component={WizardTen} path="/wTen"/>
+      <Route component={WizardEleven} path="/wEleven"/>
+      <Route component={Finish} path='/finish'/>
+
+    </div>
+  </HashRouter>
+)
+```
+
+Before you exit this file, delete the entire old `export default` statement.
+
+If you noticed the app is no longer working, this is normal. We are restructuring the entire application. We can fix the errors by going into `src/App.js` and modifying how we are using `router`.
+
 ```js
   render() {
     return (
       <div>
     
-        {router}
+        { router }
 
       </div>
     );
   }
 ```
-</details>
 
+The application should now render correctly again.
+
+</details>
 
 ### Solution
 
@@ -455,9 +459,7 @@ class App extends Component {
   render() {
     return (
       <div>
-    
-        {router}
-
+        { router }
       </div>
     );
   }
