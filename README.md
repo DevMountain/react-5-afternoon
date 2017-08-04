@@ -83,7 +83,7 @@ export default createStore( reducer );
 
 ### Summary
 
-In this step, we will take our store created from the previous step and hook it up in `src/index.js`. This give our app access to the store. 
+In this step, we will take our store created from the previous step and hook it up in `src/index.js`. We will also make use of `BrowserRouter` to allow routing in the application. After this step, our app should compile correctly.
 
 ### Instructions
 
@@ -109,8 +109,6 @@ import { Provider } from 'react-redux'
 ```
 
 The `Provider` component will "provide" the store to our App. All we need to do is wrap the `App` component in a `Provider` component and give the `Proivder` component a `store` prop that equals `store`. 
-
-
 
 ```js
 import React from 'react';
@@ -183,6 +181,8 @@ ReactDOM.render(
 registerServiceWorker();
 ```
 </details>
+
+<img src="https://github.com/DevMountain/home-loan-wizard/blob/solution/readme-assets/1.png" />
 
 ## Step 3
 
