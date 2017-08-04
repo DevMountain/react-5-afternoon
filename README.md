@@ -701,19 +701,38 @@ export default connect( mapStateToProps )( App );
 
 ### Summary
 
-Now that our App is set up, let's connect our Eleventh view to the store, so that moving forward, as we start hooking our views up with `redux`, we'll be able to see the data getting to where it needs to end up.
+Now that our `src/App.js` is connected to our `redux` store, let's begin connecting our views. We'll start with the Eleventh view. I chose the Eleventh view because as we start hooking our views up with `redux`, we'll be able to see the data getting to where it needs to end up.
 
 ## Instructions 
 
-In `src/components/WizardEleven/WizardEleven.js`
-
+* Open `src/components/WizardEleven/WizardEleven.js`.
 * Import `connect` from `react-redux`
-* Connect the component to the `redux store`
-    * Create a function `mapStateToProps`, pass it state.
-    * Return an object with the properties that you want from state.
-    * You will need to look at the detailed instructions or solution to get all of the properties you'll want on this Component for the return object.
-    * Export your component similarly to how it was done in the `App.js`: `export default connect(mapStateToProps)(WizardEleven);`
-
+* Connect the component to the `redux store`, just like we did for `src/App.js`.
+  * Instead of `returning` the entire state in `mapStateToProps`, return only the properties the component needs:
+    * <details>
+    
+      <summary> <code> Property List </code> </summary>
+      
+      ```
+      loanType,
+      propertyType,
+      city,
+      propToBeUsedOn,
+      found,
+      realEstateAgent,
+      cost,
+      downPayment,
+      credit,
+      history,
+      addressOne,
+      addressTwo,
+      addressThree,
+      firstName,
+      lastName,
+      email
+      ```
+      
+      </details>
 
 <details>
 
