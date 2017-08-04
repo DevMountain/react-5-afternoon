@@ -24,7 +24,8 @@ In this step, we will create our `store`.
 When using redux, the store holds the entire state of our application. So it's important we set this up first.
 
 ## Instructions
-* Create a new file in your src folder called `store.js`
+
+* Create a new file in your `src` folder called `store.js`
 * Open `src/store.js`.
 * Import `createStore` from `redux`.
 * Import `reducer.js` from `src/ducks/reducer.js`.
@@ -60,7 +61,6 @@ import reducer from "./ducks/reducer";
 export default createStore( reducer );
 ```
 
-
 </details>
 
 ### Solution
@@ -83,7 +83,7 @@ export default createStore( reducer );
 
 ### Summary
 
-In this step, we will take our store created from the previous step and hook it up in `src/index.js`. This will allow our App to compile correctly.
+In this step, we will take our store created from the previous step and hook it up in `src/index.js`. This give our app access to the store. 
 
 ### Instructions
 
