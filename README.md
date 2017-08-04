@@ -1009,6 +1009,8 @@ In this step, we'll start creating our store's reducer and the action creators t
 
 <summary> Detailed Instructions </summary>
 
+<br />
+
 Let's begin by opening `src/ducks/reducer.js`. Our store will need an initial state when it loads for the first time. Let's create a constant variable called `initialState` that will have all of our state's initial values. The property list is listed above in the instructions.
 
 ```js
@@ -1047,7 +1049,7 @@ const UPDATE_LOAN_TYPE = "UPDATE_LOAN_TYPE";
 const UPDATE_PROPERTY_TYPE = "UPDATE_PROPERTY_TYPE";
 ```
 
-Now that we have our two action types we can create action creators that use them. All an action creator does is return an object with a `type` and `payload` property. The `payload` will equal the value of the parameter in this case. The action creator for loan type will have a `loanType` parameter and the action creator for property type will have a `property` payload. We also export these action creators so other components can use them. Let's add them under the `reducer` function.
+Now that we have our two action types we can create action creators that use them. All an action creator does is return an object with a `type` and `payload` property. The `payload` will equal the value of the parameter in this case. The action creator for loan type will have a `loanType` parameter and the action creator for property type will have a `property` parameter. We also export these action creators so other components can use them. Let's add them under the `reducer` function.
 
 ```js
 export function updateLoanType( loanType ){
