@@ -2,7 +2,7 @@
 
 # Project Summary
 
-This is a working project that currently only utilizes state and props to pass its data. Before getting started, try to get familiar with the code and see how props is being passed through to different components. In particular, take a look at `src/App.js`. You'll notice that `src/App.js` is currently very large. With the use of `redux`, we'll be able to turn App.js into a small 27 line file. 
+This is a working project that currently only utilizes state and props to pass its data. Before getting started, try to get familiar with the code and see how props is being passed through to different components. In particular, take a look at `src/App.js`. You'll notice that `src/App.js` is currently very large. With the use of `redux`, we'll be able to turn `src/App.js` into a small, 27 line, file. 
 
 During this project, we'll be improving on a web application that walks users through filling out a home loan application. We'll be modifying components that have already been built to use `redux`. This allows us to keep track of data and pass it to the correct components via routing. We'll be making changes to all files in the `src/components` folder, except for `src/components/Finish/Finish.js`, to modify them to work with Redux. We'll also make changes to `src/router.js`, `src/index.js` and `src/App.js`.
 
