@@ -151,7 +151,6 @@ registerServiceWorker();
 
 </details>
 
-
 ### Solution
 
 <details>
@@ -186,13 +185,11 @@ registerServiceWorker();
 
 ### Summary
 
-We need to clean up our `App.js` and `router.js` and get them ready to be used with `redux`. Let's go check out our router.js first. This view is almost as messy as our `App.js`. 
-
 Because we needed to pass state down to our routes, we had to make our routing a function. Currently, we're exporting a function by default in our `router.js`, by making this a function, we were able to import it into our `App.js` and then pass it props through its arguments. 
 
-In addition to our route component being a function, the way we're connecting our `Route` to the correct component is using a `render={()=> <Component prop={prop}/> path='/'}` instead of a `component={Component} path='/'`. The reason we needed to use render this way was so we could pass props down through the Components element. However, this results in messy looking code, so let's clean it up.
+In addition to our route component being a function, the way we're connecting our `Route` to the correct component is using a `render={()=> <Component prop={prop}/> path='/'}` instead of a `component={Component} path='/'`. The reason we needed to use render this way was so we could pass props down through the Components element. However, this results in messy looking code.
 
-
+In this step, we are going to clean up the mess.
 
 ## Instructions
 
