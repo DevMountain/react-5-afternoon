@@ -193,15 +193,23 @@ In this step, we are going to clean up the mess.
 
 ## Instructions
 
-* Export default our router without making it a function.
-    * Now that our routes aren't exported in a function, we don't need to `return` anything.
-    * You will start getting errors coming from the props on the routes rendered elements once our routing is no longer a function, this is because they're no longer receiving information via parameters from the function and are now undefined.
+* Open `src/router.js`.
 * Import `HashRouter` from `react-router-dom`.
-    * Instead of using `Switch`, we're going to use `HashRouter` from `react-router-dom` to wrap our routes. (HashRouter uses the hash portion of our URL to keep our UI in sync with the URL when we change views).
-* Wrap routes in a div, HashRouter can only have one first level element, so we will nest our routes inside of the div. 
-* For each individual route, instead of using render, we will be using component. A route should look like the following: `<Route component={WizardOne}  path='/wOne'/>`
-* Now that we've changed our `router.js`, no data is going to be passed to our other components, you will also get an error that says `TypeError: __webpack_require__.i(...) is not a function`. This is because in our `App.js` router is still being treated as a function.
-* Go to your `App.js` and remove the invoking parenthesis from your `{router}` as well as the content inside of them.
+    * Instead of using `Switch`, we're going to use `HashRouter` from `react-router-dom` to wrap our routes. 
+      * HashRouter uses the hash portion of our URL to keep our UI in sync with the URL when we change views.
+* Instead of exporting default a router function, export by default a `HashRouter` component.
+  * Now that our routes aren't exported in a function, we don't need to `return` anything.
+  * You will start getting errors coming from the props on the routes rendered elements once our routing is no longer a function, this is because they're no longer receiving information via parameters from the function and are now undefined.
+* Wrap all the routes in a `<div>`. HashRouter can only have one first level element.
+* For each individual route, instead of using render, we will be using component. 
+  * A route should look like the following: `<Route component={ theComponent }  path='/thePath'/>`
+
+<br />
+
+Now that we've changed our `router.js`, no data is going to be passed to our other components, you will also get an error that says `TypeError: __webpack_require__.i(...) is not a function`. This is because in our `App.js` router is still being treated as a function.
+
+* Open `src/App.js`.
+* Remove the invoking parenthesis from your `{router}` as well as the content inside of them.
 
 
 <details>
@@ -303,26 +311,25 @@ import NextBtn from './components/NextBtn/NextBtn';
 import {  Route, HashRouter } from 'react-router-dom';
 
 export default (
+  <HashRouter>
+      <div>  
 
-        <HashRouter>
-            <div>  
-                 
-                <Route component={NextBtn} exact path= '/'/>
-                <Route component={WizardOne}  path='/wOne'/>
-                <Route component={WizardTwo}  path="/wTwo"/>
-                <Route component={WizardThree} path="/wThree"/>
-                <Route component={WizardFour} path="/wFour"/>
-                <Route component={WizardFive} path="/wFive"/>
-                <Route component={WizardSix} path="/wSix"/>
-                <Route component={WizardSeven} path="/wSeven"/>
-                <Route component={WizardEight} path="/wEight"/>
-                <Route component={WizardNine} path="/wNine"/>
-                <Route component={WizardTen} path="/wTen"/>
-                <Route component={WizardEleven} path="/wEleven"/>
-                <Route component={Finish} path='/finish'/>
+        <Route component={NextBtn} exact path= '/'/>
+        <Route component={WizardOne}  path='/wOne'/>
+        <Route component={WizardTwo}  path="/wTwo"/>
+        <Route component={WizardThree} path="/wThree"/>
+        <Route component={WizardFour} path="/wFour"/>
+        <Route component={WizardFive} path="/wFive"/>
+        <Route component={WizardSix} path="/wSix"/>
+        <Route component={WizardSeven} path="/wSeven"/>
+        <Route component={WizardEight} path="/wEight"/>
+        <Route component={WizardNine} path="/wNine"/>
+        <Route component={WizardTen} path="/wTen"/>
+        <Route component={WizardEleven} path="/wEleven"/>
+        <Route component={Finish} path='/finish'/>
 
-            </div>
-        </HashRouter>
+      </div>
+  </HashRouter>
 )
 ```
 </details>
