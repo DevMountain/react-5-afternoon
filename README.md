@@ -12,9 +12,7 @@ During this project, we'll be improving on a web application that walks users th
 * `cd` into the project directory.
 * Run `npm i` to install current dependencies.
 * Run `npm i react-redux redux react-router-dom`
-* Run `npm start`.
-
-<img src="https://github.com/DevMountain/home-loan-wizard/blob/solution/readme-assets/1.png" />
+* Run `npm start` ( The app should intentionally not compile correctly ).
 
 ## Step 1
 
