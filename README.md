@@ -739,6 +739,8 @@ Now that our `src/App.js` is connected to our `redux` store, let's begin connect
 
 <summary> Detailed Instructions </summary>
 
+<br />
+
 Let's begin by opening `src/components/WizardEleven/WizardEleven.js` and importing `connect` from `react-redux`.
 
 ```js
