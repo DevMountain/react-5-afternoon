@@ -472,41 +472,55 @@ export default App;
 ## Step 4
 
 ### Summary
-In this next step, we'll be looking at our `App.js`, understanding what's happening with state. Then transition into how we'll be handling state with redux.
+
+In this next step, we'll be looking at `src/App.js` to understanding what's happening with state. Then transition into how we'll be handling state with redux.
+
+Open `src/App.js`. You'll notice that throughout this file there are comments, these comments are there to more easily show which pieces of state have to do with which views/routes. In this step, we're just going to connect `src/App.js` and the first view to redux. 
+
+Sidenote: You can either leave the constructor function, super, state, all of the bound functions and regular functions that originally dealt with state in there if you'd like. Or it may help to take out the specific ones that deal with state one at a time as you connect things to redux. I'll be removing them all at once. 
 
 ## Instructions
-Now that we have our `router.js` cleaned up, let's head over to our App.js and take a look at what we have.
 
-You'll notice that throughout this file there are comments, these comments are there to more easily show which pieces of state have to do with which views/routes. In this step, we're just going to connect our App.js and first view to redux. 
-
-Sidenote: You can either leave the constructor function, super, state, all of the bound functions and regular functions that originally dealt with state in there if you'd like. Or it may help to take out the specific ones that deal with state one at a time as you connect things to redux. In this project I'll be removing them all at once. 
-
+* Open `src/App.js`.
 * Import `connect` from `react-redux`
-* At the bottom of the page make a function called `mapStateToProps`, pass it `state`, then return `state`
-* Instead of having `export default App`, we're going to be using `connect` to connect the `App.js` to the `redux` store. `export default connect(mapStateToProps)(App);`
+* Make a function called `mapStateToProps` just above the `export default` statement.
+  * This function should have a parameter called `state`.
+  * This function should return the `state` parameter.
+* Modify the `export default` statement to use `connect` instead.
+  * Be sure to pass in the `mapStateToProps` function.
 
 <details>
 
 <summary> Detailed Instructions </summary>
 
-* Import `connect` from `react-redux`;
+Let's begin by opening `src/App.js`. In this file we are going to modify to component to connect to our redux store. To do this, we'll need to import `connect` from `react-redux`.
+
 ```js
 import { connect } from 'react-redux'
 ```
-* At the bottom of the page make a function called `mapStateToProps`, pass it `state`, then return `state`
+
+Before we connect our app to redux, we'll need to make a function called `mapStateToProps`. This allows to choose what parts of state we want from the reducer. For now, we'll just pass all of state into the reducer.
+
 ```js
-function mapStateToProps(state){
-  return{
-
-      state
-
-  }
+function mapStateToProps( state ) {
+  return {
+    state
+  };
 }
 
+export default App;
 ```
-* Instead of having `export default App`, we're going to be using `connect` to connect the `App.js` to the `redux` store. `export default connect(mapStateToProps)(App);`
+
+Now that we have a `mapStateToProps` function we can use it with `connect` to connect `src/App,js` to the `redux` store.
+
 ```js
-export default connect(mapStateToProps)(App);
+function mapStateToProps( state ) {
+  return {
+    state
+  };
+}
+
+export default connect( mapStateToProps )( App );
 ```
 </details>
 
@@ -527,26 +541,22 @@ class App extends Component {
   render() {
     return (
       <div>
-    
-      {router}
-
+        { router }
       </div>
     );
   }
 }
 
-function mapStateToProps(state){
-  return{
-
-      state
-
-  }
+function mapStateToProps( state ) {
+  return {
+    state
+  };
 }
 
-export default connect(mapStateToProps)(App);
+export default connect( mapStateToProps )( App );
 ```
-</details>
 
+</details>
 
 ## Step 5
 
