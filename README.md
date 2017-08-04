@@ -710,8 +710,10 @@ Now that our `src/App.js` is connected to our `redux` store, let's begin connect
 * Connect the component to the `redux store`, just like we did for `src/App.js`.
   * Instead of `returning` the entire state in `mapStateToProps`, return only the properties the component needs:
     * <details>
-    
+
       <summary> <code> Properties </code> </summary>
+
+      <br />
       
       ```
       loanType,
