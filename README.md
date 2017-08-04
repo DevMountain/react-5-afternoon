@@ -1009,102 +1009,86 @@ In this step, we'll start creating our store's reducer and the action creators t
 
 <summary> Detailed Instructions </summary>
 
-* First, let's create our `initialState`. Initial state serves as a placeholder for what we want to change on state, `redux` needs the state to always be defined so having a placeholder prevents it from being undefined.
-    * Create a const called `initialState`, set it equal to an object with these values:
+Let's begin by opening `src/ducks/reducer.js`. Our store will need an initial state when it loads for the first time. Let's create a constant variable called `initialState` that will have all of our state's initial values. The property list is listed above in the instructions.
 
 ```js
 const initialState = {
-   loanType: 'Home Purchase',
-   propertyType: 'Single Family Home',
-   city: '',
-   propToBeUsedOn: '',
-   found: false,
-   realEstateAgent: "false",
-   cost: 0,
-   downPayment: 0,
-   credit: '',
-   history: '',
-   addressOne: '',
-   addressTwo: '',
-   addressThree: '',
-   firstName: 'aa',
-   lastName: '',
-   email: ''
-}
+  loanType: 'Home Purchase',
+  propertyType: 'Single Family Home',
+  city: '',
+  propToBeUsedOn: '',
+  found: false,
+  realEstateAgent: "false",
+  cost: 0,
+  downPayment: 0,
+  credit: '',
+  history: '',
+  addressOne: '',
+  addressTwo: '',
+  addressThree: '',
+  firstName: '',
+  lastName: '',
+  email: ''
+};
 ```
-* Create a function called reducer and pass it `state` equal to `initialState` and an `action`.
+
+Now that we have an initial state we can update our `reducer` function to have a `state` and `action` parameter. Using `es6` default parameters we can default the `state` parameter to `initialState`. This will happen when the store is first created. 
 
 ```js
-function reducer(state=initialState, action){ 
+function reducer( state = initialState, action ) { 
 
 }
 ```
 
-* At the bottom of the file `export default reducer`. This reducer will take place in actually manipulating state once we put some cases in it. 
-
-```js
-function reducer(state=initialState, action){ 
-
-}
-export default reducer; 
-```
-* Above the reducer we're going to make two const's, one called `UPDATE_LOAN_TYPE ` set equal to a string `"UPDATE_LOAN_TYPE "`, the other called `UPDATE_PROPERTY_TYPE ` set equal to a string `"UPDATE_PROPERTY_TYPE "`. 
-    * We do this because react will throw an error if a variable is misspelled, but not if a string is misspelled.
+Before we create the action creators our store needs to determine how to update state, we need to create our action types. We'll put these action types in between our `initialState` and `reducer` function. We'll need two types for this step. One type for updating the loan type and one type for updating the property type. 
 
 ```js
 const UPDATE_LOAN_TYPE = "UPDATE_LOAN_TYPE";
-const UPDATE_PROPERTY_TYPE = 'UPDATE_PROPERTY_TYPE';
+const UPDATE_PROPERTY_TYPE = "UPDATE_PROPERTY_TYPE";
 ```
 
-* Now let's set up the `action` that will connect to the `reducer`:
-    * `Actions` will be exported functions, below the reducer function, export a function called `updateLoanType`, pass it `loanType`. 
-    * All of our `actions` will return an object with a `type` and `payload`.
-    * Return an object with `type: UPDATE_LOAN_TYPE` and `payload: loanType`. 
-        * `UPDATE_LOAN_TYPE` is equal to the string in that const we set before, `loanType` is a parameter in the function that serves as what we want to actually change on state.
-    * Return an object with `type: UPDATE_PROPERTY_TYPE` and `payload: property`. 
-        * `UPDATE_PROPERTY_TYPE` is equal to the string in that const we set before, `property` is a parameter in the function that serves as what we want to actually change on state.
-
-    
-```js
-export function updateLoanType(loanType){
-    return{
-        type: UPDATE_LOAN_TYPE,
-        payload: loanType
-    }
-}
-export function updatePropertyType(property) {
-    return {
-        type: UPDATE_PROPERTY_TYPE,
-        payload: property
-    }
-}
-```
-* The action needs a reducer now that will change the state. Inside of the reducer function, create a switch statement, passing it action.type as a parameter. 
-    * The action parameter in our reducer function is equal to the object our actions return, which is why we pass the switch statement action.type.
+Now that we have our two action types we can create action creators that use them. All an action creator does is return an object with a `type` and `payload` property. The `payload` will equal the value of the parameter in this case. The action creator for loan type will have a `loanType` parameter and the action creator for property type will have a `property` payload. We also export these action creators so other components can use them. Let's add them under the `reducer` function.
 
 ```js
-function reducer(state=initialState, action){ 
-    switch(action.type){
+export function updateLoanType( loanType ){
+  return {
+    type: UPDATE_LOAN_TYPE,
+    payload: loanType
+  }
+}
 
-    }
+export function updatePropertyType( property ) {
+  return {
+    type: UPDATE_PROPERTY_TYPE,
+    payload: property
+  }
 }
 ```
 
-* Create a `case` with `UPDATE_LOAN_TYPE`, enter down and tab in once, return `Object.assign({}, state, {loanType: action.payload})`
-* Create another `case` with `UPDATE_PROPERTY_TYPE`, enter down and tab in once, return `Object.assign({}, state, {propertyType: action.payload})`
-    * Object.assign is used to copy values from an original source, the first parameter is curly brackets, showing that we want to make a `new` object, the second parameter is state, which is the object we want to copy all the values of, and the third parameter targets the specific property and it's value that we want to change on this new version of state.
-* At the end of all our cases we need a default to return if nothing matches action.type. We need to return state by default.
-```js
-function reducer(state=initialState, action){ 
-    switch(action.type){
-        case UPDATE_LOAN_TYPE:
-            return Object.assign({}, state, {loanType: action.payload})
-        case UPDATE_PROPERTY_TYPE:
-            return Object.assign({}, state, {propertyType: action.payload})
+The last thing we need to do is update the `reducer` function to use a `switch` statement on the `action.type`. This is how our `reducer` will determine which part of state to update. Since we need to keep state `immutable` we will make use of `Object.assign`. Let's start by adding a `switch` statement to our reducer. The `default case` for this switch should just return `state`.
 
-        default:
-            return state;
-    }
+```js
+function reducer( state = initialState, action ) { 
+  switch( action.type ) {
+
+    default: return state;
+  }
+}
+```
+
+To add our action types to our reducer all we have to do is: `case actionTypeVariableGoesHere`. We'll then use `Object.assign` to get the previous value of state and update its `loanType` or `propertyType` property to the value on the payload.
+
+```js
+function reducer( state = initialState, action ) { 
+  switch( action.type ) {
+    case  UPDATE_LOAN_TYPE:
+      return Object.assign( {}, state, { loanType: action.payload } );
+
+    case UPDATE_PROPERTY_TYPE:
+      return Object.assign( {}, state, { propertyType: action.payload } );
+
+    default: return state;
+  }
 }
 ```
 </details>
@@ -1138,31 +1122,30 @@ const initialState = {
 const UPDATE_LOAN_TYPE = "UPDATE_LOAN_TYPE";
 const UPDATE_PROPERTY_TYPE = 'UPDATE_PROPERTY_TYPE'; 
 
-function reducer(state=initialState, action){ 
+function reducer( state = initialState, action ){ 
+    switch( action.type ){
+      case UPDATE_LOAN_TYPE:
+          return Object.assign( {}, state, { loanType: action.payload } );
 
-    switch(action.type){
-        case UPDATE_LOAN_TYPE:
-            return Object.assign({}, state, {loanType: action.payload})
-        case UPDATE_PROPERTY_TYPE:
-            return Object.assign({}, state, {propertyType: action.payload})
+      case UPDATE_PROPERTY_TYPE:
+          return Object.assign( {}, state, { propertyType: action.payload } );
 
-        default:
-            return state
+      default: return state;
     }
-
 } 
 
-export function updateLoanType(loanType){
-    return{
-        type: UPDATE_LOAN_TYPE,
-        payload: loanType
-    }
+export function updateLoanType( loanType ){
+  return {
+    type: UPDATE_LOAN_TYPE,
+    payload: loanType
+  }
 }
-export function updatePropertyType(property) {
-    return {
-        type: UPDATE_PROPERTY_TYPE,
-        payload: property
-    }
+
+export function updatePropertyType( property ) {
+  return {
+    type: UPDATE_PROPERTY_TYPE,
+    payload: property
+  }
 }
 
 export default reducer; 
