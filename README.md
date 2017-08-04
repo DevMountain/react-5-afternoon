@@ -473,7 +473,7 @@ export default App;
 
 ### Summary
 
-In this next step, we'll be looking at `src/App.js` to understanding what's happening with state. Then transition into how we'll be handling state with redux.
+In this step, we'll be looking at `src/App.js` to modify it to handle state with the `redux` store.
 
 Open `src/App.js`. You'll notice that throughout this file there are comments, these comments are there to more easily show which pieces of state have to do with which views/routes. In this step, we're just going to connect `src/App.js` and the first view to redux. 
 
@@ -493,13 +493,15 @@ Sidenote: You can either leave the constructor function, super, state, all of th
 
 <summary> Detailed Instructions </summary>
 
-Let's begin by opening `src/App.js`. In this file we are going to modify to component to connect to our redux store. To do this, we'll need to import `connect` from `react-redux`.
+<br />
+
+Let's begin by opening `src/App.js`. In this file we are going to modify to component to connect to our `redux` store. To do this, we'll need to import `connect` from `react-redux`.
 
 ```js
 import { connect } from 'react-redux'
 ```
 
-Before we connect our app to redux, we'll need to make a function called `mapStateToProps`. This allows to choose what parts of state we want from the reducer. For now, we'll just pass all of state into the reducer.
+Before we connect our app to `redux`, we'll need to make a function called `mapStateToProps`. This allows us to choose what parts of state we want from the `redux` store. For now, we'll just return all of the state.
 
 ```js
 function mapStateToProps( state ) {
@@ -511,7 +513,7 @@ function mapStateToProps( state ) {
 export default App;
 ```
 
-Now that we have a `mapStateToProps` function we can use it with `connect` to connect `src/App,js` to the `redux` store.
+Now that we have a `mapStateToProps` function we can use it with `connect` to connect `src/App.js` to the `redux` store.
 
 ```js
 function mapStateToProps( state ) {
@@ -533,11 +535,148 @@ export default connect( mapStateToProps )( App );
 ```js
 import React, { Component } from 'react';
 import './App.css';
-import router from './router'
+import router from './router';
+
 import { connect } from "react-redux";
 
 
 class App extends Component {
+  constructor(){
+    super()
+    this.state = {
+      //first view
+      loanType: 'Home Purchase',
+      propertyType: 'Single Family Home',
+      //second view
+      city: '',
+      //third view
+      propToBeUsedOn: '',
+      //fourth view
+      found: "false",
+      //fifth view
+      realEstateAgent: "false",
+      //sixth view
+      downPayment: 0,
+      cost: 0,
+      //seventh view
+      credit: '',
+      //eigth view
+      history: '',
+      //ninth view
+      addressOne: '',
+      addressTwo: '',
+      addressThree: '',
+      //tenth view
+      firstName: '',
+      lastName: '',
+      email: ''
+    }
+    //first view 
+    this.handleChangeLoanType = this.handleChangeLoanType.bind(this);
+    this.handleChangePropertyType = this.handleChangePropertyType.bind(this);
+    //second view
+    this.handleChangeCity = this.handleChangeCity.bind(this);
+    //third view
+    this.handleChangePropertyToBeUsedOn = this.handleChangePropertyToBeUsedOn.bind(this);
+    //fourth view
+    this.handleChangeFoundFalse = this.handleChangeFoundFalse.bind(this);
+    this.handleChangeFoundTrue = this.handleChangeFoundTrue.bind(this);
+    //fifth view
+    this.handleChangeRealEstateAgentTrue = this.handleChangeRealEstateAgentTrue.bind(this);
+    this.handleChangeRealEstateAgentFalse = this.handleChangeRealEstateAgentFalse.bind(this);
+    //sixth view
+    this.handleChangeUpdateDownPayment = this.handleChangeUpdateDownPayment.bind(this);
+    this.handleChangeUpdateCost = this.handleChangeUpdateCost.bind(this);
+    //seventh view
+    this.handleChangeCreditE = this.handleChangeCreditE.bind(this);
+    this.handleChangeCreditG = this.handleChangeCreditG.bind(this);
+    this.handleChangeCreditF = this.handleChangeCreditF.bind(this);
+    this.handleChangeCreditP = this.handleChangeCreditP.bind(this);
+    //eigth view
+    this.handleChangeUpdateHistory = this.handleChangeUpdateHistory.bind(this);
+    //ninth view
+    this.handleChangeAddressOne = this.handleChangeAddressOne.bind(this);
+    this.handleChangeAddressTwo = this.handleChangeAddressTwo.bind(this);
+    this.handleChangeAddressThree = this.handleChangeAddressThree.bind(this);
+    //tenth view
+    this.handleChangeFirstName = this.handleChangeFirstName.bind(this);
+    this.handleChangeLastName = this.handleChangeLastName.bind(this);
+    this.handleChangeEmail = this.handleChangeEmail.bind(this);
+  }
+    //first view
+    handleChangeLoanType(event) {
+        this.setState({loanType : event.target.value});
+    }
+    handleChangePropertyType(event) {
+        this.setState({propertyType : event.target.value});
+    }
+    //second view
+    handleChangeCity(event){
+        this.setState({city : event.target.value});
+    }
+    //third view
+    handleChangePropertyToBeUsedOn(event){
+        this.setState({propToBeUsedOn : event.target.value})
+    }
+    //fourth view
+    handleChangeFoundTrue(event){
+        this.setState({found : "true"});
+    }
+    handleChangeFoundFalse(event){
+        this.setState({found : "false"});
+    }
+    //fifth view
+    handleChangeRealEstateAgentTrue(){
+        this.setState({realEstateAgent : "true"});
+    }
+    handleChangeRealEstateAgentFalse(){
+        this.setState({realEstateAgent : "false"});
+    }
+    //sixth view
+    handleChangeUpdateDownPayment(event){
+        this.setState({downPayment : event.target.value})
+    }
+    handleChangeUpdateCost(event){
+      this.setState({cost: event.target.value});
+    }
+    //seventh view
+    handleChangeCreditE(){
+      this.setState({credit: 'Excellent'})
+    }
+    handleChangeCreditG(){
+      this.setState({credit: 'Good'})
+    }
+    handleChangeCreditF(){
+      this.setState({credit: 'Fair'})
+    }
+    handleChangeCreditP(){
+      this.setState({credit: 'Poor'})
+    }
+    //eigth view
+    handleChangeUpdateHistory(event){
+      this.setState({history: event.target.value})
+    }
+    //ninth view
+    handleChangeAddressOne(event){
+      this.setState({addressOne: event.target.value})
+    }
+    handleChangeAddressTwo(event){
+      this.setState({addressTwo: event.target.value})
+    }
+    handleChangeAddressThree(event){
+      this.setState({addressThree: event.target.value})
+    }
+    //tenth view
+    handleChangeFirstName(event){
+      this.setState({firstName : event.target.value})
+    }
+    handleChangeLastName(event){
+      this.setState({lastName: event.target.value})
+    }
+    handleChangeEmail(event){
+      this.setState({email: event.target.value})
+    }
+
   render() {
     return (
       <div>
