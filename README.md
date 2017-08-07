@@ -1321,6 +1321,8 @@ In this step, we will update the reducer to handle modifying the city on state. 
 
 <summary> Detailed Instructions </summary>
 
+<br />
+
 Let's begin by opening `src/ducks/reducer.js` and creating an `UPDATE_CITY` action type. 
 
 ```js
