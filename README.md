@@ -1179,55 +1179,56 @@ In this step, we will connect `src/WizardOne.js` to the store and configure the 
 
 <br />
 
-* Import `connect` from `react-redux`.
+Let's begin by opening `src/components/WizardOne/WizardOne.js` and importing `connect` and the action creators we have created so far. 
 
 ```js
-import { connect } from 'react-redux'; 
+import { connect } from 'react-redux';
+import { updateLoanType, updatePropertyType } from '../../ducks/reducer';
 ```
 
-* Import the update functions you just made from your reducer: `updateLoanType` and `updatePropertyType` from `'./../../ducks/reducer'` (remember to destructure them).
+Now that we have these, we can modify the `export default` statement to `connect` to our store. In this case, we'll only need two properties from `state` and we'll also be passing in the action creators. When we pass in the action creators into our `connect` statement it wraps them in a `dispatch` function. This allows our component to just call the action creator. If we didn't do it this way, we would have to import `dispatch` and call `dispatch` with our action creator as an argument. 
 
-```js
-import { updateLoanType, updatePropertyType } from './../../ducks/reducer'
-```
-* Currently, in the first select elements `onChange` function, we have `{this.props.handleLoanType}`. This is because we were previously being passed the handle function on props coming from our `App.js`, to the `router.js`, then to our WizardOne component. Now that we're using `redux`, we'll be handling it a little differently.
-* Connect the WizardOne component to `redux`, similarly to how we connected our `App.js` to `redux`.
-    * Create a `mapStateToProps` function, passing it `state`.
+Since this component has select statements for a loan type and property type, we will want the `loanType` and `propertyType` from `state`.
 
 ```js
 function mapStateToProps( state ) {
+  const { loanType, propertyType } = state;
 
+  return {
+    loanType,
+    propertyType
+  };
+}
+
+export default connect( mapStateToProps, { updateLoanType, updatePropertyType } )( WizardOne );
+```
+
+We can then destructor our action creators off of `props`. It is imperative that you call your action creators off of `props` otherwise the function call will never make it to the `store`.
+
+```js
+render() {
+  const { updateLoanType, updatePropertyType } = this.props;
 }
 ```
-* Return an object that contains the two pieces of state you'll be updating/wanting access to.
+
+Now that our component is connected to the `store` and our action creators are destructured off of `props`, we can modify the `onChange` events to call the action creators. Remember that each action creator needs one argument. This argument will be the value that replaces the property's value on `state`. We can capture the event and pass in the event's target value as the argument.
 
 ```js
-function mapStateToProps( state ) {
-  return { 
-      loanType: state.loanType,
-      propertyType: state.propertyType
-    };
-}
+<select onChange={ ( e ) => updateLoanType( e.target.value ) }>
+  <option type="text" value="Home Purchase" >Home Purchase</option>
+  <option type="text" value="Refinance" >Refinance</option>
+  <option type="text" value="Home Equity" >Home Equity loan/line</option>
+</select> <br/>
+
+<select onChange={ ( e ) => updatePropertyType( e.target.value ) }>
+  <option value="Single Family Home">Single Family Home</option>
+  <option value="Town Home">Townhome</option>
+  <option value="Condo">Condo</option>
+  <option value="Multi Family Home">Multi Family Dwelling</option>
+  <option value="Mobile Home">Mobile Home</option>
+</select>
 ```
-* The export default will be a little different, this time we'll need to access the destructured functions from our reducer like so: `export default connect(mapStateToProps, {updateLoanType, updatePropertyType})(WizardOne);`
 
-```js
-export default connect(mapStateToProps, {updateLoanType, updatePropertyType})(WizardOne); 
-
-```
-* Now our component is connected to the `redux store`, let's access the function we need to change state. On the first select element on the `onChange` event, set it equal to `{(e) =>this.props.updateLoanType(e.target.value)}`.
-    * Because we've connected to `redux`, the updateLoanType function is now on props for this component.
-
-```js
-<select onChange={(e) =>this.props.updateLoanType(e.target.value)}>
-
-```
-* Go to the second select element's `onChange` even and set it equal to `(e)=>this.props.updatePropertyType(e.target.value)}`
-
-```js
-<select onChange={(e)=>this.props.updatePropertyType(e.target.value)}>
-
-```
 </details>
 
 ### Solution
@@ -1236,56 +1237,55 @@ export default connect(mapStateToProps, {updateLoanType, updatePropertyType})(Wi
 
 <summary> <code> src/components/WizardOne/WizardOne.js </code> </summary>
 
-
 ```js
 import React,  { Component } from 'react';
-import {Link} from 'react-router-dom';
-import { updateLoanType, updatePropertyType } from './../../ducks/reducer'
-import { connect } from 'react-redux'; 
+import { Link } from 'react-router-dom';
 
-class WizardOne extends Component { 
+import { connect } from 'react-redux';
+import { updateLoanType, updatePropertyType } from '../../ducks/reducer';
 
-    render(){
-        return(
-            <div className="parent-div">
-                <div className="vert-align">
+class WizardOne extends Component {
+  render(){
+    const { updateLoanType, updatePropertyType } = this.props;
 
-                <p>What type of loan will you be needing?</p> <br />
-            
-                <select onChange={(e) =>this.props.updateLoanType(e.target.value)}>
+    return(
+      <div className="parent-div">
+        <div className="vert-align">
+          <p>What type of loan will you be needing?</p> <br />
+      
+          <select onChange={ ( e ) => updateLoanType( e.target.value ) }>
+            <option type="text" value="Home Purchase" >Home Purchase</option>
+            <option type="text" value="Refinance" >Refinance</option>
+            <option type="text" value="Home Equity" >Home Equity loan/line</option>
+          </select> <br/>
 
-                    <option type="text" value="Home Purchase" >Home Purchase</option>
-                    <option type="text" value="Refinance" >Refinance</option>
-                    <option type="text" value="Home Equity" >Home Equity loan/line</option>
+          <p>What type of property are you purchasing?</p> <br />
 
-                </select> <br />  
-
-                <p>What type of property are you purchasing?</p> <br />
-
-                <select onChange={(e)=>this.props.updatePropertyType(e.target.value)}>
-
-
-                        <option value="Single Family Home">Single Family Home</option>
-                        <option value="Town Home">Townhome</option>
-                        <option value="Condo">Condo</option>
-                        <option value="Multi Family Dwelling">Multi Family Dwelling</option>
-                        <option value="Mobile Home">Mobile Home</option>
-
-                </select>
-                    
-                    <Link to="/wTwo"><button className="margin-btn"> Next </button></Link>
-                </div>
-            </div>
-        )
-    }
+          <select onChange={ ( e ) => updatePropertyType( e.target.value ) }>
+            <option value="Single Family Home">Single Family Home</option>
+            <option value="Town Home">Townhome</option>
+            <option value="Condo">Condo</option>
+            <option value="Multi Family Home">Multi Family Dwelling</option>
+            <option value="Mobile Home">Mobile Home</option>
+          </select>
+          
+          <Link to="/wTwo"><button className="margin-btn"> Next </button></Link>
+        </div>
+      </div>
+    )
+  }
 }
+
 function mapStateToProps( state ) {
-  return { 
-      loanType: state.loanType,
-      propertyType: state.propertyType
-    };
+  const { loanType, propertyType } = state;
+
+  return {
+    loanType,
+    propertyType
+  };
 }
-export default connect(mapStateToProps, {updateLoanType, updatePropertyType})(WizardOne); 
+
+export default connect( mapStateToProps, { updateLoanType, updatePropertyType } )( WizardOne ); 
 ```
 
 </details>
