@@ -1757,6 +1757,64 @@ In this step, we will update the reducer to handle modifying the `found` on stat
 
 <br />
 
+Let's begin by opening `src/ducks/reducer.js` and creating an `UPDATE_FOUND` action type. 
+
+```js
+const UPDATE_FOUND = 'UPDATE_FOUND';
+```
+
+Then we can create an `updateFound` action creator that uses `UPDATE_FOUND` as its `type`. This action creator should have a parameter called `found`. We will use the value of `found` for the payload property.
+
+```js
+export default updateFound( found ) {
+  return {
+    type: UPDATE_FOUND,
+    payload: found
+  }
+}
+```
+
+Now let's add an `UPDATE_FOUD` case to the reducer. In this case, the reducer should update the value of `found` on state using the value set on the action's payload. Remember that we need to keep state immutable, so we'll make use of `Object.assign`.
+
+```js
+case UPDATE_FOUND:
+  return Object.assign( {}, state, { found: action.payload } );
+```
+
+Our store now has everything it needs to update the `state`'s `found` property. Let's now implement this into `src/components/WizardFour/WizardFour.js`. Open this file and import `connect` from `react-redux` and import `updateFound` from `src/ducks/reducer.js`.
+
+```js
+import { connect } from 'react-redux';
+import { updateFound } from '../../ducks/reducer.js';
+``` 
+
+Before we modify our component to `connect` to the store, let's create a `mapStateToProps` function. Since the fourth screen of the wizard process only asks the user if they have found their property, we only need `found` from the `store`'s state.
+
+```js
+function mapStateToProps( state ) {
+  const { found } = state;
+
+  return {
+    found
+  };
+}
+
+export default WizardFour;
+```
+
+Now that we have a `mapStateToProps` function, let's modify the `export default` statement to use `connect`. Remember that we should also include `updateFound` as a second parameter. This will allow us to call `updateFound` off of props without having to worry about `dispatch`.
+
+```js
+export default connect( mapStateToProps, { updateFound } )( WizardFour );
+```
+
+Now that our component is connected to the store, we can update the `onClick` events to call `updateFound` instead. You can either deconstruct `updateProp` off of props or call `this.props.updateProp`.
+
+```js
+<button onClick={ ( e ) => updateFound( true ) }>Yes</button>
+<button onClick={ ( e ) => updateFound( false ) }>No</button>
+```
+
 </details>
 
 ### Solution
