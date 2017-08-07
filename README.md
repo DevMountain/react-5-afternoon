@@ -1503,9 +1503,10 @@ export default connect( mapStateToProps, { updateCity } )( WizardTwo );
 
 ### Summary
 
-In this step, we will update the reducer to handle modifying the city on state. We will also configure the src/components/WizardTwo/WizardTwo.js to connect to the store and use an action creator to update the city on state.
+In this step, we will update the reducer to handle modifying the `propToBeUsedOn` on state. We will also configure  `src/components/WizardThree/WizardThree.js` to connect to the store and use an action creator to update the `propToBeUsedOn` on state.
 
 ### Instructions
+
 In the `src/ducks/reducer.js`
 
 * Create a new const: `const UPDATE_PROP  = 'UPDATE_PROP ';`
