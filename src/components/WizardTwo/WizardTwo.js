@@ -6,8 +6,9 @@ import { updateCity } from '../../ducks/reducer';
 
 class WizardTwo extends Component {
   render() {
-    const { updateCity } = this.props;
-    console.log( this.props.city );
+    const { updateCity, city } = this.props;
+    console.log('WizardTwo props:');
+    console.log('CITY UPDATED ->', city);
 
     return(
       <div className="parent-div">

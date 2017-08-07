@@ -1495,6 +1495,8 @@ export default connect( mapStateToProps, { updateCity } )( WizardTwo );
 
 </details>
 
+<img src="https://github.com/DevMountain/home-loan-wizard/blob/solution/readme-assets/2g.gif" />
+
 ## Step 9
 
 ### Summary
