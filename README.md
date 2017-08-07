@@ -1305,6 +1305,7 @@ In this step, we will update the reducer to handle modifying the city on state. 
 * Open `src/ducks/reducer.js`.
 * Create an action type for `UPDATE_CITY`.
 * Create an action creator called `updateCity`.
+  * This action creator should use a parameter called `city`.
 * Add an `UPDATE_CITY` case to the reducer that updates `city`.
   * Remember to keep state immutable. 
 * Open `src/components/WizardTwo/WizardTwo.js`.
@@ -1320,36 +1321,63 @@ In this step, we will update the reducer to handle modifying the city on state. 
 
 <summary> Detailed Instructions </summary>
 
-* Create a new const: `const UPDATE_CITY = 'UPDATE_CITY';`
-    * We do this because react will throw an error if a variable is misspelled, but not if a string is misspelled.
+Let's begin by opening `src/ducks/reducer.js` and creating an `UPDATE_CITY` action type. 
+
 ```js
 const UPDATE_CITY = 'UPDATE_CITY';
-
 ```
 
-* Create an action for updating the city:
-    * All `actions` will return an object with a `type` and `payload`.
-    * Beneath the reducer function, export a function called `updateCity` and pass it `city` as a parameter.
-    * Return an object with a `type` equal to `UPDATE_CITY` and a `payload` equal to `city`.
+Then we can create an `updateCity` action creator that uses `UPDATE_CITY` as its `type`. This action creator should have a parameter called `city`. We will use the value of `city` for the payload property.
 
 ```js
-export function updateCity(city) {
-    return {
-        type: UPDATE_CITY,
-        payload: city
-    }
+export default updateCity( city ) {
+  return {
+    type: UPDATE_CITY,
+    payload: city
+  }
 }
 ```
 
-* Create a reducer to update state for that action. Inside the reducer function:
-    * Create a case for `UPDATE_CITY`
-    * Return a new object that will become state, pass it empty curly braces, state, and the property with the value that you want to change.
-    * Remember, Object.assign is used to copy values from an original source, the first parameter is curly brackets, showing that we want to make a `new` object, the second parameter is state, which is the object we want to copy all the values of, and the third parameter targets the specific property and it's value that we want to change on this new version of state.
+Now let's add an `UPDATE_CITY` case to the reducer. In this case, the reducer should update the value of `city` on state using the value set on the action's payload. Remember that we need to keep state immutable, so we'll make use of `Object.assign`.
 
 ```js
-    case UPDATE_CITY:
-        return Object.assign({}, state, {city: action.payload})
+case UPDATE_CITY:
+  return Object.assign( {}, state, { city: action.payload } );
 ```
+
+Our store now has everything it needs to update the `state`'s city. Let's now implement this into `src/components/WizardTwo/WizardTwo.js`. Open this file and import `connect` from `react-redux` and import `updateCity` from `src/ducks/reducer.js`.
+
+```js
+import { connect } from 'react-redux';
+import { updateCity } from '../../ducks/reducer.js';
+``` 
+
+Before we modify our component to `connect` to the store, let's create a `mapStateToProps` function. Since the second screen of the wizard process only asks the user for their city, we only need city from the `store`'s state.
+
+```js
+function mapStateToProps( state ) {
+  const { city } = state;
+
+  return {
+    city
+  };
+}
+
+export default WizardTwo;
+```
+
+Now that we have a `mapStateToProps` function, let's modify the `export default` statement to use `connect`. Remember that we should also include `updateCity` as a second parameter. This will allow us to call `updateCity` off of props without having to worry about `dispatch`.
+
+```js
+export default connect( mapStateToProps, { updateCity } )( WizardTwo );
+```
+
+Now that our component is connected to the store, we can update the `onChange` event to call `updateCity` instead. You can either deconstruct `updateCity` off of props or call `this.props.updateCity`.
+
+```js
+<input placeholder="city name" type="text" onChange={ ( e ) => updateCity( e.target.value ) } />
+```
+
 </details>
 
 ### Solution
@@ -1380,42 +1408,42 @@ const initialState = {
 
 const UPDATE_LOAN_TYPE = "UPDATE_LOAN_TYPE";
 const UPDATE_PROPERTY_TYPE = 'UPDATE_PROPERTY_TYPE';
-const UPDATE_CITY = 'UPDATE_CITY';
+const UPDATE_CITY = "UPDATE_CITY";
 
-function reducer(state=initialState, action){ 
+function reducer( state = initialState, action ) { 
+    switch( action.type ){
+      case UPDATE_LOAN_TYPE:
+        return Object.assign( {}, state, { loanType: action.payload } );
 
-    switch(action.type){
-        case UPDATE_LOAN_TYPE:
-            return Object.assign({}, state, {loanType: action.payload})
-        case UPDATE_PROPERTY_TYPE:
-            return Object.assign({}, state, {propertyType: action.payload})
-        case UPDATE_CITY:
-            return Object.assign({}, state, {city: action.payload})
+      case UPDATE_PROPERTY_TYPE:
+        return Object.assign( {}, state, { propertyType: action.payload } );
 
-        default:
-            return state
+      case UPDATE_CITY:
+        return Object.assign( {}, state, { city: action.payload } );
+
+      default: return state;
     }
-
 } 
 
-export function updateLoanType(loanType){
-    return{
-        type: UPDATE_LOAN_TYPE,
-        payload: loanType
-    }
-}
-export function updatePropertyType(property) {
-    return {
-        type: UPDATE_PROPERTY_TYPE,
-        payload: property
-    }
+export function updateLoanType( loanType ){
+  return {
+    type: UPDATE_LOAN_TYPE,
+    payload: loanType
+  };
 }
 
-export function updateCity(city) {
-    return {
-        type: UPDATE_CITY,
-        payload: city
-    }
+export function updatePropertyType( property ) {
+  return {
+    type: UPDATE_PROPERTY_TYPE,
+    payload: property
+  };
+}
+
+export function updateCity( city ) {
+  return {
+    type: UPDATE_CITY,
+    payload: city
+  };
 }
 
 export default reducer; 
