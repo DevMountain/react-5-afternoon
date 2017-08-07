@@ -1528,6 +1528,65 @@ In this step, we will update the reducer to handle modifying the `propToBeUsedOn
 
 <br />
 
+Let's begin by opening `src/ducks/reducer.js` and creating an `UPDATE_PROP` action type. 
+
+```js
+const UPDATE_PROP = 'UPDATE_PROP';
+```
+
+Then we can create an `updateProp` action creator that uses `UPDATE_PROP` as its `type`. This action creator should have a parameter called `prop`. We will use the value of `prop` for the payload property.
+
+```js
+export default updateProp( prop ) {
+  return {
+    type: UPDATE_PROP,
+    payload: prop
+  }
+}
+```
+
+Now let's add an `UPDATE_PROP` case to the reducer. In this case, the reducer should update the value of `propToBeUsedOn` on state using the value set on the action's payload. Remember that we need to keep state immutable, so we'll make use of `Object.assign`.
+
+```js
+case UPDATE_PROP:
+  return Object.assign( {}, state, { propToBeUsedOn: action.payload } );
+```
+
+Our store now has everything it needs to update the `state`'s `propToBeUsedOn` property. Let's now implement this into `src/components/WizardThree/WizardThree.js`. Open this file and import `connect` from `react-redux` and import `updateProp` from `src/ducks/reducer.js`.
+
+```js
+import { connect } from 'react-redux';
+import { updateProp } from '../../ducks/reducer.js';
+``` 
+
+Before we modify our component to `connect` to the store, let's create a `mapStateToProps` function. Since the third screen of the wizard process only asks the user for their property type, we only need `propToBeUsedOn` from the `store`'s state.
+
+```js
+function mapStateToProps( state ) {
+  const { propToBeUsedOn } = state;
+
+  return {
+    propToBeUsedOn
+  };
+}
+
+export default WizardThree;
+```
+
+Now that we have a `mapStateToProps` function, let's modify the `export default` statement to use `connect`. Remember that we should also include `updateProp` as a second parameter. This will allow us to call `updateProp` off of props without having to worry about `dispatch`.
+
+```js
+export default connect( mapStateToProps, { updateProp } )( WizardThree );
+```
+
+Now that our component is connected to the store, we can update the `onClick` events to call `updateProp` instead. You can either deconstruct `updateProp` off of props or call `this.props.updateProp`. Since the button elements have a value, you can capture the event and pass in the event's target value.
+
+```js
+<button value="primaryHome" onClick={ ( e ) => updateProp( e.target.value ) }>Primary Home</button>
+<button value="rentalProperty" onClick={ ( e ) => updateProp( e.target.value ) }>Rental Property</button>
+<button value="secondaryHome" onClick={ ( e ) => updateProp( e.target.value ) }>Secondary Home</button>
+```
+
 </details>
 
 ### Solution
