@@ -1503,7 +1503,7 @@ export default connect( mapStateToProps, { updateCity } )( WizardTwo );
 
 ### Summary
 
-In this step, we will update the reducer to handle modifying the `propToBeUsedOn` on state. We will also configure  `src/components/WizardThree/WizardThree.js` to connect to the store and use an action creator to update the `propToBeUsedOn` on state.
+In this step, we will update the reducer to handle modifying the `propToBeUsedOn` on state. We will also configure  `src/components/WizardThree/WizardThree.js` to connect to the store and use an action creator to update `propToBeUsedOn` on state.
 
 ### Instructions
 
@@ -1732,19 +1732,24 @@ export default connect( mapStateToProps, { updateProp } )( WizardThree );
 
 ### Summary
 
-Now that we have our third view hooked up. Let's move on to the fourth View.
+In this step, we will update the reducer to handle modifying the `found` on state. We will also configure  `src/components/WizardFour/WizardFour.js` to connect to the store and use an action creator to update `found` on state.
 
 ## Instructions 
 
-In the `src/ducks/reducer.js`
-
-* Create a new const: `const UPDATE_FOUND = 'UPDATE_FOUND';`
-* Create an action for updating found:
-    * Beneath the reducer function, export a function called `updateFound` and pass it `found` as a parameter.
-    * Return an object with a `type` equal to `UPDATE_FOUND` and a `payload` equal to `found`.
-* Create a reducer to update state for that action. Inside the reducer function:
-    * Create a case for `UPDATE_FOUND`
-    * Return a new object that will become state, pass it empty curly braces, state, and the property with the value that you want to change.
+* Open `src/ducks/reducer.js`.
+* Create an action type for `UPDATE_PROP`.
+* Create an action creator called `updateProp`.
+  * This action creator should use a parameter called `prop`.
+* Add an `UPDATE_PROP` case to the reducer that updates `propToBeUsedOn`.
+  * Remember to keep state immutable. 
+* Open `src/components/WizardThree/WizardThree.js`.
+* Import `connect` from `react-redux`.
+* Import `updateProp` from `src/ducks/reducer.js`.
+* Modify the `export default` statement to use connect.
+  * `mapStateToProps` should only return one property from state.
+  * `updateProp` should be passed in as a second parameter.
+* Modify the `onClick` events to call `updateProp`.
+  * Remember this action creator has one parameter.
 
 
 <details>
