@@ -1290,6 +1290,7 @@ export default connect( mapStateToProps, { updateLoanType, updatePropertyType } 
 
 </details>
 
+<img src="https://github.com/DevMountain/home-loan-wizard/blob/solution/readme-assets/1g.gif" />
 
 ## Step 8
 

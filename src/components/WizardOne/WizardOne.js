@@ -7,6 +7,9 @@ import { updateLoanType, updatePropertyType } from '../../ducks/reducer';
 class WizardOne extends Component {
   render(){
     const { updateLoanType, updatePropertyType } = this.props;
+    console.log('Wizard One Props:');
+    console.log('LOAN TYPE UPDATED ->', this.props.loanType);
+    console.log('PROPERTY TYPE UPDATED ->', this.props.propertyType);
 
     return(
       <div className="parent-div">

@@ -20,7 +20,9 @@ const initialState = {
 const UPDATE_LOAN_TYPE = "UPDATE_LOAN_TYPE";
 const UPDATE_PROPERTY_TYPE = 'UPDATE_PROPERTY_TYPE'; 
 
-function reducer( state = initialState, action ){ 
+function reducer( state = initialState, action ) { 
+    console.log('REDUCER HIT: Action ->', action );
+    
     switch( action.type ){
       case UPDATE_LOAN_TYPE:
           return Object.assign( {}, state, { loanType: action.payload } );
