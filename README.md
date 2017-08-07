@@ -1724,6 +1724,10 @@ export default connect( mapStateToProps, { updateProp } )( WizardThree );
 
 </details>
 
+<br />
+
+<img src="https://github.com/DevMountain/home-loan-wizard/blob/solution/readme-assets/3g.gif" />
+
 ## Step 10
 
 ### Summary
