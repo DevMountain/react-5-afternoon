@@ -1159,7 +1159,7 @@ export default reducer;
 
 ### Summary
 
-Now that the `action` and `reducer` are set up for our first view, let's head over to `src/WizardOne.js`.
+In this step, we will connect `src/WizardOne.js` to the store and configure the component to use the action creators we have created so far.
 
 ### Instructions
 
