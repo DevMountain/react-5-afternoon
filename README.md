@@ -1159,11 +1159,11 @@ export default reducer;
 
 ### Summary
 
-In this step, we will connect `src/WizardOne.js` to the store and configure the component to use the action creators we have created so far.
+In this step, we will connect `src/components/WizardOne/WizardOne.js` to the store and configure the component to use the action creators we have created so far.
 
 ### Instructions
 
-* Open `src/WizardOne.js`.
+* Open `src/components/WizardOne/WizardOne.js`.
 * Import `connect` from `react-redux`.
 * Import the `updateLoanType` and `updatePropertyType` action creators from `src/store.js`.
   * Hint: Use destructuring.
@@ -1298,20 +1298,23 @@ export default connect( mapStateToProps, { updateLoanType, updatePropertyType } 
 
 ### Summary
 
-Now that we have our first view hooked up. Let's move on to the second View.
+In this step, we will update the reducer to handle modifying the city on state. We will also configure the `src/components/WizardTwo/WizardTwo.js` to connect to the store and use an action creator to update the city on state.
 
 ## Instructions 
 
-In the `src/ducks/reducer.js`
-
-* Create a new const: `const UPDATE_CITY = 'UPDATE_CITY';`
-* Create an action for updating the city:
-    * Beneath the reducer function, export a function called `updateCity` and pass it `city` as a parameter.
-    * Return an object with a `type` equal to `UPDATE_CITY` and a `payload` equal to `city`.
-* Create a reducer to update state for that action. Inside the reducer function:
-    * Create a case for `UPDATE_CITY`
-    * Return a new object that will become state, pass it empty curly braces, state, and the property with the value that you want to change.
-
+* Open `src/ducks/reducer.js`.
+* Create an action type for `UPDATE_CITY`.
+* Create an action creator called `updateCity`.
+* Add an `UPDATE_CITY` case to the reducer that updates `city`.
+  * Remember to keep state immutable. 
+* Open `src/components/WizardTwo/WizardTwo.js`.
+* Import `connect` from `react-redux`.
+* Import `updateCity` from `src/ducks/reducer.js`.
+* Modify the `export default` statement to use connect.
+  * `mapStateToProps` should only return one property from state.
+  * `updateCity` should be passed in as a second parameter.
+* Modify the `onChange` event to call `updateCity`.
+  * Remember this action creator has one parameter.
 
 <details>
 
