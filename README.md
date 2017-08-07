@@ -1453,106 +1453,50 @@ export default reducer;
 
 </details>
 
-## Instructions 
-
-In the `src/component/WizardTwo/WizardTwo.js`
-
-* Import `connect` from `react-redux`.
-* Import the update function you just made from your reducer: `updateCity` from `'./../../ducks/reducer'` (remember to destructure them). 
-* Connect the WizardTwo component to `redux`, similarly to how we connected our `App.js` to `redux`.
-    * Create a `mapStateToProps` function, passing it `state`.
-    * Return an object that contains the piece of state you'll be updating/wanting access to.
-    * In the export default we'll need to access the destructured functions from our reducer like so: `export default connect(mapStateToProps, { updateCity })(WizardTwo); `
-* Now our component is connected to the `redux store`, let's access the function we need to change state on the input element.
-    * Set the input element's `onChange` function equal to `{(e)=>this.props.updateCity(e.target.value)}`.
-* Our WizardTwo Component should now be hooked up properly and be working with redux! 
-<details>
-
-<summary> Detailed Instructions </summary>
-
-* Import `connect` from `react-redux`.
-
-```js
-import { connect } from 'react-redux'; 
-
-```
-
-* Import the update function you just made from your reducer: `updateCity` from `'./../../ducks/reducer'` (remember to destructure them). 
-
-```js
-import { updateCity } from './../../ducks/reducer'
-
-```
-
-* Connect the WizardTwo component to `redux`, similarly to how we connected our `App.js` to `redux`.
-    * Create a `mapStateToProps` function, passing it `state`.
-    * Return an object that contains the piece of state you'll be updating/wanting access to.
-    * In the export default we'll need to access the destructured functions from our reducer like so: `export default connect(mapStateToProps, { updateCity })(WizardTwo); `
-    
-```js
-function mapStateToProps( state ) {
-  return { 
-      city: state.city
-    };
-}
-export default connect(mapStateToProps, { updateCity })(WizardTwo); 
-```
-
-* Now our component is connected to the `redux store`, let's access the function we need to change state on the input element.
-    * Set the input element's `onChange` function equal to `{(e)=>this.props.updateCity(e.target.value)}`.
-    * Because we've connected to `redux`, the updateLoanType function is now on props for this component.
-* Our WizardTwo Component should now be hooked up properly and be working with redux! 
-* You can see what's on state by writing `console.log(this.props)` inside of the `render()` function.
-    
-```js
-<input placeholder="city name" type="text" onChange={(e)=>this.props.updateCity(e.target.value)}/>
-
-```
-</details>
-
-### Solution
-
 <details>
 
 <summary> <code> src/components/WizardTwo/WizardTwo.js </code> </summary>
 
-
 ```js
 import React,  { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { updateCity } from './../../ducks/reducer'
-import { connect } from 'react-redux'; 
+
+import { connect } from "react-redux";
+import { updateCity } from '../../ducks/reducer';
 
 class WizardTwo extends Component {
-    render(){
-        return(
-            <div className="parent-div">
-                <div className="vert-align">
+  render() {
+    const { updateCity } = this.props;
+
+    return(
+      <div className="parent-div">
+        <div className="vert-align">
+          <p>In what city will the property be located?</p><br />
             
-                    <p>In what city will the property be located?</p><br />
-                
-                    <input placeholder="city name" type="text" onChange={(e)=>this.props.updateCity(e.target.value)}/>
-               
-                <Link to="/wThree"><button className="wTwo-btn"> Next </button></Link>
-                </div>
-            </div>
-        )
-    }
+          <input placeholder="city name" type="text" onChange={ ( e ) => updateCity( e.target.value ) } />
+        
+          <Link to="/wThree"><button className="wTwo-btn"> Next </button></Link>
+        </div>
+      </div>
+    )
+  }
 }
 
 function mapStateToProps( state ) {
-  return { 
-      city: state.city
-    };
+  const { city } = state;
+
+  return {
+    city
+  };
 }
-export default connect(mapStateToProps, { updateCity })(WizardTwo); 
+
+export default connect( mapStateToProps, { updateCity } )( WizardTwo );
 ```
 
 </details>
 
-
-
 ## Step 9
+
 ### Summary
 
 Now that we have our second view hooked up. Let's move on to the third View.
