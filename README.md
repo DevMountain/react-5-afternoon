@@ -1163,22 +1163,21 @@ In this step, we will connect `src/WizardOne.js` to the store and configure the 
 
 ### Instructions
 
+* Open `src/WizardOne.js`.
 * Import `connect` from `react-redux`.
-* Import the update functions you just made from your reducer: `updateLoanType` and `updatePropertyType` from `'./../../ducks/reducer'` (remember to destructure them).
-* Currently, in the first select elements `onChange` function, we have `{this.props.handleLoanType}`. This is because we were previously being passed the handle function on props coming from our `App.js`, to the `router.js`, then to our WizardOne component. Now that we're using `redux`, we'll be handling it a little differently.
-* Connect the WizardOne component to `redux`, similarly to how we connected our `App.js` to `redux`.
-    * Create a `mapStateToProps` function, passing it `state`.
-    * Return an object that contains the two pieces of state you'll be updating/wanting access to.
-    * The export default will be a little different, this time we'll need to access the destructured functions from our reducer like so: `export default connect(mapStateToProps, {updateLoanType, updatePropertyType})(WizardOne);`
-* Now our component is connected to the `redux store`, let's access the function we need to change state. On the first select element on the `onChange` event, set it equal to `{(e) =>this.props.updateLoanType(e.target.value)}`.
-    * Because we've connected to `redux`, the updateLoanType function is now on props for this component.
-* Go to the second select element's `onChange` even and set it equal to `{(e)=>this.props.updatePropertyType(e.target.value)}`
-* Our WizardOne Component should now be hooked up properly and be working with redux! 
-* If you'd like to, you can console log what's currently on state by writing `console.log(this.props)` inside of the `render()` function.
+* Import the `updateLoanType` and `updatePropertyType` action creators from `src/store.js`.
+  * Hint: Use destructuring.
+* Modify the `export default` statement to use `connect`.
+  * Use `mapStateToProps` to return the only two parts of `state` it will need.
+  * Use a second parameter on the `connect` statement that passes in the action creators.
+* Modify the two `onChange` events to use the action creators.
+  * Hint: Both action creators need an argument.
 
 <details>
 
 <summary> Detailed Instructions </summary>
+
+<br />
 
 * Import `connect` from `react-redux`.
 
