@@ -21,7 +21,7 @@ During this project, we'll be improving on a web application that walks users th
 In this step, we will create our `store`. 
 When using redux, the store holds the entire state of our application. So it's important we set this up first.
 
-## Instructions
+### Instructions
 
 * Create a new file in your `src` folder called `store.js`
 * Open `src/store.js`.
@@ -191,7 +191,7 @@ In addition to our route component being a function, the way we're connecting ou
 
 In this step, we are going to clean up the mess.
 
-## Instructions
+### Instructions
 
 * Open `src/router.js`.
 * Import `HashRouter` from `react-router-dom`.
@@ -479,7 +479,7 @@ Open `src/App.js`. You'll notice that throughout this file there are comments, t
 
 Sidenote: You can either leave the constructor function, super, state, all of the bound functions and regular functions that originally dealt with state in there if you'd like. Or it may help to take out the specific ones that deal with state one at a time as you connect things to redux. I'll be removing them all at once. 
 
-## Instructions
+### Instructions
 
 * Open `src/App.js`.
 * Import `connect` from `react-redux`
@@ -703,7 +703,7 @@ export default connect( mapStateToProps )( App );
 
 Now that our `src/App.js` is connected to our `redux` store, let's begin connecting our views. We'll start with the Eleventh view. I chose the Eleventh view because as we start hooking our views up with `redux`, we'll be able to see the data getting to where it needs to end up.
 
-## Instructions 
+### Instructions 
 
 * Open `src/components/WizardEleven/WizardEleven.js`.
 * Import `connect` from `react-redux`
@@ -960,7 +960,7 @@ Now let's take a look at our first view: `src/components/WizardOne/WizardOne.js`
 
 In this step, we'll start creating our store's reducer and the action creators to update `loanType` and `propertyType`.
 
-## Instructions
+### Instructions
 
 * Open `src/ducks/reducer.js`.
 * Create an `initialState` object, at the very top of the file, with the following properties:
@@ -1300,7 +1300,7 @@ export default connect( mapStateToProps, { updateLoanType, updatePropertyType } 
 
 In this step, we will update the reducer to handle modifying the city on state. We will also configure the `src/components/WizardTwo/WizardTwo.js` to connect to the store and use an action creator to update the city on state.
 
-## Instructions 
+### Instructions 
 
 * Open `src/ducks/reducer.js`.
 * Create an action type for `UPDATE_CITY`.
@@ -1503,9 +1503,9 @@ export default connect( mapStateToProps, { updateCity } )( WizardTwo );
 
 ### Summary
 
-Now that we have our second view hooked up. Let's move on to the third View.
+In this step, we will update the reducer to handle modifying the city on state. We will also configure the src/components/WizardTwo/WizardTwo.js to connect to the store and use an action creator to update the city on state.
 
-## Instructions
+### Instructions
 In the `src/ducks/reducer.js`
 
 * Create a new const: `const UPDATE_PROP  = 'UPDATE_PROP ';`
