@@ -1737,55 +1737,26 @@ In this step, we will update the reducer to handle modifying the `found` on stat
 ## Instructions 
 
 * Open `src/ducks/reducer.js`.
-* Create an action type for `UPDATE_PROP`.
-* Create an action creator called `updateProp`.
-  * This action creator should use a parameter called `prop`.
-* Add an `UPDATE_PROP` case to the reducer that updates `propToBeUsedOn`.
+* Create an action type for `UPDATE_FOUND`.
+* Create an action creator called `updateFound`.
+  * This action creator should use a parameter called `found`.
+* Add an `UPDATE_FOUND` case to the reducer that updates `found`.
   * Remember to keep state immutable. 
-* Open `src/components/WizardThree/WizardThree.js`.
+* Open `src/components/WizardFour/WizardFour.js`.
 * Import `connect` from `react-redux`.
-* Import `updateProp` from `src/ducks/reducer.js`.
+* Import `updateFound` from `src/ducks/reducer.js`.
 * Modify the `export default` statement to use connect.
   * `mapStateToProps` should only return one property from state.
-  * `updateProp` should be passed in as a second parameter.
-* Modify the `onClick` events to call `updateProp`.
+  * `updateFound` should be passed in as a second parameter.
+* Modify the `onClick` events to call `updateFound`.
   * Remember this action creator has one parameter.
-
 
 <details>
 
 <summary> Detailed Instructions </summary>
 
-* Create a new const: `const UPDATE_FOUND = 'UPDATE_FOUND';`
-    * We do this because react will throw an error if a variable is misspelled, but not if a string is misspelled.
-```js
-const UPDATE_FOUND = 'UPDATE_FOUND';
+<br />
 
-```
-
-* Create an action for updating the found:
-    * All `actions` will return an object with a `type` and `payload`.
-    * Beneath the reducer function, export a function called `updateFound` and pass it `found` as a parameter.
-    * Return an object with a `type` equal to `UPDATE_FOUND` and a `payload` equal to `found`.
-
-```js
-export function updateFound(found){
-    return {
-        type: UPDATE_FOUND,
-        payload: found
-    }
-}
-```
-
-* Create a reducer to update state for that action. Inside the reducer function:
-    * Create a case for `UPDATE_FOUND`
-    * Return a new object that will become state, pass it empty curly braces, state, and the property with the value that you want to change.
-    * Remember, Object.assign is used to copy values from an original source, the first parameter is curly brackets, showing that we want to make a `new` object, the second parameter is state, which is the object we want to copy all the values of, and the third parameter targets the specific property and it's value that we want to change on this new version of state.
-
-```js
-    case UPDATE_FOUND:
-        return Object.assign({}, state, {found: action.payload})
-```
 </details>
 
 ### Solution
@@ -1816,63 +1787,66 @@ const initialState = {
 
 const UPDATE_LOAN_TYPE = "UPDATE_LOAN_TYPE";
 const UPDATE_PROPERTY_TYPE = 'UPDATE_PROPERTY_TYPE';
-const UPDATE_CITY = 'UPDATE_CITY';
-const UPDATE_PROP = 'UPDATE_PROP';
-const UPDATE_FOUND = 'UPDATE_FOUND';
+const UPDATE_CITY = "UPDATE_CITY";
+const UPDATE_PROP = "UPDATE_PROP";
+const UPDATE_FOUND = "UPDATE_FOUND";
 
+function reducer( state = initialState, action ) { 
+    console.log('REDUCER HIT: Action ->', action );
+    
+    switch( action.type ){
+      case UPDATE_LOAN_TYPE:
+        return Object.assign( {}, state, { loanType: action.payload } );
 
-function reducer(state=initialState, action){ 
+      case UPDATE_PROPERTY_TYPE:
+        return Object.assign( {}, state, { propertyType: action.payload } );
 
-    switch(action.type){
-        case UPDATE_LOAN_TYPE:
-            return Object.assign({}, state, {loanType: action.payload})
-        case UPDATE_PROPERTY_TYPE:
-            return Object.assign({}, state, {propertyType: action.payload})
-        case UPDATE_CITY:
-            return Object.assign({}, state, {city: action.payload})
-        case UPDATE_PROP:
-            return Object.assign({}, state, {propToBeUsedOn: action.payload})
-        case UPDATE_FOUND:
-            return Object.assign({}, state, {found: action.payload})
+      case UPDATE_CITY:
+        return Object.assign( {}, state, { city: action.payload } );
 
-        default:
-            return state
+      case UPDATE_PROP:
+        return Object.assign( {}, state, { propToBeUsedOn: action.payload } );
+
+      case UPDATE_FOUND:
+        return Object.assign( {}, state, { found: action.payload } );
+
+      default: return state;
     }
-
 } 
 
-export function updateLoanType(loanType){
-    return{
-        type: UPDATE_LOAN_TYPE,
-        payload: loanType
-    }
-}
-export function updatePropertyType(property) {
-    return {
-        type: UPDATE_PROPERTY_TYPE,
-        payload: property
-    }
+export function updateLoanType( loanType ){
+  return {
+    type: UPDATE_LOAN_TYPE,
+    payload: loanType
+  };
 }
 
-export function updateCity(city) {
-    return {
-        type: UPDATE_CITY,
-        payload: city
-    }
+export function updatePropertyType( property ) {
+  return {
+    type: UPDATE_PROPERTY_TYPE,
+    payload: property
+  };
 }
 
-export function updatePropToBeUsedOn(prop){
-    return {
-        type: UPDATE_PROP,
-        payload: prop
-    }
+export function updateCity( city ) {
+  return {
+    type: UPDATE_CITY,
+    payload: city
+  };
 }
 
-export function updateFound(found){
-    return {
-        type: UPDATE_FOUND,
-        payload: found
-    }
+export function updateProp( prop ) {
+  return {
+    type: UPDATE_PROP,
+    payload: prop
+  };
+}
+
+export function updateFound( found ) {
+  return {
+    type: UPDATE_FOUND,
+    payload: found
+  };
 }
 
 export default reducer; 
@@ -1880,102 +1854,57 @@ export default reducer;
 
 </details>
 
-## Instructions 
-
-In the `src/component/WizardFour/WizardFour.js`
-
-* Import `connect` from `react-redux`.
-* Import the update function you just made from your reducer: `updateFound` from `'./../../ducks/reducer'` (remember to destructure them). 
-* Connect the WizardFour component to `redux`, similarly to how we connected our `App.js` to `redux`.
-    * Create a `mapStateToProps` function, passing it `state`.
-    * Return an object that contains the piece of state you'll be updating/wanting access to.
-    * In the export default we'll need to access the destructured functions from our reducer like so: `export default connect(mapStateToProps, { updateFound })(WizardFour); `
-* Now our component is connected to the `redux store`, let's access the function we need to change state on the input element.
-    * Set the input element's `onChange` function equal to `{(e)=>this.props.updateFound(e.target.value)}`.
-* Our WizardFour Component should now be hooked up properly and be working with redux! 
-* You can see what's on state by writing `console.log(this.props)` inside of the `render()` function.
-<details>
-
-<summary> Detailed Instructions </summary>
-
-* Import `connect` from `react-redux`.
-
-```js
-import { connect } from 'react-redux'; 
-
-```
-
-* Import the update function you just made from your reducer: `updateFound` from `'./../../ducks/reducer'` (remember to destructure them). 
-
-```js
-import { updateFound } from './../../ducks/reducer'
-
-```
-
-* Connect the WizardFour component to `redux`, similarly to how we connected our `App.js` to `redux`.
-    * Create a `mapStateToProps` function, passing it `state`.
-    * Return an object that contains the piece of state you'll be updating/wanting access to.
-    * In the export default we'll need to access the destructured functions from our reducer like so: `export default connect(mapStateToProps, { updateFound })(WizardFour); `
-    
-```js
-function mapStateToProps( state ) {
-  return { 
-      found: state.found
-    };
-}
-export default connect(mapStateToProps, { updateFound })(WizardFour); 
-```
-
-* Now our component is connected to the `redux store`, let's access the function we need to change state on the input element.
-    * Set the input element's `onChange` function equal to `{(e)=>this.props.updateFound(e.target.value)}`.
-    * Because we've connected to `redux`, the updateLoanType function is now on props for this component.
-* Our WizardFour Component should now be hooked up properly and be working with redux! 
-    
-```js
-<input placeholder="found name" type="text" onChange={(e)=>this.props.updateFound(e.target.value)}/>
-
-```
-</details>
-
-### Solution
-
 <details>
 
 <summary> <code> src/components/WizardFour/WizardFour.js </code> </summary>
 
-
 ```js
 import React,  { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { updateFound } from './../../ducks/reducer'
-import { connect } from 'react-redux'; 
 
+import { connect } from 'react-redux';
+import { updateFound } from '../../ducks/reducer';
 
 class WizardFour extends Component {
-    render(){
-        return(
-            <div className="parent-div">
-                <div className="vert-align">
-               <p>Have you already found your new home?</p> <br />
-                <div className="row">
-                    <Link to="/wFive"><button onClick={ (e)=>this.props.updateFound("True") }>Yes</button></Link>
-                    <Link to="/wFive"><button onClick={ (e)=>this.props.updateFound("False") }>No </button></Link> 
-                </div>           
-            </div>
+  render() {
+    const { updateFound } = this.props;
+
+    return (
+      <div className="parent-div">
+        <div className="vert-align">
+          <p>Have you already found your new home?</p><br />
+          
+          <div className="row">
+            <Link to="/wFive">
+              <button onClick={ ( e ) => updateFound( true ) }>Yes</button>
+            </Link>
+
+            <Link to="/wFive">
+              <button onClick={ ( e ) => updateFound( false ) }>No</button>
+            </Link>
+          </div>
         </div>
-        )
-    }
+      </div>
+    )
+  }
 }
 
 function mapStateToProps( state ) {
-  return { 
-      found: state.found
-    };
+  const { found } = state;
+
+  return {
+    found
+  };
 }
-export default connect(mapStateToProps, { updateFound })(WizardFour); 
+
+export default connect( mapStateToProps, { updateFound } )( WizardFour );
 ```
 
 </details>
+
+<br />
+
+<img src="https://github.com/DevMountain/home-loan-wizard/blob/solution/readme-assets/4g.gif" />
 
 ## Step 11
 
