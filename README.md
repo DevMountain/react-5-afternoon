@@ -2214,7 +2214,7 @@ In this step, we will hook up the rest of the views to the store and modify the 
 
 ### Instructions 
 
-Open the remaining `wizard` components ( Wizard 5-11 ) and update them to connect to the store. Remember to use `mapStateToProps` to grab only the property(s) that component is modifying. Also remember to pull in the action creators from the reducer. Then modify the events in the component ( `onChange` || `onClick` ) to call the action creator(s). 
+Open the remaining `wizard` components ( Wizard 5-11 ) and update them to connect to the store. Remember to use `mapStateToProps` to grab only the property(s) that component is modifying. Also remember to pull in the action creator(s) from the reducer. Then modify the events in the component ( `onChange` || `onClick` ) to call the action creator(s). 
 
 ### Solution
 
