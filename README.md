@@ -1734,7 +1734,7 @@ export default connect( mapStateToProps, { updateProp } )( WizardThree );
 
 In this step, we will update the reducer to handle modifying the `found` on state. We will also configure  `src/components/WizardFour/WizardFour.js` to connect to the store and use an action creator to update `found` on state.
 
-## Instructions 
+### Instructions 
 
 * Open `src/ducks/reducer.js`.
 * Create an action type for `UPDATE_FOUND`.
@@ -1970,7 +1970,7 @@ export default connect( mapStateToProps, { updateFound } )( WizardFour );
 
 In this step, we will complete the rest of the reducer for updating the remaining properties on state. This step will be a challenge, meaning there will not be any guided instructions. Try to complete this step without looking at any previous steps. If you get stuck, try looking back at the previous three steps.
 
-## Instructions 
+### Instructions 
 
 * Open `src/ducks/reducer.js`.
 * Create an action type for updating the following state properties:
@@ -2212,105 +2212,9 @@ export default reducer;
 
 In this step, we will hook up the rest of the views to the store and modify the events to call our action creators. This step will be a challenge, meaning there will not be any guided instructions. Try to complete this step without looking at any previous steps. If you get stuck, try looking back steps eight through ten.
 
-## Instructions 
-
-In the `src/component/WizardFive/WizardFive.js`
-
-* Import `connect` from `react-redux`.
-* Import the update function you just made from your reducer: `updateRealEstateAgent ` from `'./../../ducks/reducer'` (remember to destructure them). 
-* Connect the WizardFive component to `redux`, similarly to how we connected our `App.js` to `redux`.
-    * Create a `mapStateToProps` function, passing it `state`.
-    * Return an object that contains the piece of state you'll be updating/wanting access to.
-    * In the export default we'll need to access the destructured functions from our reducer like so: `export default connect(mapStateToProps, { updateRealEstateAgent  })(WizardFive); `
-* Now our component is connected to the `redux store`, let's access the function we need to change state on the input element.
-    * Set the first button element's `onChange` function equal to `{(e)=>this.props.updateRealEstateAgent("True")}`.
-    * Set the second button element's `onChange` function equal to `{(e)=>this.props.updateRealEstateAgent("False")}`.
-* Our WizardFive Component should now be hooked up properly and be working with redux! 
-* You can see what's on state by writing `console.log(this.props)` inside of the `render()` function.
-<details>
-
-<summary> Detailed Instructions </summary>
-
-* Import `connect` from `react-redux`.
-
-```js
-import { connect } from 'react-redux'; 
-
-```
-
-* Import the update function you just made from your reducer: `updateRealEstateAgent ` from `'./../../ducks/reducer'` (remember to destructure them). 
-
-```js
-import { updateRealEstateAgent  } from './../../ducks/reducer'
-
-```
-
-* Connect the WizardFive component to `redux`, similarly to how we connected our `App.js` to `redux`.
-    * Create a `mapStateToProps` function, passing it `state`.
-    * Return an object that contains the piece of state you'll be updating/wanting access to.
-    * In the export default we'll need to access the destructured functions from our reducer like so: `export default connect(mapStateToProps, { updateRealEstateAgent  })(WizardFive); `
-    
-```js
-function mapStateToProps( state ) {
-  return { 
-      realEstateAgent: state.realEstateAgent
-    };
-}
-export default connect(mapStateToProps, { updateRealEstateAgent  })(WizardFive); 
-```
-
-* Now our component is connected to the `redux store`, let's access the function we need to change state on the input element.
-    * Set the first button element's `onChange` function equal to `{(e)=>this.props.updateRealEstateAgent("True")}`.
-    * Set the second button element's `onChange` function equal to `{(e)=>this.props.updateRealEstateAgent("False")}`.    
-    * Because we've connected to `redux`, the updateLoanType function is now on props for this component.
-* Our WizardFive Component should now be hooked up properly and be working with redux! 
-    
-```js
-<Link to="/wSix"><button onClick={ (e)=>this.props.updateRealEstateAgent("True") }>Yes</button></Link>
-<Link to="/wSix"><button onClick={ (e)=>this.props.updateRealEstateAgent("False") }>No </button></Link>
-```
-</details>
+### Instructions 
 
 ### Solution
-
-<details>
-
-<summary> <code> src/components/WizardFive/WizardFive.js </code> </summary>
-
-
-```js
-import React,  { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { updateRealEstateAgent } from './../../ducks/reducer'
-import { connect } from 'react-redux';
-
-class WizardFive extends Component {
-
-    render(){
-        return(
-            <div className="parent-div">
-                <div className="vert-align">
-
-                    <p>Are you currently working with a real estate agent?</p> <br />
-                    <div className="row">
-                        <Link to="/wSix"><button onClick={ (e)=>this.props.updateRealEstateAgent("True") }>Yes</button></Link>
-                        <Link to="/wSix"><button onClick={ (e)=>this.props.updateRealEstateAgent("False") }>No </button></Link>
-                    </div>
-                </div>
-            </div>
-        )
-    }
-}
-
-function mapStateToProps( state ) {
-  return { 
-      found: state.found
-    };
-}
-export default connect(mapStateToProps, { updateRealEstateAgent })(WizardFive); 
-```
-
-</details>
 
 ## Contributions
 
