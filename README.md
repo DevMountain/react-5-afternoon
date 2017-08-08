@@ -1972,6 +1972,7 @@ In this step, we will complete the rest of the reducer for updating the remainin
 
 ## Instructions 
 
+* Open `src/ducks/reducer.js`.
 * Create an action type for updating the following state properties:
   * `realEstateAgent`
   * `cost`
