@@ -1964,11 +1964,11 @@ export default connect( mapStateToProps, { updateFound } )( WizardFour );
 
 <img src="https://github.com/DevMountain/home-loan-wizard/blob/solution/readme-assets/4g.gif" />
 
-## Step 11
+## Step 11 - Challenge
 
 ### Summary
 
-Now that we have our fourth view hooked up, I think we're getting the hang of the flow between the reducer and our component. So in this step we're going to finish out our reducer.js.
+In this step, we will complete the rest of the reducer for updating the remaining properties on state. This step will be a challenge, meaning there will not be any guided instructions. Try to complete this step without looking at any previous steps. If you get stuck, try looking back at the previous three steps.
 
 ## Instructions 
 
