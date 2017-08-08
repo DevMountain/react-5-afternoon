@@ -2205,11 +2205,11 @@ export default reducer;
 
 </details>
 
-## Step 12
+## Step 12 - Challenge
 
 ### Summary
 
-Setting up the fifth view with our reducer.
+In this step, we will hook up the rest of the views to the store and modify the events to call our action creators. This step will be a challenge, meaning there will not be any guided instructions. Try to complete this step without looking at any previous steps. If you get stuck, try looking back steps eight through ten.
 
 ## Instructions 
 
