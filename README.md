@@ -1203,7 +1203,7 @@ function mapStateToProps( state ) {
 export default connect( mapStateToProps, { updateLoanType, updatePropertyType } )( WizardOne );
 ```
 
-We can then destructor our action creators off of `props`. It is imperative that you call your action creators off of `props` otherwise the function call will never make it to the `store`.
+We can then destructure our action creators off of `props`. It is imperative that you call your action creators off of `props` otherwise the function call will never make it to the `store`.
 
 ```js
 render() {
@@ -1968,7 +1968,7 @@ export default connect( mapStateToProps, { updateFound } )( WizardFour );
 
 ### Summary
 
-In this step, we will complete the rest of the reducer for updating the remaining properties on state. This step will be a challenge, meaning there will not be any guided instructions. Try to complete this step without looking at any previous steps. If you get stuck, try looking back at the previous three steps.
+In this step, we will complete the rest of the reducer for updating the remaining properties on state. We want this step to be a challenge for you, meaning there will not be any guided instructions. Try to complete this step without looking at any previous steps. If you get stuck, try looking back at the previous three steps.
 
 ### Instructions 
 
@@ -2210,7 +2210,7 @@ export default reducer;
 
 ### Summary
 
-In this step, we will hook up the rest of the views to the store and modify the events to call our action creators. This step will be a challenge, meaning there will not be any guided instructions. Try to complete this step without looking at any previous steps. If you get stuck, try looking back steps eight through ten.
+In this step, we will hook up the rest of the views to the store and modify the events to call our action creators. We want this step to be a challenge for you, meaning there will not be any guided instructions. Try to complete this step without looking at any previous steps. If you get stuck, try looking back steps eight through ten.
 
 ### Instructions 
 
