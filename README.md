@@ -1746,13 +1746,15 @@ function mapStateToProps( state ) {
 export default connect(mapStateToProps, { updateFound })(WizardFour); 
 ```
 
-* Now our component is connected to the `redux store`, let's access the function we need to change state on the input element.
-    * Set the input element's `onChange` function equal to `{(e)=>this.props.updateFound(e.target.value)}`.
-    * Because we've connected to `redux`, the updateLoanType function is now on props for this component.
+* Now our component is connected to the `redux store`, let's access the function we need to change state on the Link element.
+    * Set up the first Link element's `onClick` function equal to `{(e)=>this.props.updateFound("True")}`.
+    * Set up the second Link element's `onClick` function equal to `{(e)=>this.props.updateFound("False")}`.
+    * Because we've connected to `redux`, the updateFound function is now on props for this component.
 * Our WizardFour Component should now be hooked up properly and be working with redux! 
     
 ```js
-<input placeholder="found name" type="text" onChange={(e)=>this.props.updateFound(e.target.value)}/>
+<Link to="/wFive"><button onClick={ (e)=>this.props.updateFound("True") }>Yes</button></Link>
+<Link to="/wFive"><button onClick={ (e)=>this.props.updateFound("False") }>No </button></Link> 
 
 ```
 </details>
@@ -1771,7 +1773,7 @@ import { updateFound } from './../../ducks/reducer'
 import { connect } from 'react-redux'; 
 
 
-class WizardFour extends Component {
+class WizardFour extends Component {(e)=>this.props.updateFound("False")
     render(){
         return(
             <div className="parent-div">
@@ -1784,8 +1786,7 @@ class WizardFour extends Component {
             </div>
         </div>
         )
-    }
-}
+    }}
 
 function mapStateToProps( state ) {
   return { 
@@ -2464,7 +2465,7 @@ Continue to go through the rest of the views and hook them up to the reducer lik
 
 <details>
 
-<summary> <code> src/components/WizardSix/WizardSix.js </code> </summary>
+<summary> <code> src/components/WizardSeven/WizardSeven.js </code> </summary>
 
 
 ```js
@@ -2503,11 +2504,11 @@ export default connect(mapStateToProps, { updateCredit })(WizardSeven);
 </details>
 
 
-### Solution For Eigth View
+### Solution For Eighth View
    
 <details>
 
-<summary> <code> src/components/WizardSix/WizardSix.js </code> </summary>
+<summary> <code> src/components/WizardEight/WizardEight.js </code> </summary>
 
 
 ```js
@@ -2549,7 +2550,7 @@ export default connect(mapStateToProps, { updateHist })(WizardEight);
 
 <details>
 
-<summary> <code> src/components/WizardSix/WizardSix.js </code> </summary>
+<summary> <code> src/components/WizardNine/WizardNine.js </code> </summary>
 
 
 ```js
@@ -2592,7 +2593,7 @@ export default connect(mapStateToProps, { updateAddOne, updateAddTwo, updateAddT
 
 <details>
 
-<summary> <code> src/components/WizardSix/WizardSix.js </code> </summary>
+<summary> <code> src/components/WizardTen/WizardTen.js </code> </summary>
 
 
 ```js
