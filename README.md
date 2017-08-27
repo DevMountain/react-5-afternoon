@@ -1773,7 +1773,7 @@ import { updateFound } from './../../ducks/reducer'
 import { connect } from 'react-redux'; 
 
 
-class WizardFour extends Component {(e)=>this.props.updateFound("False")
+class WizardFour extends Component {
     render(){
         return(
             <div className="parent-div">
