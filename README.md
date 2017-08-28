@@ -81,7 +81,7 @@ export default createStore( reducer );
 
 ### Summary
 
-In this step, we will take our store created from the previous step and hook it up in `src/index.js`. We will also make use of `BrowserRouter` to allow routing in the application. After this step, our app should compile correctly.
+In this step, we will take our store created from the previous step and hook it up in `src/index.js`. We will also make use of `HashRouter` to allow routing in the application. After this step, our app should compile correctly.
 
 ### Instructions
 
@@ -90,8 +90,8 @@ In this step, we will take our store created from the previous step and hook it 
 * Import `store` from `src/store.js`.
 * Wrap the `App` component in a `Provider` component:
   * The `Provider` component should have a `store` prop that equals `store` (remember how we call variables in jsx). 
-* Import `BrowserRouter` from `react-router-dom`.
-* Wrap the `Provider` in `<BrowserRouter>` tags.
+* Import `HashRouter` from `react-router-dom`.
+* Wrap the `Provider` in `<HashRouter>` tags.
 
 <details>
 
@@ -126,7 +126,7 @@ ReactDOM.render(
 registerServiceWorker();
 ```
 
-Lastly, since we're using routing we'll be needing to import `BrowserRouter` from `react-router-dom`.
+Lastly, since we're using routing we'll be needing to import `HashRouter` from `react-router-dom`.
 
 ```js
 import React from 'react';
@@ -137,14 +137,14 @@ import './index.css';
 
 import store from './store'
 import { Provider } from 'react-redux'
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 
 ReactDOM.render(
-<BrowserRouter>
+<HashRouter>
     <Provider store={store}>
         <App />
     </Provider>    
-</BrowserRouter>
+</HashRouter>
 , document.getElementById('root'));
 registerServiceWorker();
 ```
@@ -166,14 +166,14 @@ import './index.css';
 
 import store from './store';
 import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 
 ReactDOM.render(
-<BrowserRouter>
+<HashRouter>
     <Provider store={store}>
         <App />
     </Provider>    
-</BrowserRouter>
+</HashRouter>
 , document.getElementById('root'));
 registerServiceWorker();
 ```
