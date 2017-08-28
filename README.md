@@ -1774,7 +1774,7 @@ export default updateFound( found ) {
 }
 ```
 
-Now let's add an `UPDATE_FOUD` case to the reducer. In this case, the reducer should update the value of `found` on state using the value set on the action's payload. Remember that we need to keep state immutable, so we'll make use of `Object.assign`.
+Now let's add an `UPDATE_FOUND` case to the reducer. In this case, the reducer should update the value of `found` on state using the value set on the action's payload. Remember that we need to keep state immutable, so we'll make use of `Object.assign`.
 
 ```js
 case UPDATE_FOUND:
@@ -1808,12 +1808,16 @@ Now that we have a `mapStateToProps` function, let's modify the `export default`
 export default connect( mapStateToProps, { updateFound } )( WizardFour );
 ```
 
-Now that our component is connected to the store, we can update the `onClick` events to call `updateFound` instead. You can either deconstruct `updateProp` off of props or call `this.props.updateProp`.
+Now our component is connected to the `redux store`, let's access the function we need to change state on the Link element.
+  * Set up the first Link element's `onClick` function equal to `{(e)=>this.props.updateFound("True")}`.
+  * Set up the second Link element's `onClick` function equal to `{(e)=>this.props.updateFound("False")}`.
+  * Because we've connected to `redux`, the updateFound function is now on props for this component.
 
 ```js
-<button onClick={ ( e ) => updateFound( true ) }>Yes</button>
-<button onClick={ ( e ) => updateFound( false ) }>No</button>
+<Link to="/wFive"><button onClick={ (e)=>this.props.updateFound("True") }>Yes</button></Link>
+<Link to="/wFive"><button onClick={ (e)=>this.props.updateFound("False") }>No </button></Link> 
 ```
+
 
 </details>
 
