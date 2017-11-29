@@ -1165,7 +1165,7 @@ In this step, we will connect `src/components/WizardOne/WizardOne.js` to the sto
 
 * Open `src/components/WizardOne/WizardOne.js`.
 * Import `connect` from `react-redux`.
-* Import the `updateLoanType` and `updatePropertyType` action creators from `src/store.js`.
+* Import the `updateLoanType` and `updatePropertyType` action creators from `src/ducks/reducer.js`.
   * Hint: Use destructuring.
 * Modify the `export default` statement to use `connect`.
   * Use `mapStateToProps` to return the only two parts of `state` it will need.
