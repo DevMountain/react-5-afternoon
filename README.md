@@ -1766,7 +1766,7 @@ const UPDATE_FOUND = 'UPDATE_FOUND';
 Then we can create an `updateFound` action creator that uses `UPDATE_FOUND` as its `type`. This action creator should have a parameter called `found`. We will use the value of `found` for the payload property.
 
 ```js
-export default updateFound( found ) {
+export function updateFound( found ) {
   return {
     type: UPDATE_FOUND,
     payload: found
