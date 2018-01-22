@@ -6,6 +6,10 @@ This is a working project that currently only utilizes state and props to pass i
 
 During this project, we'll be improving on a web application that walks users through filling out a home loan application. We'll be modifying components that have already been built to use `redux`. This allows us to keep track of data and pass it to the correct components via routing. We'll be making changes to all files in the `src/components` folder, except for `src/components/Finish/Finish.js`, to modify them to work with `redux`. We'll also make changes to `src/router.js`, `src/index.js` and `src/App.js`.
 
+# Live Example
+
+<a href="https://devmountain.github.io/react-5-afternoon/">Click Me!</a>
+
 ## Setup
 
 * `fork` and `clone` this repository.
