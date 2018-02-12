@@ -1334,7 +1334,7 @@ const UPDATE_CITY = 'UPDATE_CITY';
 Then we can create an `updateCity` action creator that uses `UPDATE_CITY` as its `type`. This action creator should have a parameter called `city`. We will use the value of `city` for the payload property.
 
 ```js
-export default updateCity( city ) {
+export function updateCity( city ) {
   return {
     type: UPDATE_CITY,
     payload: city
