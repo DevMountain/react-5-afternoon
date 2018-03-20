@@ -90,12 +90,12 @@ In this step, we will take our store created from the previous step and hook it 
 ### Instructions
 
 * Open `src/index.js`.
+* Import `HashRouter` from `react-router-dom`.
+* Wrap the `App` component in `<HashRouter>` tags.
 * Import `Provider` from `react-redux`.
 * Import `store` from `src/store.js`.
-* Wrap the `App` component in a `Provider` component:
+* Wrap the `HashRouter` component tags with the `Provider` component:
   * The `Provider` component should have a `store` prop that equals `store` (remember how we call variables in jsx). 
-* Import `HashRouter` from `react-router-dom`.
-* Wrap the `Provider` in `<HashRouter>` tags.
 
 <details>
 
@@ -103,14 +103,7 @@ In this step, we will take our store created from the previous step and hook it 
 
 <br />
 
-Now that our store is created, we can hook it up to our App in `src/index.js`. This will allow our App to have access to the store and the reducers and will also allow our App to compile correctly. Let's open `src/index.js`. We'll need to import `Provider` from `react-redux` and `store` from `src/store.js`. 
-
-```js
-import store from './store'
-import { Provider } from 'react-redux'
-```
-
-The `Provider` component will "provide" the store to our App. All we need to do is wrap the `App` component in a `Provider` component and give the `Proivder` component a `store` prop that equals `store`. 
+Open `src/index.js`. Since we're using routing we'll be needing to import `HashRouter` from `react-router-dom` and wrap the `App` component.
 
 ```js
 import React from 'react';
@@ -118,19 +111,24 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import './index.css';
-
-import store from './store'
-import { Provider } from 'react-redux'
+import { HashRouter } from 'react-router-dom';
 
 ReactDOM.render(
-    <Provider store={store}>
-        <App />
-    </Provider>    
+  <HashRouter>
+    <App />
+  </HashRouter>
 , document.getElementById('root'));
 registerServiceWorker();
 ```
 
-Lastly, since we're using routing we'll be needing to import `HashRouter` from `react-router-dom`.
+Since our store has been created, we can hook it up to our App in `src/index.js`. This will allow our App to have access to the store and the reducers and will also allow our App to compile correctly. We'll need to import `Provider` from `react-redux` and `store` from `src/store.js`. 
+
+```js
+import store from './store'
+import { Provider } from 'react-redux'
+```
+
+The `Provider` component will "provide" the store to our App. All we need to do is wrap the `HashRouter` component with the `Provider` component and give the `Proivder` component a `store` prop that equals `store`. 
 
 ```js
 import React from 'react';
@@ -138,17 +136,16 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import './index.css';
-
-import store from './store'
-import { Provider } from 'react-redux'
 import { HashRouter } from 'react-router-dom';
+import { Provider } from 'react-redux'
+import store from './store'
 
 ReactDOM.render(
-<HashRouter>
-    <Provider store={store}>
-        <App />
-    </Provider>    
-</HashRouter>
+  <Provider store={store}>
+    <HashRouter>
+      <App />
+    </HashRouter>
+  </Provider>    
 , document.getElementById('root'));
 registerServiceWorker();
 ```
@@ -167,17 +164,16 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import './index.css';
-
-import store from './store';
-import { Provider } from 'react-redux';
 import { HashRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import store from './store';
 
 ReactDOM.render(
-<HashRouter>
-    <Provider store={store}>
-        <App />
-    </Provider>    
-</HashRouter>
+  <Provider store={store}>
+    <HashRouter>
+      <App />
+    </HashRouter>
+  </Provider>    
 , document.getElementById('root'));
 registerServiceWorker();
 ```
