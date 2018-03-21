@@ -1535,7 +1535,7 @@ const UPDATE_PROP = 'UPDATE_PROP';
 Then we can create an `updateProp` action creator that uses `UPDATE_PROP` as its `type`. This action creator should have a parameter called `prop`. We will use the value of `prop` for the payload property.
 
 ```js
-export default updateProp( prop ) {
+export function updateProp( prop ) {
   return {
     type: UPDATE_PROP,
     payload: prop
