@@ -971,7 +971,7 @@ In this step, we'll start creating our store's reducer and the action creators t
     propertyType: 'Single Family Home',
     city: '',
     propToBeUsedOn: '',
-    found: false,
+    found: "false",
     realEstateAgent: "false",
     cost: 0,
     downPayment: 0,
