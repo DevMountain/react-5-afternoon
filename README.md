@@ -194,13 +194,8 @@ In this step, we are going to clean up the mess.
 ### Instructions
 
 * Open `src/router.js`.
-* Import `HashRouter` from `react-router-dom`.
-    * Instead of using `Switch`, we're going to use `HashRouter` from `react-router-dom` to wrap our routes. 
-      * HashRouter uses the hash portion of our URL to keep our UI in sync with the URL when we change views.
-* Instead of exporting default a router function, export by default a `HashRouter` component.
-  * Now that our routes aren't exported in a function, we don't need to `return` anything.
+* Instead of exporting a function, let's remove the function and simply export the chunk of JSX that was returned by the function.
   * You will start getting errors coming from the props on the routes rendered elements once our routing is no longer a function, this is because they're no longer receiving information via parameters from the function and are now undefined.
-* Wrap all the routes in a `<div>`. HashRouter can only have one first level element.
 * For each individual route, instead of using render, we will be using component. 
   * A route should look like the following: `<Route component={ theComponent }  path='/thePath'/>`
 
@@ -221,35 +216,14 @@ Now that we've changed our `router.js`, no data is going to be passed to our oth
 Let's begin by opening `src/router.js` and importing `HashRouter` from `react-router-dom`. We can replace `Switch` with `HashRouter` since we will no longer be using `Switch`.
 
 ```js
-import { HashRouter, Route } from 'react-router-dom';
-```
-
-We can then use this `HashRouter` to reconfigure our router. Let's add an `export default ()` statement above the current export default statement. 
-
-```js
-export default (
-
-)
-```
-
-In the new export default statement, add a `HashRouter` component that has a `<div>` inside of it. We use this single `<div>` to export all of our routes.
-
-```js
-export default (
-  <HashRouter>
-    <div>
-
-    </div>
-  </HashRouter>
-)
+import { Switch, Route } from 'react-router-dom';
 ```
 
 We can then copy and paste all the routes from the old export default statement into your new one. We'll also need to make modifications to each one so that it looks like: `<Route component={ theComponent } path="/thePath" />`. When finished you'll end up with:
 
 ```js
 export default (
-  <HashRouter>
-    <div>
+  <Switch>
 
       <Route component={NextBtn} exact path= '/'/>
       <Route component={WizardOne}  path='/wOne'/>
@@ -265,8 +239,7 @@ export default (
       <Route component={WizardEleven} path="/wEleven"/>
       <Route component={Finish} path='/finish'/>
 
-    </div>
-  </HashRouter>
+    </Switch>
 )
 ```
 
@@ -312,11 +285,10 @@ import WizardEleven from './components/WizardEleven/WizardEleven';
 import Finish from './components/Finish/Finish';
 
 import NextBtn from './components/NextBtn/NextBtn';
-import {  Route, HashRouter } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 
 export default (
-  <HashRouter>
-      <div>  
+  <Switch>  
 
         <Route component={NextBtn} exact path= '/'/>
         <Route component={WizardOne}  path='/wOne'/>
@@ -332,8 +304,7 @@ export default (
         <Route component={WizardEleven} path="/wEleven"/>
         <Route component={Finish} path='/finish'/>
 
-      </div>
-  </HashRouter>
+      </Switch>
 )
 ```
 </details>
