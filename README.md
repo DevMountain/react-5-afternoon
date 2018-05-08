@@ -85,41 +85,25 @@ export default createStore( reducer );
 
 ### Summary
 
-In this step, we will take our store created from the previous step and hook it up in `src/index.js`. We will also make use of `HashRouter` to allow routing in the application. After this step, our app should compile correctly.
+In this step, we will take our store created from the previous step and hook it up in `src/index.js`. We will also make use of `HashRouter` from `react-router-dom`, to allow routing in our application. After this step, our App should compile correctly.
 
 ### Instructions
 
 * Open `src/index.js`.
-* Import `HashRouter` from `react-router-dom`.
-* Wrap the `App` component in `<HashRouter>` tags.
 * Import `Provider` from `react-redux`.
 * Import `store` from `src/store.js`.
-* Wrap the `HashRouter` component tags with the `Provider` component:
-  * The `Provider` component should have a `store` prop that equals `store` (remember how we call variables in jsx). 
+* Wrap the `App` component in `<Provider>` tags.
+  * The `Provider` component should have a `store` prop that equals `store` (remember how we call variables in jsx).
+  
+* Open `src/router.js`
+* Add `HashRouter` to the import statement from `react-router-dom`.
+* Wrap the `Switch` component in `<HashRouter>` tags.
 
 <details>
 
 <summary> Detailed Instructions </summary>
 
 <br />
-
-Open `src/index.js`. Since we're using routing we'll be needing to import `HashRouter` from `react-router-dom` and wrap the `App` component.
-
-```js
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
-import './index.css';
-import { HashRouter } from 'react-router-dom';
-
-ReactDOM.render(
-  <HashRouter>
-    <App />
-  </HashRouter>
-, document.getElementById('root'));
-registerServiceWorker();
-```
 
 Since our store has been created, we can hook it up to our App in `src/index.js`. This will allow our App to have access to the store and the reducers and will also allow our App to compile correctly. We'll need to import `Provider` from `react-redux` and `store` from `src/store.js`. 
 
@@ -128,7 +112,7 @@ import store from './store'
 import { Provider } from 'react-redux'
 ```
 
-The `Provider` component will "provide" the store to our App. All we need to do is wrap the `HashRouter` component with the `Provider` component and give the `Proivder` component a `store` prop that equals `store`. 
+The `Provider` component will "provide" the store to our App. All we need to do is wrap our `App` with the `Provider` component and give the `Proivder` component a `store` prop that equals `store`. 
 
 ```js
 import React from 'react';
@@ -136,18 +120,36 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import './index.css';
-import { HashRouter } from 'react-router-dom';
 import { Provider } from 'react-redux'
 import store from './store'
 
 ReactDOM.render(
   <Provider store={store}>
-    <HashRouter>
-      <App />
-    </HashRouter>
+    <App />
   </Provider>    
 , document.getElementById('root'));
 registerServiceWorker();
+```
+
+<br />
+
+Since our routes have already been created in `src/router.js`, all we need to do is wrap the `Switch` component with a `HashRouter` component.
+
+```js
+import React from 'react';
+... all our other imports
+import { HashRouter, Switch, Route } from 'react-router-dom';
+
+export default (
+
+  <HashRouter>
+     <Switch>  
+
+        ... all our routes
+
+     </Switch>
+  </HashRouter>
+)
 ```
 
 </details>
@@ -163,19 +165,51 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-import './index.css';
-import { HashRouter } from 'react-router-dom';
+import './index.css';;
 import { Provider } from 'react-redux';
 import store from './store';
 
 ReactDOM.render(
   <Provider store={store}>
-    <HashRouter>
-      <App />
-    </HashRouter>
+    <App />
   </Provider>    
 , document.getElementById('root'));
 registerServiceWorker();
+```
+</details>
+
+<details>
+ 
+ <summary> <code> src/router.js </code> </summary>
+
+```js
+import React from 'react';
+import WizardOne from './components/WizardOne/WizardOne';
+import WizardTwo from './components/WizardTwo/WizardTwo';
+import WizardThree from './components/WizardThree/WizardThree';
+import WizardFour from './components/WizardFour/WizardFour';
+import WizardFive from './components/WizardFive/WizardFive';
+import WizardSix from './components/WizardSix/WizardSix';
+import WizardSeven from './components/WizardSeven/WizardSeven';
+import WizardEight from './components/WizardEight/WizardEight';
+import WizardNine from './components/WizardNine/WizardNine';
+import WizardTen from './components/WizardTen/WizardTen';
+import WizardEleven from './components/WizardEleven/WizardEleven';
+import Finish from './components/Finish/Finish';
+
+import NextBtn from './components/NextBtn/NextBtn';
+import { HashRouter, Switch, Route } from 'react-router-dom';
+
+export default (
+
+  <HashRouter>
+     <Switch>  
+
+        ... all our routes
+
+     </Switch>
+  </HashRouter>
+)
 ```
 </details>
 
@@ -213,33 +247,36 @@ Now that we've changed our `router.js`, no data is going to be passed to our oth
 
 <br />
 
-Let's begin by opening `src/router.js` and importing `HashRouter` from `react-router-dom`. We can replace `Switch` with `HashRouter` since we will no longer be using `Switch`.
+Let's begin by opening `src/router.js` and importing `HashRouter` from `react-router-dom`. We can wrap `Switch` with `HashRouter`.
 
 ```js
-import { Switch, Route } from 'react-router-dom';
+import { HashRouter, Switch, Route } from 'react-router-dom';
 ```
 
 We can then copy and paste all the routes from the old export default statement into your new one. We'll also need to make modifications to each one so that it looks like: `<Route component={ theComponent } path="/thePath" />`. When finished you'll end up with:
 
 ```js
 export default (
-  <Switch>
 
-      <Route component={NextBtn} exact path= '/'/>
-      <Route component={WizardOne}  path='/wOne'/>
-      <Route component={WizardTwo}  path="/wTwo"/>
-      <Route component={WizardThree} path="/wThree"/>
-      <Route component={WizardFour} path="/wFour"/>
-      <Route component={WizardFive} path="/wFive"/>
-      <Route component={WizardSix} path="/wSix"/>
-      <Route component={WizardSeven} path="/wSeven"/>
-      <Route component={WizardEight} path="/wEight"/>
-      <Route component={WizardNine} path="/wNine"/>
-      <Route component={WizardTen} path="/wTen"/>
-      <Route component={WizardEleven} path="/wEleven"/>
-      <Route component={Finish} path='/finish'/>
+  <HashRouter>
+     <Switch>  
 
-    </Switch>
+        <Route component={NextBtn} exact path= '/'/>
+        <Route component={WizardOne}  path='/wOne'/>
+        <Route component={WizardTwo}  path="/wTwo"/>
+        <Route component={WizardThree} path="/wThree"/>
+        <Route component={WizardFour} path="/wFour"/>
+        <Route component={WizardFive} path="/wFive"/>
+        <Route component={WizardSix} path="/wSix"/>
+        <Route component={WizardSeven} path="/wSeven"/>
+        <Route component={WizardEight} path="/wEight"/>
+        <Route component={WizardNine} path="/wNine"/>
+        <Route component={WizardTen} path="/wTen"/>
+        <Route component={WizardEleven} path="/wEleven"/>
+        <Route component={Finish} path='/finish'/>
+
+     </Switch>
+  </HashRouter>
 )
 ```
 
@@ -285,10 +322,12 @@ import WizardEleven from './components/WizardEleven/WizardEleven';
 import Finish from './components/Finish/Finish';
 
 import NextBtn from './components/NextBtn/NextBtn';
-import { Switch, Route } from 'react-router-dom';
+import { HashRouter, Switch, Route } from 'react-router-dom';
 
 export default (
-  <Switch>  
+
+  <HashRouter>
+     <Switch>  
 
         <Route component={NextBtn} exact path= '/'/>
         <Route component={WizardOne}  path='/wOne'/>
@@ -304,7 +343,8 @@ export default (
         <Route component={WizardEleven} path="/wEleven"/>
         <Route component={Finish} path='/finish'/>
 
-      </Switch>
+     </Switch>
+  </HashRouter>
 )
 ```
 </details>
