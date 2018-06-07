@@ -85,41 +85,23 @@ export default createStore( reducer );
 
 ### Summary
 
-In this step, we will take our store created from the previous step and hook it up in `src/index.js`. We will also make use of `HashRouter` to allow routing in the application. After this step, our app should compile correctly.
+In this step, we will take our store created from the previous step and hook it up in `src/index.js`. We will also make use of `HashRouter` in `App.js` to allow routing in the application. After this step, our app should compile correctly.
 
 ### Instructions
 
 * Open `src/index.js`.
-* Import `HashRouter` from `react-router-dom`.
-* Wrap the `App` component in `<HashRouter>` tags.
-* Import `Provider` from `react-redux`.
 * Import `store` from `src/store.js`.
-* Wrap the `HashRouter` component tags with the `Provider` component:
-  * The `Provider` component should have a `store` prop that equals `store` (remember how we call variables in jsx). 
+* Import `Provider` from `react-redux`.
+  * The `Provider` component should have a `store` prop that equals `store` (remember how we reference variables in jsx). 
+* Open `src/App.js`.
+* Import `HashRouter` from `react-router-dom`.
+* Wrap the `router` invocation in `<HashRouter>` tags.
 
 <details>
 
 <summary> Detailed Instructions </summary>
 
 <br />
-
-Open `src/index.js`. Since we're using routing we'll be needing to import `HashRouter` from `react-router-dom` and wrap the `App` component.
-
-```js
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
-import './index.css';
-import { HashRouter } from 'react-router-dom';
-
-ReactDOM.render(
-  <HashRouter>
-    <App />
-  </HashRouter>
-, document.getElementById('root'));
-registerServiceWorker();
-```
 
 Since our store has been created, we can hook it up to our App in `src/index.js`. This will allow our App to have access to the store and the reducers and will also allow our App to compile correctly. We'll need to import `Provider` from `react-redux` and `store` from `src/store.js`. 
 
@@ -128,7 +110,7 @@ import store from './store'
 import { Provider } from 'react-redux'
 ```
 
-The `Provider` component will "provide" the store to our App. All we need to do is wrap the `HashRouter` component with the `Provider` component and give the `Proivder` component a `store` prop that equals `store`. 
+The `Provider` component will "provide" the store to our App. All we need to do is wrap the `App` component with the `Provider` component and give the `Proivder` component a `store` prop that equals `store`. 
 
 ```js
 import React from 'react';
@@ -136,19 +118,36 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import './index.css';
-import { HashRouter } from 'react-router-dom';
 import { Provider } from 'react-redux'
 import store from './store'
 
 ReactDOM.render(
   <Provider store={store}>
-    <HashRouter>
-      <App />
-    </HashRouter>
+    <App />
   </Provider>    
 , document.getElementById('root'));
 registerServiceWorker();
 ```
+
+Open `src/index.js`. Since we're using routing we'll be needing to import `HashRouter` from `react-router-dom` and wrap the `router` invocation.
+
+```js
+import { HashRouter } from 'react-router-dom'
+```
+
+```js
+render() {
+    return (
+      <div>
+        <HashRouter>
+          { 
+            router( this.state.loanType, this.state.propertyType, this.handleChangeLoanType, this.handleChangePropertyType, this.handleChangePropertyToBeUsedOn, this.state.propToBeUsedOn, this.state.city, this.handleChangeCity, this.handleChangeFoundFalse, this.handleChangeFoundTrue, this.state.found, this.handleChangeRealEstateAgentTrue, this.handleChangeRealEstateAgentFalse, this.state.realEstateAgent, this.handleChangeUpdateDownPayment, this.state.downPayment, this.handleChangeUpdateCost, this.state.cost, this.state.credit, this.handleChangeCreditE, this.handleChangeCreditG,this.handleChangeCreditF, this.handleChangeCreditP, this.state.history, this.handleChangeUpdateHistory, this.state.addressOne, this.state.addressTwo, this.state.addressThree, this.handleChangeAddressOne, this.handleChangeAddressTwo, this.handleChangeAddressThree, this.handleChangeFirstName, this.handleChangeLastName, this.handleChangeEmail, this.state.firstName, this.state.lastName, this.state.email ) 
+          }
+        </HashRouter>
+      </div>
+    );
+  }
+  ```
 
 </details>
 
@@ -164,18 +163,37 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import './index.css';
-import { HashRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './store';
 
 ReactDOM.render(
   <Provider store={store}>
-    <HashRouter>
-      <App />
-    </HashRouter>
+    <App />
   </Provider>    
 , document.getElementById('root'));
 registerServiceWorker();
+```
+</details>
+
+<details>
+
+<summary> <code> src/App.js </code> </summary>
+
+```js
+import { HashRouter } from 'react-router-dom';
+```
+```js
+render() {
+    return (
+      <div>
+        <HashRouter>
+          { 
+            router( this.state.loanType, this.state.propertyType, this.handleChangeLoanType, this.handleChangePropertyType, this.handleChangePropertyToBeUsedOn, this.state.propToBeUsedOn, this.state.city, this.handleChangeCity, this.handleChangeFoundFalse, this.handleChangeFoundTrue, this.state.found, this.handleChangeRealEstateAgentTrue, this.handleChangeRealEstateAgentFalse, this.state.realEstateAgent, this.handleChangeUpdateDownPayment, this.state.downPayment, this.handleChangeUpdateCost, this.state.cost, this.state.credit, this.handleChangeCreditE, this.handleChangeCreditG,this.handleChangeCreditF, this.handleChangeCreditP, this.state.history, this.handleChangeUpdateHistory, this.state.addressOne, this.state.addressTwo, this.state.addressThree, this.handleChangeAddressOne, this.handleChangeAddressTwo, this.handleChangeAddressThree, this.handleChangeFirstName, this.handleChangeLastName, this.handleChangeEmail, this.state.firstName, this.state.lastName, this.state.email ) 
+          }
+        </HashRouter>
+      </div>
+    );
+  }
 ```
 </details>
 
@@ -213,13 +231,7 @@ Now that we've changed our `router.js`, no data is going to be passed to our oth
 
 <br />
 
-Let's begin by opening `src/router.js` and importing `HashRouter` from `react-router-dom`. We can replace `Switch` with `HashRouter` since we will no longer be using `Switch`.
-
-```js
-import { Switch, Route } from 'react-router-dom';
-```
-
-We can then copy and paste all the routes from the old export default statement into your new one. We'll also need to make modifications to each one so that it looks like: `<Route component={ theComponent } path="/thePath" />`. When finished you'll end up with:
+Let's begin by opening `src/router.js`. Since this will no longer be a function, all we need to do is export the content inside of the return statement and delete everything else that's part of the function. We'll also need to make modifications to each route so that it looks like: `<Route component={ theComponent } path="/thePath" />`. When finished you'll end up with:
 
 ```js
 export default (
@@ -243,9 +255,7 @@ export default (
 )
 ```
 
-Before you exit this file, delete the entire old `export default` statement.
-
-If you noticed the app is no longer working, this is normal. We are restructuring the entire application. We can fix the errors by going into `src/App.js` and modifying how we are using `router`.
+If you noticed the app is no longer working, this is normal. We are restructuring the entire application. We can fix the errors by going into `src/App.js` and modifying how we are using `router`. Since it no longer a function, we take to remove the invocation and arguments.
 
 ```js
   render() {
@@ -316,7 +326,7 @@ export default (
 import React, { Component } from 'react';
 import './App.css';
 import router from './router'
-
+import { HashRouter } from 'react-router-dom';
 
 class App extends Component {
   constructor(){
@@ -430,7 +440,9 @@ class App extends Component {
   render() {
     return (
       <div>
-        { router }
+        <HashRouter>
+          { router }
+        </HashRouter>
       </div>
     );
   }
@@ -463,12 +475,15 @@ In this step, we'll be removing the state and handler methods from `App.js`. Tha
 import React, { Component } from 'react';
 import './App.css';
 import router from './router';
+import { HashRouter } from 'react-router-dom';
 
 class App extends Component {
   render() {
     return (
       <div>
-        { router }
+        <HashRouter>
+          { router }
+        </HashRouter>
       </div>
     );
   }
