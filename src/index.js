@@ -6,13 +6,10 @@ import './index.css';
 
 import store from './store'
 import { Provider } from 'react-redux'
-import { HashRouter } from 'react-router-dom';
 
 ReactDOM.render(
-<HashRouter>
     <Provider store={store}>
         <App />
-    </Provider>    
-</HashRouter>
+    </Provider> 
 , document.getElementById('root'));
 registerServiceWorker();
