@@ -451,7 +451,7 @@ In this step, we'll be removing the state and handler methods from `App.js`. Tha
 * Open `src/App.js`.
 * In the App component, delete the constructor and state.
 * Delete all the handler methods.
-* In `render()`, delete everything but the `div` with the router.
+* In the return statement of `render()`, delete everything but the `div` with the router.
 
 ### Solution
 
@@ -529,7 +529,7 @@ Let's begin by opening `src/components/WizardEleven/WizardEleven.js` and importi
 import { connect } from 'react-redux'; 
 ```
 
-Before we create our `connect` statement, let's make a `mapStateToProps` function just like we did in `src/App.js`. This time, instead of passing the entire state from the store, we are going to pick very specific properties. The list of properties we'll need are listed in the instructions above. 
+Before we create our `connect` statement, let's make a `mapStateToProps` function. Instead of passing the entire state from the store, we are going to pick very specific properties. The list of properties we'll need are listed in the instructions above. 
 
 ```js
 function mapStateToProps( state ) {
