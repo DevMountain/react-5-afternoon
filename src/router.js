@@ -13,12 +13,13 @@ import WizardEleven from './components/WizardEleven/WizardEleven';
 import Finish from './components/Finish/Finish';
 
 import NextBtn from './components/NextBtn/NextBtn';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, HashRouter } from 'react-router-dom';
 
 
 export default function(loanType, propType, changeLoanType, changePropertyType, changePropertyToBeUsedOn, propToBeUsedOn, city, updateCity, foundFalse, foundTrue, found, realEstateAgentTrue, realEstateAgentFalse, realEstateAgent, updateDownPayment, downPayment, updateCost, cost, credit, updateCreditE,updateCreditG, updateCreditF,updateCreditP, history, updateHistory, addressOne, addressTwo, addressThree, updateAddLineOne, updateAddLineTwo, updateAddLineThree, updateFirst, updateLast, updateEmail, firstName, lastName, email){
 
         return (
+            <HashRouter>
             <Switch>
                 <Route exact path= '/' render={()=> <NextBtn />} />
 
@@ -122,6 +123,7 @@ export default function(loanType, propType, changeLoanType, changePropertyType, 
                 />
                 <Route path='/finish' component={Finish} />
             </Switch>
+            </HashRouter>
         )
 }
  
