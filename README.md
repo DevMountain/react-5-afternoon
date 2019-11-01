@@ -504,7 +504,7 @@ Let's begin connecting our views. We'll start with the Eleventh view. I chose th
 
 * Open `src/components/WizardEleven/WizardEleven.js`.
 * Import `connect` from `react-redux`
-* Connect the component to the `redux store`, just like we did for `src/App.js`.
+* Connect the component to the `redux store`.
   * Instead of `returning` the entire state in `mapStateToProps`, return only the properties the component needs:
     * <details>
 
